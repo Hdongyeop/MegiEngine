@@ -3,10 +3,15 @@
 
 #include "framework.h"
 #include "Editor_Window.h"
+#include "../MegiEngine_SOURCE/MegiApplication.h"
+
+#pragma comment(lib, "../x64/Debug/MegiEngine_Window.lib")
 
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
+Application app;
+
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
@@ -26,6 +31,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
+    app.Test();
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -42,15 +48,31 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+        }
+        else
+        {
+	        
         }
     }
+
+    // 기본 메시지 루프입니다:
+//    while (GetMessage(&msg, nullptr, 0, 0))
+//    {
+//        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+//        {
+//            TranslateMessage(&msg);
+//            DispatchMessage(&msg);
+//        }
+//    }
 
     return (int) msg.wParam;
 }
@@ -142,11 +164,34 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+    case WM_KEYDOWN:
+	    {
+		    
+	    }
+        break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+
+            HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
+
+            HBRUSH oldBrush = static_cast<HBRUSH>(SelectObject(hdc, blueBrush));
+            Rectangle(hdc, 100, 100, 200, 200);
+            DeleteObject(blueBrush);
+
+            HBRUSH curBrush = static_cast<HBRUSH>(SelectObject(hdc, oldBrush));
+            HPEN redPen = CreatePen(PS_SOLID, 5, RGB(255, 0, 0));
+            HPEN oldPen = static_cast<HPEN>(SelectObject(hdc, redPen));
+
+            Ellipse(hdc, 200, 200, 300, 300);
+            DeleteObject(curBrush);
+    		// SelectObject(hdc, oldPen);
+            // DeleteObject(redPen);
+
+
+            Ellipse(hdc, 300, 300, 400, 400);
+
             EndPaint(hWnd, &ps);
         }
         break;
