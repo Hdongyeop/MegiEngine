@@ -14,9 +14,14 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiLoopingObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiLoopingObject.cpp" />
   </ItemGroup>
 </Project>

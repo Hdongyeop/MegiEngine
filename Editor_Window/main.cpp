@@ -7,10 +7,12 @@
 
 #pragma comment(lib, "../x64/Debug/MegiEngine_Window.lib")
 
+using namespace MegiEngine;
+
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
-Application app;
+Application application;
 
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
@@ -29,9 +31,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-
-    // TODO: 여기에 코드를 입력합니다.
-    app.Test();
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -52,6 +51,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     {
         if(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
+            if (msg.message == WM_QUIT)
+                break;
+
 			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
 			{
 				TranslateMessage(&msg);
@@ -60,30 +62,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-	        
+            application.Run();
         }
     }
-
-    // 기본 메시지 루프입니다:
-//    while (GetMessage(&msg, nullptr, 0, 0))
-//    {
-//        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-//        {
-//            TranslateMessage(&msg);
-//            DispatchMessage(&msg);
-//        }
-//    }
 
     return (int) msg.wParam;
 }
 
-
-
-//
-//  함수: MyRegisterClass()
-//
-//  용도: 창 클래스를 등록합니다.
-//
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
     WNDCLASSEXW wcex;
@@ -105,22 +90,14 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     return RegisterClassExW(&wcex);
 }
 
-//
-//   함수: InitInstance(HINSTANCE, int)
-//
-//   용도: 인스턴스 핸들을 저장하고 주 창을 만듭니다.
-//
-//   주석:
-//
-//        이 함수를 통해 인스턴스 핸들을 전역 변수에 저장하고
-//        주 프로그램 창을 만든 다음 표시합니다.
-//
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+
+   application.Initialize(hWnd);
 
    if (!hWnd)
    {
@@ -133,16 +110,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
-//
-//  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  용도: 주 창의 메시지를 처리합니다.
-//
-//  WM_COMMAND  - 애플리케이션 메뉴를 처리합니다.
-//  WM_PAINT    - 주 창을 그립니다.
-//  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
-//
-//
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -173,25 +140,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-
-            HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
-
-            HBRUSH oldBrush = static_cast<HBRUSH>(SelectObject(hdc, blueBrush));
-            Rectangle(hdc, 100, 100, 200, 200);
-            DeleteObject(blueBrush);
-
-            HBRUSH curBrush = static_cast<HBRUSH>(SelectObject(hdc, oldBrush));
-            HPEN redPen = CreatePen(PS_SOLID, 5, RGB(255, 0, 0));
-            HPEN oldPen = static_cast<HPEN>(SelectObject(hdc, redPen));
-
-            Ellipse(hdc, 200, 200, 300, 300);
-            DeleteObject(curBrush);
-    		// SelectObject(hdc, oldPen);
-            // DeleteObject(redPen);
-
-
-            Ellipse(hdc, 300, 300, 400, 400);
-
             EndPaint(hWnd, &ps);
         }
         break;
