@@ -1,9 +1,14 @@
 #include "MegiGameObject.h"
 
+#include "MegiInput.h"
+#include "MegiTime.h"
+
 namespace MegiEngine
 {
 	GameObject::GameObject()
 	{
+		redSpeed = 100;
+		blueSpeed = 100;
 	}
 
 	GameObject::~GameObject()
@@ -15,41 +20,46 @@ namespace MegiEngine
 		///
 		/// Blue One
 		///
-		if(GetAsyncKeyState(VK_LEFT) & KF_UP)
+		if(Input::GetKey(KeyCode::Left))
 		{
-			mX -= 0.01f;
+			mX -= blueSpeed * Time::DeltaTime();
 		}
-		if(GetAsyncKeyState(VK_RIGHT) & KF_UP)
+		if(Input::GetKey(KeyCode::Right))
 		{
-			mX += 0.01f;
+			mX += blueSpeed * Time::DeltaTime();
 		}
-		if(GetAsyncKeyState(VK_UP) & KF_UP)
+		if(Input::GetKey(KeyCode::Up))
 		{
-			mY -= 0.01f;
+			mY -= blueSpeed * Time::DeltaTime();
 		}
-		if(GetAsyncKeyState(VK_DOWN) & KF_UP)
+		if(Input::GetKey(KeyCode::Down))
 		{
-			mY += 0.01f;
+			mY += blueSpeed * Time::DeltaTime();
 		}
 
 		///
 		/// Red One
 		///
-		if(GetAsyncKeyState('A') & KF_UP)
+		if(Input::GetKey(KeyCode::A))
 		{
-			mX2 -= 0.01f;
+			mX2 -= redSpeed * Time::DeltaTime();
 		}
-		if(GetAsyncKeyState('D') & KF_UP)
+		if(Input::GetKey(KeyCode::D))
 		{
-			mX2 += 0.01f;
+			mX2 += redSpeed * Time::DeltaTime();
 		}
-		if(GetAsyncKeyState('W') & KF_UP)
+		if(Input::GetKey(KeyCode::W))
 		{
-			mY2 -= 0.01f;
+			mY2 -= redSpeed * Time::DeltaTime();
 		}
-		if(GetAsyncKeyState('S') & KF_UP)
+		if(Input::GetKey(KeyCode::S))
 		{
-			mY2 += 0.01f;
+			mY2 += redSpeed * Time::DeltaTime();
+		}
+
+		if(Input::GetKey(KeyCode::SPACE))
+		{
+			
 		}
 	}
 
@@ -60,24 +70,27 @@ namespace MegiEngine
 	void GameObject::Render(HDC hdc)
 	{
 		HPEN blackPen = CreatePen(PS_SOLID, 3, RGB(0, 0, 0));
-		SelectObject(hdc, blackPen);
+		HPEN oldPen = (HPEN)SelectObject(hdc, blackPen);
 
 		// Blue
-		{
-			HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
-			SelectObject(hdc, blueBrush);
-			Rectangle(hdc, mX, mY, 100 + mX, 100 + mY);
-			DeleteObject(blueBrush);
-		}
+//		{
+//			HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
+//			HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, blueBrush);
+//			Rectangle(hdc, mX, mY, 100 + mX, 100 + mY);
+//			SelectObject(hdc, oldBrush);
+//			DeleteObject(blueBrush);
+//		}
 
 		// Red
 		{
 			HBRUSH redBrush = CreateSolidBrush(RGB(255, 0, 0));
-			SelectObject(hdc, redBrush);
+			HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, redBrush);
 			Rectangle(hdc, 400 + mX2, 400 + mY2, 500 + mX2, 500 + mY2);
+			SelectObject(hdc, oldBrush);
 			DeleteObject(redBrush);
 		}
 
+		SelectObject(hdc, oldPen);
 		DeleteObject(blackPen);
 	}
 }

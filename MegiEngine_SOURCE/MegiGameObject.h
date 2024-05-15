@@ -40,6 +40,9 @@ namespace MegiEngine
 		float mY;
 		float mX2;
 		float mY2;
+
+		float blueSpeed;
+		float redSpeed;
 	};
 }
 

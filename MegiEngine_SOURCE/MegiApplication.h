@@ -1,4 +1,6 @@
 #pragma once
+#include <map>
+
 #include "CommonInclude.h"
 #include "MegiGameObject.h"
 #include "MegiLoopingObject.h"
@@ -10,18 +12,23 @@ namespace MegiEngine
 	public:
 		Application();
 		~Application();
-		void Initialize(HWND hWnd);
+		void Initialize(HWND hWnd, UINT width, UINT height);
 		void Run();
 		void Update();
 		void LateUpdate();
 		void Render();
+		void AddGameObject(GameObject& obj);
 	private:
 		HWND mHwnd;
 		HDC mHdc;
+		HDC mBackHdc;
+		HBITMAP mBackBitmap;
 
-		float mSpeed;
+		UINT mWidth;
+		UINT mHeight;
+
 		GameObject mPlayer;
-		LoopingObject mLoopingObj;
+		LoopingObject mBullet;
 	};
 
 }

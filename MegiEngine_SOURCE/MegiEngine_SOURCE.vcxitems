@@ -17,11 +17,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiLoopingObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiTime.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiLoopingObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiTime.cpp" />
   </ItemGroup>
 </Project>
