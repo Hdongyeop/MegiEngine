@@ -1,5 +1,6 @@
 #pragma once
 #include "CommonInclude.h"
+#include "MegiComponent.h"
 
 namespace MegiEngine
 {
@@ -9,40 +10,36 @@ namespace MegiEngine
 		GameObject();
 		~GameObject();
 
-		void virtual Update();
-		void LateUpdate();
-		void virtual Render(HDC hdc);
+		virtual void Initialize();
+		virtual void Update();
+		virtual void LateUpdate();
+		virtual void Render(HDC hdc);
 
-		void SetPlayerPosition(float x, float y)
+		template <typename T>
+		T* AddComponent()
 		{
-			mX = x;
-			mY = y;
+			T* component = new T();
+			component->SetOwner(this);
+			mComponents.push_back(component);
+
+			return component;
 		}
 
-		void SetTargetPosition(float x, float y)
+		template <typename T>
+		T* GetComponent()
 		{
-			mX2 = x;
-			mY2 = y;
-		}
+			T* component = nullptr;
+			for (auto _mComponent : mComponents)
+			{
+				component = dynamic_cast<T*>(_mComponent);
+				if (component) break;
+			}
 
-		int GetPositionX()
-		{
-			return mX;
-		}
-
-		int GetPositionY()
-		{
-			return mY;
+			return component;
 		}
 
 	private:
-		float mX;
-		float mY;
-		float mX2;
-		float mY2;
-
-		float blueSpeed;
-		float redSpeed;
+		std::vector<Component*> mComponents;
 	};
 }
 

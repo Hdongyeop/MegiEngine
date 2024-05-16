@@ -16,16 +16,28 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiInput.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiLoopingObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiSceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTime.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiInput.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiLoopingObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiSceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTime.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiTransform.cpp" />
   </ItemGroup>
 </Project>
