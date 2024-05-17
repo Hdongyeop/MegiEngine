@@ -21,9 +21,11 @@
   <ItemGroup>
     <ClInclude Include="MegiLoadScene.h" />
     <ClInclude Include="MegiPlayScene.h" />
+    <ClInclude Include="MegiTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegiPlayScene.cpp" />
+    <ClCompile Include="MegiTitleScene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -120,6 +122,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>

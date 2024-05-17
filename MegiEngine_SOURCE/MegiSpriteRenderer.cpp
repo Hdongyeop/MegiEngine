@@ -5,7 +5,7 @@
 
 namespace MegiEngine
 {
-	SpriteRenderer::SpriteRenderer()
+	SpriteRenderer::SpriteRenderer() : mImage(nullptr), mWidth(0), mHeight(0)
 	{
 
 	}
@@ -31,21 +31,17 @@ namespace MegiEngine
 
 	void SpriteRenderer::Render(HDC hdc)
 	{
-		HPEN blackPen = CreatePen(PS_SOLID, 3, RGB(0, 0, 0));
-		HPEN oldPen = (HPEN)SelectObject(hdc, blackPen);
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
 
-		Transform* tr = GetOwner()->GetComponent < Transform >();
+		Gdiplus::Graphics graphics(hdc);
+		graphics.DrawImage(mImage , Gdiplus::Rect(pos.x , pos.y , mWidth , mHeight));
+	}
 
-		// Green Rectangle
-		{
-			HBRUSH greenBrush = CreateSolidBrush(RGB(0, 255, 0));
-			HBRUSH oldBrush = (HBRUSH)SelectObject(hdc,greenBrush);
-			Rectangle(hdc, tr->GetX(), tr->GetY(), 100 + tr->GetX(), 100 + tr->GetY());
-			SelectObject(hdc, oldBrush);
-			DeleteObject(greenBrush);
-		}
-
-		SelectObject(hdc, oldPen);
-		DeleteObject(blackPen);
+	void SpriteRenderer::ImageLoad(const std::wstring& path)
+	{
+		mImage = Gdiplus::Image::FromFile(path.c_str());
+		mWidth = mImage->GetWidth();
+		mHeight = mImage->GetHeight();
 	}
 }

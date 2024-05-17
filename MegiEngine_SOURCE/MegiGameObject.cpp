@@ -1,9 +1,12 @@
 #include "MegiGameObject.h"
 
+#include "MegiTransform.h"
+
 namespace MegiEngine
 {
 	GameObject::GameObject()
 	{
+		InitializeTransform();
 	}
 
 	GameObject::~GameObject()
@@ -45,5 +48,10 @@ namespace MegiEngine
 		{
 			_mComponent->Render(hdc);
 		}
+	}
+
+	void GameObject::InitializeTransform()
+	{
+		AddComponent<Transform>();
 	}
 }

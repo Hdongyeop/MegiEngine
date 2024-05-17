@@ -10,8 +10,10 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="MegiPlayScene.h" />
+    <ClInclude Include="MegiTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegiPlayScene.cpp" />
+    <ClCompile Include="MegiTitleScene.cpp" />
   </ItemGroup>
 </Project>

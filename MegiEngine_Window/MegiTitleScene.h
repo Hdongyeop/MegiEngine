@@ -1,13 +1,13 @@
 #pragma once
-#include "MegiGameObject.h"
+#include "../MegiEngine_SOURCE/MegiScene.h"
 
 namespace MegiEngine
 {
-	class Player : public GameObject
+	class TitleScene : public Scene
 	{
 	public:
-		Player();
-		~Player();
+		TitleScene();
+		~TitleScene();
 
 		void Initialize() override;
 		void Update() override;

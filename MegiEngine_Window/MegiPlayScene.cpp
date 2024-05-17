@@ -1,8 +1,11 @@
 #include "MegiPlayScene.h"
 
+#include "MegiInput.h"
+#include "MegiObject.h"
 #include "MegiPlayer.h"
+#include "MegiPlayerController.h"
+#include "MegiSceneManager.h"
 #include "MegiSpriteRenderer.h"
-#include "MegiTransform.h"
 
 namespace MegiEngine
 {
@@ -17,30 +20,30 @@ namespace MegiEngine
 	void PlayScene::Initialize()
 	{
 		{
-			Player* pl = new Player();
+			GameObject* background = 
+				Instantiate<GameObject>(LayerType::Background);
 
-			Transform* tr = pl->AddComponent<Transform>();
-			tr->SetPos(300 , 450);
-			tr->SetName(L"TR");
+			SpriteRenderer* sr = background->AddComponent<SpriteRenderer>();
+			sr->ImageLoad(L"E:\\MegiEngine\\Resources\\CloudOcean.png");
 
-			SpriteRenderer* sr = pl->AddComponent<SpriteRenderer>();
-			sr->SetName(L"SR");
-
-			AddGameObject(pl);
+			AddGameObject(background, LayerType::Background);
 		}
 
 		{
-			Player* pl = new Player();
+			Player* player =
+				Instantiate<Player>(LayerType::Player , Vector2(100 , 350));
 
-			Transform* tr = pl->AddComponent<Transform>();
-			tr->SetPos(100 , 650);
-			tr->SetName(L"TR");
+			SpriteRenderer* sr =player ->AddComponent<SpriteRenderer>();
+			sr->ImageLoad(L"E:\\MegiEngine\\Resources\\Player.png");
 
-			SpriteRenderer* sr = pl->AddComponent<SpriteRenderer>();
-			sr->SetName(L"SR");
+			PlayerController* pc =player ->AddComponent<PlayerController>();
+			pc->SetName(L"PC");
 
-			AddGameObject(pl);
+			AddGameObject(player , LayerType::Player);
 		}
+
+
+		Scene::Initialize();
 	}
 
 	void PlayScene::Update()
@@ -51,10 +54,28 @@ namespace MegiEngine
 	void PlayScene::LateUpdate()
 	{
 		Scene::LateUpdate();
+		if(Input::GetKeyDown(KeyCode::N))
+		{
+			SceneManager::LoadScene(L"TitleScene");
+		}
 	}
 
 	void PlayScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
+
+		wchar_t str[ 50 ] = L"Play Scene";
+		int len = wcsnlen_s(str, 50);
+		TextOut(hdc , 0 , 0 , str , len);
+	}
+
+	void PlayScene::OnEnter()
+	{
+		Scene::OnEnter();
+	}
+
+	void PlayScene::OnExit()
+	{
+		Scene::OnExit();
 	}
 }

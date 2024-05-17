@@ -3,8 +3,9 @@
 namespace MegiEngine
 {
 	Scene::Scene()
-	: mGameObjects{}
+	: mLayers{}
 	{
+		CreateLayers();
 	}
 
 	Scene::~Scene()
@@ -13,34 +14,64 @@ namespace MegiEngine
 
 	void Scene::Initialize()
 	{
+		for (auto& layer : mLayers)
+		{
+			if ( layer == nullptr ) continue;
+			layer->Initialize();
+		}
 	}
 
 	void Scene::Update()
 	{
-		for (auto gameObject : mGameObjects)
+		for (auto& layer : mLayers)
 		{
-			gameObject->Update();
+			if ( layer == nullptr ) continue;
+			layer->Update();
 		}
 	}
 
 	void Scene::LateUpdate()
 	{
-		for (auto gameObject : mGameObjects)
+		for (auto& layer : mLayers)
 		{
-			gameObject->LateUpdate();
+			if ( layer == nullptr ) continue;
+			layer->LateUpdate();
 		}
 	}
 
 	void Scene::Render(HDC hdc)
 	{
-		for (auto gameObject : mGameObjects)
+		for (auto& layer : mLayers)
 		{
-			gameObject->Render(hdc);
+			if ( layer == nullptr ) continue;
+			layer->Render(hdc);
 		}
 	}
 
-	void Scene::AddGameObject(GameObject* gameObject)
+	void Scene::OnEnter()
 	{
-		mGameObjects.push_back(gameObject);
+	}
+
+	void Scene::OnExit()
+	{
+	}
+
+	void Scene::AddGameObject(GameObject* gameObject, const LayerType type)
+	{
+		 mLayers[(UINT)type]->AddGameObject(gameObject);
+	}
+
+	void Scene::CreateLayers()
+	{
+		mLayers.resize(( UINT ) LayerType::MAX);
+		for (Layer*& _mLayer : mLayers)
+		{
+			_mLayer = new Layer();
+		}
+	}
+
+	Layer* Scene::GetLayer(LayerType type)
+	{
+		return mLayers[ ( UINT ) type ];
 	}
 }

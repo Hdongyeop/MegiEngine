@@ -30,6 +30,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayer.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayerController.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
@@ -64,6 +68,17 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayer.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayerController.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiMath.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiEnums.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

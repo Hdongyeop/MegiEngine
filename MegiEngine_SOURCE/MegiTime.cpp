@@ -39,6 +39,6 @@ namespace MegiEngine
 		swprintf_s(str, 50, L"FPS: %d", (int)fps);
 		int len = wcsnlen_s(str, 50);
 
-		TextOut(hdc, 0, 0, str, len);
+		TextOut(hdc, 1500, 0, str, len);
 	}
 }
