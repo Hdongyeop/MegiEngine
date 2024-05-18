@@ -1,16 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Scene">
+    <Filter Include="Load">
       <UniqueIdentifier>{c675f885-05de-4628-8c20-588f8222fdd5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MegiLoadScene.h">
-      <Filter>Scene</Filter>
+      <Filter>Load</Filter>
     </ClInclude>
     <ClInclude Include="MegiPlayScene.h" />
     <ClInclude Include="MegiTitleScene.h" />
+    <ClInclude Include="MegiLoadResource.h">
+      <Filter>Load</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegiPlayScene.cpp" />

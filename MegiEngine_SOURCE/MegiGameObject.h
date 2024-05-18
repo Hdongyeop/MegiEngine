@@ -15,7 +15,7 @@ namespace MegiEngine
 		virtual void LateUpdate();
 		virtual void Render(HDC hdc);
 
-		template <typename T>
+		template <typename T, std::enable_if_t<std::is_base_of_v<Component, T>, bool> = true>
 		T* AddComponent()
 		{
 			T* component = new T();
@@ -25,7 +25,7 @@ namespace MegiEngine
 			return component;
 		}
 
-		template <typename T>
+		template <typename T, std::enable_if_t<std::is_base_of_v<Component, T>, bool> = true>
 		T* GetComponent()
 		{
 			T* component = nullptr;

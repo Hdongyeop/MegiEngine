@@ -26,9 +26,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayerController.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTransform.h" />
   </ItemGroup>
@@ -39,11 +42,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayerController.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTransform.cpp" />
   </ItemGroup>

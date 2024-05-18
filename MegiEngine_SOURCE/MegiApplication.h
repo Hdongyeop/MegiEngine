@@ -16,6 +16,8 @@ namespace MegiEngine
 		void LateUpdate();
 		void Render();
 
+		HDC GetHdc() const { return mHdc; }
+
 	private:
 		void clearRenderTarget();
 		void copyRenderTarget(HDC src , HDC dest);

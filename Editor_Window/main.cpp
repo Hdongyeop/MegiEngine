@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "Editor_Window.h"
 #include "../MegiEngine_SOURCE/MegiApplication.h"
+#include "../MegiEngine_Window/MegiLoadResource.h"
 #include "../MegiEngine_Window/MegiLoadScene.h"
 
 #pragma comment(lib, "../x64/Debug/MegiEngine_Window.lib")
@@ -119,7 +120,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    Gdiplus::GdiplusStartup(&gpToken , &gpsi , NULL);
 
    //load scenes
-   LoadScene();
+   MegiEngine::LoadResource();
+   MegiEngine::LoadScene();
 
    return TRUE;
 }

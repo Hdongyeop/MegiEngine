@@ -1,6 +1,14 @@
 #pragma once
 namespace MegiEngine
 {
+	enum class ResourceType
+	{
+		Texture,
+		AudioClip,
+		Prefab,
+		End,
+	};
+
 	enum class LayerType
 	{
 		None ,

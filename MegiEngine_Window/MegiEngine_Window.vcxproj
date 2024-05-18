@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MegiLoadResource.h" />
     <ClInclude Include="MegiLoadScene.h" />
     <ClInclude Include="MegiPlayScene.h" />
     <ClInclude Include="MegiTitleScene.h" />

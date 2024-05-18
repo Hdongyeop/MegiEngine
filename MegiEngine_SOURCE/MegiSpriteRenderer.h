@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MegiComponent.h"
+#include "MegiTexture.h"
 
 namespace MegiEngine
 {
@@ -15,13 +16,12 @@ namespace MegiEngine
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
 
-		void ImageLoad(const std::wstring& path);
-		
-	private:
-		Gdiplus::Image* mImage;
-		UINT mWidth;
-		UINT mHeight;
+		void SetTexture(graphics::Texture* texture) { mTexture = texture; }
+		void SetSize(Vector2 size) { mSize = size; }
 
+	private:
+		graphics::Texture* mTexture;
+		Vector2 mSize;
 	};
 
 

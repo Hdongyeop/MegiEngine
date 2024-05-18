@@ -4,6 +4,7 @@
 #include "MegiObject.h"
 #include "MegiPlayer.h"
 #include "MegiPlayerController.h"
+#include "MegiResources.h"
 #include "MegiSceneManager.h"
 #include "MegiSpriteRenderer.h"
 
@@ -24,7 +25,8 @@ namespace MegiEngine
 				Instantiate<GameObject>(LayerType::Background);
 
 			SpriteRenderer* sr = background->AddComponent<SpriteRenderer>();
-			sr->ImageLoad(L"E:\\MegiEngine\\Resources\\CloudOcean.png");
+			auto bg = Resources::Find<graphics::Texture>(L"Background");
+			sr->SetTexture(bg);
 
 			AddGameObject(background, LayerType::Background);
 		}
@@ -34,7 +36,8 @@ namespace MegiEngine
 				Instantiate<Player>(LayerType::Player , Vector2(100 , 350));
 
 			SpriteRenderer* sr =player ->AddComponent<SpriteRenderer>();
-			sr->ImageLoad(L"E:\\MegiEngine\\Resources\\Player.png");
+			auto playerTexture = Resources::Find<graphics::Texture>(L"Player");
+			sr->SetTexture(playerTexture);
 
 			PlayerController* pc =player ->AddComponent<PlayerController>();
 			pc->SetName(L"PC");

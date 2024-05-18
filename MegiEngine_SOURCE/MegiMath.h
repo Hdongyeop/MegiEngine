@@ -4,6 +4,9 @@ namespace MegiEngine
 {
 	struct Vector2
 	{
+		static Vector2 Zero;
+		static Vector2 One;
+
 		float x;
 		float y;
 

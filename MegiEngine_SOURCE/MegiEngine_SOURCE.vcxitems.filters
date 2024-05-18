@@ -34,6 +34,18 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiTexture.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMath.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiResources.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
@@ -79,6 +91,15 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiTexture.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiResources.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -89,6 +110,9 @@
     </Filter>
     <Filter Include="GameObjects">
       <UniqueIdentifier>{4a30b8a9-b2f0-474d-b5ef-e78dff12ddf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{ed5f4ce5-f775-45f1-9e68-44d54e36c8ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
