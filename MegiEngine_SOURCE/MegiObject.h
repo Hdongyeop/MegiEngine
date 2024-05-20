@@ -3,6 +3,7 @@
 
 #include "MegiEnums.h"
 #include "MegiGameObject.h"
+#include "MegiRenderer.h"
 #include "MegiScene.h"
 #include "MegiSceneManager.h"
 #include "MegiTransform.h"
@@ -10,7 +11,7 @@
 namespace MegiEngine
 {
 	template <typename T, std::enable_if_t<std::is_base_of_v<GameObject, T>, bool> = true>
-	static T* Instantiate(LayerType type)
+	static T* Instantiate(Type::LayerType type)
 	{
 		T* gameObject = new T();
 		Scene* activeScene = SceneManager::GetActiveScene();
@@ -21,7 +22,7 @@ namespace MegiEngine
 	}
 
 	template <typename T, std::enable_if_t<std::is_base_of_v<GameObject, T>, bool> = true>
-	static T* Instantiate(LayerType type, Vector2 position)
+	static T* Instantiate(Type::LayerType type, Vector2 position)
 	{
 		T* gameObject = new T();
 		Scene* activeScene = SceneManager::GetActiveScene();

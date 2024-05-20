@@ -1,5 +1,9 @@
 #include "MegiTime.h"
 
+#include "MegiApplication.h"
+
+extern MegiEngine::Application application;
+
 namespace MegiEngine
 {
 	LARGE_INTEGER Time::CpuFrequency = {};
@@ -39,6 +43,6 @@ namespace MegiEngine
 		swprintf_s(str, 50, L"FPS: %d", (int)fps);
 		int len = wcsnlen_s(str, 50);
 
-		TextOut(hdc, 1500, 0, str, len);
+		TextOut(hdc, application.GetWidth() - 100, 0, str, len);
 	}
 }

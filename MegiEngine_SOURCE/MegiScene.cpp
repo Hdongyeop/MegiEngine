@@ -56,21 +56,21 @@ namespace MegiEngine
 	{
 	}
 
-	void Scene::AddGameObject(GameObject* gameObject, const LayerType type)
+	void Scene::AddGameObject(GameObject* gameObject, const Type::LayerType type)
 	{
 		 mLayers[(UINT)type]->AddGameObject(gameObject);
 	}
 
 	void Scene::CreateLayers()
 	{
-		mLayers.resize(( UINT ) LayerType::MAX);
+		mLayers.resize(( UINT ) Type::LayerType::MAX);
 		for (Layer*& _mLayer : mLayers)
 		{
 			_mLayer = new Layer();
 		}
 	}
 
-	Layer* Scene::GetLayer(LayerType type)
+	Layer* Scene::GetLayer(Type::LayerType type)
 	{
 		return mLayers[ ( UINT ) type ];
 	}

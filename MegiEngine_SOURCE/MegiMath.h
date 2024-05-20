@@ -1,6 +1,6 @@
 #pragma once
 
-namespace MegiEngine
+namespace MegiEngine::Math
 {
 	struct Vector2
 	{
@@ -18,6 +18,21 @@ namespace MegiEngine
 		Vector2(float _x , float _y) : x(_x) , y(_y)
 		{
 			
+		}
+
+		Vector2 operator+(const Vector2& other) const
+		{
+			return Vector2(x + other.x , y + other.y);
+		}
+
+		Vector2 operator-(const Vector2& other) const
+		{
+			return Vector2(x - other.x , y - other.y);
+		}
+
+		Vector2 operator/(float value) const
+		{
+			return Vector2(x / value , y / value);
 		}
 	};
 

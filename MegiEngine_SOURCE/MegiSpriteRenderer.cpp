@@ -2,11 +2,12 @@
 
 #include "MegiGameObject.h"
 #include "MegiTransform.h"
+#include "MegiRenderer.h"
 
 namespace MegiEngine
 {
 	SpriteRenderer::SpriteRenderer()
-	: Component()
+	: Component(ComponentType::SpriteRenderer)
 	, mTexture(nullptr)
 	, mSize(Vector2::One)
 	{
@@ -38,6 +39,8 @@ namespace MegiEngine
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
+		// 메인 카메라에 맞게 위치 변환
+		pos = MainCamera->CalculatePosition(pos);
 
 		if(mTexture->GetTextureType() == graphics::Texture::TextureType::Bmp)
 		{

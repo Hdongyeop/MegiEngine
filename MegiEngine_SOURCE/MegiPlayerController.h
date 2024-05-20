@@ -1,10 +1,10 @@
 #pragma once
-#include "MegiComponent.h"
+#include "MegiScript.h"
 
 namespace MegiEngine
 {
 	class Transform;
-	class PlayerController : public Component
+	class PlayerController : public Script
 	{
 	public:
 		PlayerController();

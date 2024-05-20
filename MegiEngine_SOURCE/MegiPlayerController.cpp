@@ -7,7 +7,9 @@
 
 namespace MegiEngine
 {
-	PlayerController::PlayerController() : tr(nullptr), speed(0)
+	PlayerController::PlayerController()
+	: tr(nullptr)
+	, speed(0)
 	{
 	}
 
@@ -44,9 +46,8 @@ namespace MegiEngine
 
 		if(tr != NULL)
 		{
-			float resX = tr->GetPosition().x + dx;
-			float resY = tr->GetPosition().y + dy;
-			tr->SetPosition(resX , resY);
+			auto res = tr->GetPosition() + Vector2(dx , dy);
+			tr->SetPosition(res);
 		}
 	}
 

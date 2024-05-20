@@ -3,6 +3,7 @@
 
 namespace MegiEngine
 {
+	using namespace Math;
 	struct Pos
 	{
 		int mX;

@@ -17,11 +17,11 @@ namespace MegiEngine
 		void Render(HDC hdc) override;
 
 		void SetTexture(graphics::Texture* texture) { mTexture = texture; }
-		void SetSize(Vector2 size) { mSize = size; }
+		void SetSize(Math::Vector2 size) { mSize = size; }
 
 	private:
 		graphics::Texture* mTexture;
-		Vector2 mSize;
+		Math::Vector2 mSize;
 	};
 
 

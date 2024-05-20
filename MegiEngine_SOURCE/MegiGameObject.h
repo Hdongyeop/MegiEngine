@@ -20,7 +20,7 @@ namespace MegiEngine
 		{
 			T* component = new T();
 			component->SetOwner(this);
-			mComponents.push_back(component);
+			mComponents[static_cast<UINT>(component->GetComponentType())] = component;
 
 			return component;
 		}
@@ -40,6 +40,7 @@ namespace MegiEngine
 
 	private:
 		void InitializeTransform();
+
 	private:
 		std::vector<Component*> mComponents;
 	};

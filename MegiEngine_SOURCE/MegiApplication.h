@@ -17,6 +17,8 @@ namespace MegiEngine
 		void Render();
 
 		HDC GetHdc() const { return mHdc; }
+		UINT GetWidth() { return mWidth; }
+		UINT GetHeight() { return mHeight; }
 
 	private:
 		void clearRenderTarget();

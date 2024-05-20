@@ -5,6 +5,7 @@
 
 namespace MegiEngine
 {
+	using namespace Type;
 	class Resource abstract : public Entity
 	{
 	public:

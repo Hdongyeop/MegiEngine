@@ -1,5 +1,4 @@
 #pragma once
-#include "CommonInclude.h"
 #include "MegiEntity.h"
 
 namespace MegiEngine
@@ -8,7 +7,7 @@ namespace MegiEngine
 	class Component : public Entity
 	{
 	public:
-		Component();
+		Component(Type::ComponentType type);
 		~Component();
 
 		virtual void Initialize();
@@ -21,9 +20,11 @@ namespace MegiEngine
 			mOwner = owner;
 		}
 		GameObject* GetOwner() { return mOwner; }
+		Type::ComponentType GetComponentType() { return mType; }
 
 	private:
 		GameObject* mOwner;
+		Type::ComponentType mType;
 	};
 
 

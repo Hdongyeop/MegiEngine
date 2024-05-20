@@ -4,19 +4,33 @@
     <Filter Include="Load">
       <UniqueIdentifier>{c675f885-05de-4628-8c20-588f8222fdd5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{a0001701-2c3e-4833-853b-f04ad7469bc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{acc43ab3-c4f2-4eb7-b198-797e52a801db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MegiLoadScene.h">
       <Filter>Load</Filter>
     </ClInclude>
-    <ClInclude Include="MegiPlayScene.h" />
-    <ClInclude Include="MegiTitleScene.h" />
     <ClInclude Include="MegiLoadResource.h">
       <Filter>Load</Filter>
     </ClInclude>
+    <ClInclude Include="MegiPlayScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MegiTitleScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MegiPlayScene.cpp" />
-    <ClCompile Include="MegiTitleScene.cpp" />
+    <ClCompile Include="MegiPlayScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MegiTitleScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

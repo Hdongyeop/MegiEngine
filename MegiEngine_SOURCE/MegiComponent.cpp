@@ -2,7 +2,8 @@
 
 namespace MegiEngine
 {
-	Component::Component()
+	Component::Component(Type::ComponentType type)
+	: mType(type)
 	{
 	}
 

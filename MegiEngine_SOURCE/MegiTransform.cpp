@@ -3,6 +3,7 @@
 namespace MegiEngine
 {
 	Transform::Transform()
+	: Component(Type::ComponentType::Transform)
 	{
 	}
 

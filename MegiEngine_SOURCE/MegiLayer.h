@@ -19,7 +19,7 @@ namespace MegiEngine
 		void AddGameObject(GameObject* gameObject);
 
 	private:
-		LayerType mType;
+		Type::LayerType mType;
 		std::vector<GameObject*> mGameObjects;
 	};
 

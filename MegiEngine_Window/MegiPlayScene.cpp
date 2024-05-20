@@ -1,5 +1,6 @@
 #include "MegiPlayScene.h"
 
+#include "MegiApplication.h"
 #include "MegiInput.h"
 #include "MegiObject.h"
 #include "MegiPlayer.h"
@@ -7,6 +8,9 @@
 #include "MegiResources.h"
 #include "MegiSceneManager.h"
 #include "MegiSpriteRenderer.h"
+#include "MegiRenderer.h"
+
+extern MegiEngine::Application application;
 
 namespace MegiEngine
 {
@@ -20,30 +24,44 @@ namespace MegiEngine
 
 	void PlayScene::Initialize()
 	{
+		// Main Camera GameObject
 		{
-			GameObject* background = 
+			GameObject* mainCamera = 
+				Instantiate<GameObject>(LayerType::None
+					, Vector2((float)application.GetWidth() / 2, (float)application.GetHeight() / 2));
+			Camera* cameraComponent = mainCamera->AddComponent<Camera>();
+			MainCamera = cameraComponent;
+			mainCamera->AddComponent<PlayerController>();
+
+			AddGameObject(mainCamera, LayerType::None);
+		}
+
+		// Background GameObject
+		{
+			GameObject* background =
 				Instantiate<GameObject>(LayerType::Background);
 
 			SpriteRenderer* sr = background->AddComponent<SpriteRenderer>();
 			auto bg = Resources::Find<graphics::Texture>(L"Background");
 			sr->SetTexture(bg);
 
-			AddGameObject(background, LayerType::Background);
+			AddGameObject(background , LayerType::Background);
 		}
 
-		{
-			Player* player =
-				Instantiate<Player>(LayerType::Player , Vector2(100 , 350));
-
-			SpriteRenderer* sr =player ->AddComponent<SpriteRenderer>();
-			auto playerTexture = Resources::Find<graphics::Texture>(L"Player");
-			sr->SetTexture(playerTexture);
-
-			PlayerController* pc =player ->AddComponent<PlayerController>();
-			pc->SetName(L"PC");
-
-			AddGameObject(player , LayerType::Player);
-		}
+		// Player GameObject
+//		{
+//			Player* player =
+//				Instantiate<Player>(LayerType::Player, Vector2(0, 0));
+//
+//			SpriteRenderer* sr = player->AddComponent<SpriteRenderer>();
+//			auto playerTexture = Resources::Find<graphics::Texture>(L"Player");
+//			sr->SetTexture(playerTexture);
+//
+////			PlayerController* pc =player ->AddComponent<PlayerController>();
+////			pc->SetName(L"PC");
+//
+//			AddGameObject(player , LayerType::Player);
+//		}
 
 
 		Scene::Initialize();
@@ -57,7 +75,7 @@ namespace MegiEngine
 	void PlayScene::LateUpdate()
 	{
 		Scene::LateUpdate();
-		if(Input::GetKeyDown(KeyCode::N))
+		if ( Input::GetKeyDown(KeyCode::N) )
 		{
 			SceneManager::LoadScene(L"TitleScene");
 		}
@@ -68,7 +86,7 @@ namespace MegiEngine
 		Scene::Render(hdc);
 
 		wchar_t str[ 50 ] = L"Play Scene";
-		int len = wcsnlen_s(str, 50);
+		int len = wcsnlen_s(str , 50);
 		TextOut(hdc , 0 , 0 , str , len);
 	}
 

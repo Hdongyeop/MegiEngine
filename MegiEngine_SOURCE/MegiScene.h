@@ -21,9 +21,9 @@ namespace MegiEngine
 		virtual void OnEnter();
 		virtual void OnExit();
 
-		void AddGameObject(GameObject* const gameObject, const LayerType type);
+		void AddGameObject(GameObject* const gameObject, const Type::LayerType type);
 		void CreateLayers();
-		Layer* GetLayer(LayerType type);
+		Layer* GetLayer(Type::LayerType type);
 
 	private:
 		std::vector<Layer*> mLayers;

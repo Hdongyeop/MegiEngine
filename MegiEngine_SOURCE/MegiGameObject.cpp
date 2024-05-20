@@ -6,6 +6,7 @@ namespace MegiEngine
 {
 	GameObject::GameObject()
 	{
+		mComponents.resize(( UINT ) Type::ComponentType::End);
 		InitializeTransform();
 	}
 
@@ -22,6 +23,7 @@ namespace MegiEngine
 	{
 		for (auto _mComponent : mComponents)
 		{
+			if ( _mComponent == nullptr ) continue;
 			_mComponent->Initialize();
 		}
 	}
@@ -30,6 +32,7 @@ namespace MegiEngine
 	{
 		for (auto _mComponent : mComponents)
 		{
+			if ( _mComponent == nullptr ) continue;
 			_mComponent->Update();
 		}
 	}
@@ -38,6 +41,7 @@ namespace MegiEngine
 	{
 		for (auto _mComponent : mComponents)
 		{
+			if ( _mComponent == nullptr ) continue;
 			_mComponent->LateUpdate();
 		}
 	}
@@ -46,6 +50,7 @@ namespace MegiEngine
 	{
 		for (auto _mComponent : mComponents)
 		{
+			if ( _mComponent == nullptr ) continue;
 			_mComponent->Render(hdc);
 		}
 	}
