@@ -39,8 +39,12 @@ namespace MegiEngine
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
+
 		// 메인 카메라에 맞게 위치 변환
 		pos = MainCamera->CalculatePosition(pos);
+
+		float rotation = tr->GetRotation();
+		Vector2 scale = tr->GetScale();
 
 		if(mTexture->GetTextureType() == graphics::Texture::TextureType::Bmp)
 		{
@@ -48,8 +52,8 @@ namespace MegiEngine
 				hdc,
 				pos.x,
 				pos.y,
-				mTexture->GetWidth() * mSize.x,
-				mTexture->GetHeight() * mSize.y,
+				mTexture->GetWidth() * scale.x,
+				mTexture->GetHeight() * scale.y,
 				mTexture->GetHdc(),
 				0, 0,
 				mTexture->GetWidth(),
@@ -59,9 +63,29 @@ namespace MegiEngine
 		}
 		else if(mTexture->GetTextureType() == graphics::Texture::TextureType::Png )
 		{
+			// 투명화 시킬 픽셀의 색 범위
+			Gdiplus::ImageAttributes imgAtt = {};
+			imgAtt.SetColorKey
+			( Gdiplus::Color(200, 200, 200)
+			, Gdiplus::Color(255 , 255 , 255));
+
 			Gdiplus::Graphics graphics(hdc);
-			graphics.DrawImage(mTexture->GetImage(),
-				Gdiplus::Rect(pos.x , pos.y , mTexture->GetWidth() * mSize.x , mTexture->GetHeight() * mSize.y));
+
+			graphics.TranslateTransform(pos.x , pos.y);
+			graphics.RotateTransform(rotation);
+			graphics.TranslateTransform(-pos.x , -pos.y);
+
+			graphics.DrawImage(mTexture->GetImage()
+			, Gdiplus::Rect
+			(
+				pos.x , pos.y
+				, mTexture->GetWidth() * mSize.x * scale.x
+				, mTexture->GetHeight() * mSize.y * scale.y
+			)
+			, 0 , 0
+			, mTexture->GetWidth() , mTexture->GetHeight()
+			, Gdiplus::UnitPixel
+			, &imgAtt);
 		}
 	}
 }

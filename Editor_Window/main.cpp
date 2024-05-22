@@ -107,7 +107,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
-
 //   LONG lStyle = GetWindowLong(hWnd , GWL_STYLE);
 //   lStyle &= ~( WS_CAPTION | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU );
 //   SetWindowLong(hWnd , GWL_STYLE , lStyle);
@@ -119,15 +118,20 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	   return FALSE;
    }
 
+   // Window Settings
    SetMenu(hWnd , NULL);
    ShowWindow(hWnd , nCmdShow);
    UpdateWindow(hWnd);
 
+   // GdiPlus
    Gdiplus::GdiplusStartup(&gpToken , &gpsi , NULL);
 
    //load scenes
    MegiEngine::LoadResource();
    MegiEngine::LoadScene();
+
+   int a = 0;
+   srand((unsigned int)&a);
 
    return TRUE;
 }

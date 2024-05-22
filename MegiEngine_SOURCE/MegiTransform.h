@@ -34,9 +34,15 @@ namespace MegiEngine
 		}
 
 		Vector2 GetPosition() { return mPosition; }
+		float GetRotation() { return mRotation; }
+		void SetRotation(float rotation) { mRotation = rotation; }
+		Vector2 GetScale() { return mScale; }
+		void SetScale(Vector2 scale) { mScale = scale; }
 
 	private:
 		Vector2 mPosition;
+		Vector2 mScale;
+		float mRotation;
 	};
 
 

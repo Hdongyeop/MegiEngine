@@ -1,4 +1,5 @@
 #pragma once
+#include "CommonInclude.h"
 
 namespace MegiEngine::Math
 {
@@ -33,6 +34,22 @@ namespace MegiEngine::Math
 		Vector2 operator/(float value) const
 		{
 			return Vector2(x / value , y / value);
+		}
+
+		Vector2 operator*(float value) const
+		{
+			return Vector2(x * value , y * value);
+		}
+
+		bool operator==(Vector2 other) const
+		{
+			return areFloatsEqual(x, other.x) && areFloatsEqual(y, other.y);
+		}
+
+	private:
+		bool areFloatsEqual(float a, float b, float epsilon = 1e-10f) const
+		{
+			return std::abs(a - b) < epsilon;
 		}
 	};
 

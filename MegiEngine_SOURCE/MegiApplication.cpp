@@ -53,8 +53,8 @@ namespace MegiEngine
 	{
 		clearRenderTarget();
 
-		Time::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
+		Time::Render(mBackHdc);
 
 		copyRenderTarget(mBackHdc , mHdc);
 	}
