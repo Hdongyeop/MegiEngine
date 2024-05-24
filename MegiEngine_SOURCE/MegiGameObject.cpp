@@ -5,6 +5,7 @@
 namespace MegiEngine
 {
 	GameObject::GameObject()
+	: mState(eState::Active)
 	{
 		mComponents.resize(( UINT ) Type::ComponentType::End);
 		InitializeTransform();

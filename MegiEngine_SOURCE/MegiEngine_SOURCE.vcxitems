@@ -41,6 +41,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiAnimation.cpp" />
@@ -67,5 +68,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.cpp" />
   </ItemGroup>
 </Project>

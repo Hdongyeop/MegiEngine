@@ -16,6 +16,7 @@ namespace MegiEngine
 		void LateUpdate();
 		void Render();
 		void Release();
+		void Destroy();
 
 		HDC GetHdc() const { return mHdc; }
 		HWND GetHwnd() { return mHwnd; }

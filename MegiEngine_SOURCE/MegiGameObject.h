@@ -7,6 +7,14 @@ namespace MegiEngine
 	class GameObject
 	{
 	public:
+		enum class eState
+		{
+			Active,
+			Paused,
+			Dead,
+			End
+		};
+
 		GameObject();
 		~GameObject();
 
@@ -38,10 +46,20 @@ namespace MegiEngine
 			return component;
 		}
 
+		eState GetState() const { return mState; }
+		void SetActive(bool flag)
+		{
+			if ( flag == true ) mState = eState::Active;
+			if ( flag == false) mState = eState::Dead;
+		}
+		// FIXME Destroy로만 호출되야 하는데 흠..
+		void Death() { mState = eState::Dead; }
+
 	private:
 		void InitializeTransform();
 
 	private:
+		eState mState;
 		std::vector<Component*> mComponents;
 	};
 }

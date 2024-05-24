@@ -35,6 +35,7 @@ namespace MegiEngine
 		Update();
 		LateUpdate();
 		Render();
+		Destroy();
 	}
 
 	void Application::Update()
@@ -64,6 +65,11 @@ namespace MegiEngine
 	{
 		SceneManager::Release();
 		Resources::Release();
+	}
+
+	void Application::Destroy()
+	{
+		SceneManager::Destroy();
 	}
 
 	void Application::clearRenderTarget()

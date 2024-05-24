@@ -70,8 +70,13 @@ namespace MegiEngine
 		, Vector2::Zero
 		, 15
 		, 0.1f);
+		animator->GetCompleteEvent(L"Hit") =
+			[attackEffect]()
+			{
+				Destroy(attackEffect);
+			};
 
-		animator->PlayAnimation(L"Hit" , true);
+		animator->PlayAnimation(L"Hit" , false);
 
 		Transform* tr = attackEffect->GetComponent<Transform>();
 		tr->SetScale(Vector2(0.2f , 0.2f));

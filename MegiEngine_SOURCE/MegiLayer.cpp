@@ -33,6 +33,10 @@ namespace MegiEngine
 		{
 			if(gameObj == nullptr) continue;
 
+			GameObject::eState state = gameObj->GetState();
+			if(state == GameObject::eState::Paused || state == GameObject::eState::Dead)
+				continue;
+
 			gameObj->Update();
 		}
 	}
@@ -42,6 +46,10 @@ namespace MegiEngine
 		for (GameObject* gameObj : mGameObjects)
 		{
 			if(gameObj == nullptr) continue;
+
+			GameObject::eState state = gameObj->GetState();
+			if(state == GameObject::eState::Paused || state == GameObject::eState::Dead)
+				continue;
 
 			gameObj->LateUpdate();
 		}
@@ -53,7 +61,31 @@ namespace MegiEngine
 		{
 			if(gameObj == nullptr) continue;
 
+			GameObject::eState state = gameObj->GetState();
+			if(state == GameObject::eState::Paused || state == GameObject::eState::Dead)
+				continue;
+
 			gameObj->Render(hdc);
+		}
+	}
+
+	void Layer::Destroy()
+	{
+		for(auto iter = mGameObjects.begin(); iter != mGameObjects.end(); )
+		{
+			GameObject::eState state = ( *iter )->GetState();
+			if(state == GameObject::eState::Dead)
+			{
+				GameObject* deadObj = ( *iter );
+				iter = mGameObjects.erase(iter);
+
+				delete deadObj;
+				deadObj = nullptr;
+
+				continue;
+			}
+
+			++iter;
 		}
 	}
 
