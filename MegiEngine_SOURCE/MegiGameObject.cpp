@@ -14,6 +14,8 @@ namespace MegiEngine
 	{
 		for (auto _mComponent : mComponents)
 		{
+			if ( _mComponent == nullptr ) continue;
+
 			delete _mComponent;
 			_mComponent = nullptr;
 		}

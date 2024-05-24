@@ -1,6 +1,7 @@
 #include "MegiApplication.h"
 
 #include "MegiInput.h"
+#include "MegiResources.h"
 #include "MegiSceneManager.h"
 #include "MegiTime.h"
 
@@ -57,6 +58,12 @@ namespace MegiEngine
 		Time::Render(mBackHdc);
 
 		copyRenderTarget(mBackHdc , mHdc);
+	}
+
+	void Application::Release()
+	{
+		SceneManager::Release();
+		Resources::Release();
 	}
 
 	void Application::clearRenderTarget()

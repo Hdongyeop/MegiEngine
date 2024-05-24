@@ -6,6 +6,8 @@
 #include "MegiTransform.h"
 #include "MegiAnimator.h"
 #include "MegiApplication.h"
+#include "MegiObject.h"
+#include "MegiResources.h"
 
 extern MegiEngine::Application application;
 
@@ -14,7 +16,7 @@ namespace MegiEngine
 	PlayerController::PlayerController()
 	: tr(nullptr)
 	, speed(0)
-	, mState(eState::SitDown)
+	, mState(eState::Idle)
 	, mAnimator(nullptr)
 	{
 	}
@@ -38,11 +40,14 @@ namespace MegiEngine
 
 		switch (mState)
 		{
-		case eState::SitDown:
-			SitDown();
+		case eState::Idle:
+			Idle();
 			break;
 		case eState::Walk:
 			Move();
+			break;
+		case eState::GiveWater:
+			GiveWater();
 			break;
 		case eState::Sleep:
 			break;
@@ -51,7 +56,29 @@ namespace MegiEngine
 		}
 	}
 
-	void PlayerController::SitDown()
+	void PlayerController::AttackEffect()
+	{
+		GameObject* attackEffect = Instantiate<GameObject>(LayerType::Particle);
+
+		graphics::Texture* hitEffect = Resources::Find <graphics::Texture>(L"HitEffect");
+		Animator* animator = attackEffect->AddComponent<Animator>();
+		animator->CreateAnimation(
+		L"Hit"
+		, hitEffect
+		, Vector2(0.0f , 0.0f)
+		, Vector2(512.0f, 512.0f)
+		, Vector2::Zero
+		, 15
+		, 0.1f);
+
+		animator->PlayAnimation(L"Hit" , true);
+
+		Transform* tr = attackEffect->GetComponent<Transform>();
+		tr->SetScale(Vector2(0.2f , 0.2f));
+		tr->SetPosition(GetOwner()->GetComponent<Transform>()->GetPosition());
+	}
+
+	void PlayerController::Idle()
 	{
 		if(Input::GetKeyDown(KeyCode::D))
 		{
@@ -72,6 +99,14 @@ namespace MegiEngine
 		{
 			mState = eState::Walk;
 			mAnimator->PlayAnimation(L"DownWalk");
+		}
+		else if(Input::GetKeyDown(KeyCode::LMB))
+		{
+			mState = eState::GiveWater;
+			mAnimator->PlayAnimation(L"FrontGiveWater", false);
+
+			// TEST
+			Vector2 mousePos = Input::GetMousePosition();
 		}
 	}
 
@@ -101,8 +136,8 @@ namespace MegiEngine
 			||Input::GetKeyUp(KeyCode::S) 
 			|| Input::GetKeyUp(KeyCode::D))
 		{
-			mState = eState::SitDown;
-			mAnimator->PlayAnimation(L"SitDown" , false);
+			mState = eState::Idle;
+			mAnimator->PlayAnimation(L"Idle" , false);
 			return;
 		}
 
@@ -111,6 +146,15 @@ namespace MegiEngine
 			auto res = tr->GetPosition() + (dir * speed * Time::DeltaTime());
 			if ( CheckPositionIsValid(res) )
 				tr->SetPosition(res);
+		}
+	}
+
+	void PlayerController::GiveWater()
+	{
+		if(mAnimator->IsCompleted())
+		{
+			mState = eState::Idle;
+			mAnimator->PlayAnimation(L"Idle", false);
 		}
 	}
 

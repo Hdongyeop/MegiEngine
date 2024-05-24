@@ -9,10 +9,11 @@ namespace MegiEngine
 	public:
 		enum class eState
 		{
-			SitDown,
+			Idle,
 			Walk,
 			Sleep,
 			Attack,
+			GiveWater,
 		};
 
 		PlayerController();
@@ -21,9 +22,12 @@ namespace MegiEngine
 		void Initialize() override;
 		void Update() override;
 
+		void AttackEffect();
+
 	private:
-		void SitDown();
+		void Idle();
 		void Move();
+		void GiveWater();
 		bool CheckPositionIsValid(Math::Vector2 pos);
 
 	private:

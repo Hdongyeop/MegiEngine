@@ -16,6 +16,7 @@ namespace MegiEngine
 		A, S, D, F, G, H, J, K, L,
 		Z, X, C, V, B, N, M,
 		Left, Right, Down, Up, SPACE,
+		LMB, MMB, RMB,
 		END,
 	};
 
@@ -44,6 +45,7 @@ namespace MegiEngine
 		{
 			return mKeys[(UINT)keyCode].state == KeyState::Press;
 		}
+		static Math::Vector2 GetMousePosition() { return mMousePosition; }
 
 	private:
 		static void RegisterKeys();
@@ -52,8 +54,12 @@ namespace MegiEngine
 		static bool IsKeyDown(KeyCode keyCode);
 		static void UpdateKeyDown(Key& key);
 		static void UpdateKeyUp(Key& key);
+		static void GetMousePositionByWindow();
+		static void ClearKeys();
+
 	private:
 		static std::vector<Key> mKeys;
+		static Math::Vector2 mMousePosition;
 	};
 }
 

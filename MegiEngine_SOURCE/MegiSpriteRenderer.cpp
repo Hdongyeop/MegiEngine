@@ -61,7 +61,7 @@ namespace MegiEngine
 				RGB(255 , 0 , 255)
 			);
 		}
-		else if(mTexture->GetTextureType() == graphics::Texture::TextureType::Png )
+		else if(mTexture->GetTextureType() == graphics::Texture::TextureType::Png)
 		{
 			// 투명화 시킬 픽셀의 색 범위
 			Gdiplus::ImageAttributes imgAtt = {};

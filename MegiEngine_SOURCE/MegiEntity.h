@@ -13,6 +13,7 @@ namespace MegiEngine
 		{
 			mName = name;
 		}
+		std::wstring& GetName() { return mName; }
 	private:
 		std::wstring mName;
 	};

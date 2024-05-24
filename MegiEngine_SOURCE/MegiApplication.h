@@ -15,8 +15,10 @@ namespace MegiEngine
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Release();
 
 		HDC GetHdc() const { return mHdc; }
+		HWND GetHwnd() { return mHwnd; }
 		UINT GetWidth() { return mWidth; }
 		UINT GetHeight() { return mHeight; }
 

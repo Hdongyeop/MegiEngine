@@ -58,8 +58,7 @@ namespace MegiEngine
 		Vector2 pos = tr->GetPosition();
 
 		// 카메라 기반 위치 조정
-		if(MainCamera)
-			pos = MainCamera->CalculatePosition(pos);
+		pos = MainCamera->CalculatePosition(pos);
 
 		// 현재 스프라이트 얻기
 		Sprite sprite = mAnimationSheet[ mIndex ];
@@ -93,8 +92,8 @@ namespace MegiEngine
 			// 투명화 시킬 픽셀의 색 범위
 			Gdiplus::ImageAttributes imgAtt = {};
 			imgAtt.SetColorKey
-			( Gdiplus::Color(0, 0, 0)
-			, Gdiplus::Color(100, 100, 100));
+			( Gdiplus::Color(255, 0, 255)
+			, Gdiplus::Color(255, 0, 255));
 
 			Gdiplus::Graphics graphics(hdc);
 

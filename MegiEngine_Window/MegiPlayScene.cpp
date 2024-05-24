@@ -34,154 +34,163 @@ namespace MegiEngine
 					, Vector2((float)application.GetWidth() / 2, (float)application.GetHeight() / 2));
 			Camera* cameraComponent = mainCamera->AddComponent<Camera>();
 			MainCamera = cameraComponent;
-
-			AddGameObject(mainCamera, LayerType::None);
 		}
 
 		// Background GameObject
+
+//		{
+//			GameObject* background =
+//				Instantiate<GameObject>(LayerType::Background);
+//
+//			SpriteRenderer* sr = background->AddComponent<SpriteRenderer>();
+//			auto bg = Resources::Find<graphics::Texture>(L"Background");
+//			sr->SetTexture(bg);
+//
+//			AddGameObject(background , LayerType::Background);
+//		}
+
+		// Player GameObject
+
 		{
-			GameObject* background =
-				Instantiate<GameObject>(LayerType::Background);
-
-			SpriteRenderer* sr = background->AddComponent<SpriteRenderer>();
-			auto bg = Resources::Find<graphics::Texture>(L"Background");
-			sr->SetTexture(bg);
-
-			AddGameObject(background , LayerType::Background);
-		}
-
-		// Cat(Player) GameObject
-		{
-			Player* cat = Instantiate<Player>(LayerType::Player , Vector2(100 , 100));
-			Transform* tr = cat->GetComponent<Transform>();
+			Player* player = Instantiate<Player>(LayerType::Player , Vector2(0, 0));
+			Transform* tr = player->GetComponent<Transform>();
 			tr->SetName(L"Transform");
-			tr->SetScale(Vector2(5.0f , 5.0f));
-			Animator* animator = cat->AddComponent<Animator>();
+			Animator* animator = player->AddComponent<Animator>();
 			animator->SetName(L"Animator");
-			PlayerController* pc = cat->AddComponent < PlayerController >();
+			PlayerController* pc = player->AddComponent < PlayerController >();
 			pc->SetName(L"PlayerController");
 
-			auto catTexture = Resources::Find<graphics::Texture>(L"Cat");
+			auto playerTexture = Resources::Find<graphics::Texture>(L"Player");
 			animator->CreateAnimation(
 			L"DownWalk" 
-			, catTexture
-			, Vector2(0.0f , 0.0f)
-			, Vector2(32.0f , 32.0f)
+			, playerTexture
+			, Vector2(0 * 250.0f , 3 * 250.0f)
+			, Vector2(250.0f , 250.0f)
 			, Vector2::Zero
-			, 4
+			, 7
 			, 0.2f);
 
 			animator->CreateAnimation(
 			L"RightWalk"
-			, catTexture
-			, Vector2(0.0f , 32.0f)
-			, Vector2(32.0f , 32.0f)
+			, playerTexture
+			, Vector2(0 * 250.0f , 0 * 250.0f)
+			, Vector2(250.0f , 250.0f)
 			, Vector2::Zero
-			, 4
+			, 6
 			, 0.2f);
 
 			animator->CreateAnimation(
 			L"UpWalk"
-			, catTexture
-			, Vector2(0.0f , 64.0f)
-			, Vector2(32.0f , 32.0f)
+			, playerTexture
+			, Vector2(0 * 250.0f, 2 * 250.0f)
+			, Vector2(250.0f, 250.0f)
 			, Vector2::Zero
-			, 4
+			, 8
 			, 0.2f);
 
 			animator->CreateAnimation(
 			L"LeftWalk"
-			, catTexture
-			, Vector2(0.0f , 96.0f)
-			, Vector2(32.0f , 32.0f)
+			, playerTexture
+			, Vector2(0 * 250.0f, 1 * 250.0f)
+			, Vector2(250.0f, 250.0f)
 			, Vector2::Zero
-			, 4
+			, 6
 			, 0.2f);
 
 			animator->CreateAnimation(
-			L"SitDown"
-			, catTexture
-			, Vector2(0.0f , 128.0f)
-			, Vector2(32.0f , 32.0f)
+			L"Idle"
+			, playerTexture
+			, Vector2(0 * 250.0f, 3 * 250.0f)
+			, Vector2(250.0f, 250.0f)
 			, Vector2::Zero
-			, 4
-			, 0.2f);
+			, 1
+			, 1.0f);
 
-			animator->PlayAnimation(L"SitDown" , false);
+			animator->CreateAnimation(
+			L"FrontGiveWater"
+			, playerTexture
+			, Vector2(0 * 250.0f , 4 * 250.0f)
+			, Vector2(250.0f , 250.0f)
+			, Vector2::Zero
+			, 12
+			, 0.1f);
+			animator->GetCompleteEvent(L"FrontGiveWater")
+				= [pc]() {pc->AttackEffect(); };
 
-			AddGameObject(cat , LayerType::Player);
+			animator->PlayAnimation(L"Idle" , false);
 		}
 
 		// Cat(AI)
-		{
-			Cat* cat = Instantiate<Cat>(LayerType::Animal, Vector2(200 , 200));
-			Transform* tr = cat->GetComponent<Transform>();
-			tr->SetName(L"Transform");
-			tr->SetScale(Vector2(5.0f , 5.0f));
-			Animator* animator = cat->AddComponent<Animator>();
-			animator->SetName(L"Animator");
-			CatController* catController = cat->AddComponent<CatController>();
-			catController->SetName(L"CatController");
-			
-			auto catTexture = Resources::Find<graphics::Texture>(L"Cat");
-			animator->CreateAnimation(
-			L"DownWalk" 
-			, catTexture
-			, Vector2(0.0f , 0.0f)
-			, Vector2(32.0f , 32.0f)
-			, Vector2::Zero
-			, 4
-			, 0.2f);
 
-			animator->CreateAnimation(
-			L"RightWalk"
-			, catTexture
-			, Vector2(0.0f , 32.0f)
-			, Vector2(32.0f , 32.0f)
-			, Vector2::Zero
-			, 4
-			, 0.2f);
-
-			animator->CreateAnimation(
-			L"UpWalk"
-			, catTexture
-			, Vector2(0.0f , 64.0f)
-			, Vector2(32.0f , 32.0f)
-			, Vector2::Zero
-			, 4
-			, 0.2f);
-
-			animator->CreateAnimation(
-			L"LeftWalk"
-			, catTexture
-			, Vector2(0.0f , 96.0f)
-			, Vector2(32.0f , 32.0f)
-			, Vector2::Zero
-			, 4
-			, 0.2f);
-
-			animator->CreateAnimation(
-			L"SitDown"
-			, catTexture
-			, Vector2(0.0f , 128.0f)
-			, Vector2(32.0f , 32.0f)
-			, Vector2::Zero
-			, 4
-			, 0.2f);
-
-			animator->CreateAnimation(
-			L"LayDown"
-			, catTexture
-			, Vector2(0.0f , 192.0f)
-			, Vector2(32.0f , 32.0f)
-			, Vector2::Zero
-			, 4
-			, 0.2f);
-
-			animator->PlayAnimation(L"SitDown" , false);
-
-			AddGameObject(cat , LayerType::Animal);
-		}
+//		{
+//			Cat* cat = Instantiate<Cat>(LayerType::Animal, Vector2(200 , 200));
+//			Transform* tr = cat->GetComponent<Transform>();
+//			tr->SetName(L"Transform");
+//			tr->SetScale(Vector2(5.0f , 5.0f));
+//			Animator* animator = cat->AddComponent<Animator>();
+//			animator->SetName(L"Animator");
+//			CatController* catController = cat->AddComponent<CatController>();
+//			catController->SetName(L"CatController");
+//			
+//			auto catTexture = Resources::Find<graphics::Texture>(L"Cat");
+//			animator->CreateAnimation(
+//			L"DownWalk" 
+//			, catTexture
+//			, Vector2(0.0f , 0.0f)
+//			, Vector2(32.0f , 32.0f)
+//			, Vector2::Zero
+//			, 4
+//			, 0.2f);
+//
+//			animator->CreateAnimation(
+//			L"RightWalk"
+//			, catTexture
+//			, Vector2(0.0f , 32.0f)
+//			, Vector2(32.0f , 32.0f)
+//			, Vector2::Zero
+//			, 4
+//			, 0.2f);
+//
+//			animator->CreateAnimation(
+//			L"UpWalk"
+//			, catTexture
+//			, Vector2(0.0f , 64.0f)
+//			, Vector2(32.0f , 32.0f)
+//			, Vector2::Zero
+//			, 4
+//			, 0.2f);
+//
+//			animator->CreateAnimation(
+//			L"LeftWalk"
+//			, catTexture
+//			, Vector2(0.0f , 96.0f)
+//			, Vector2(32.0f , 32.0f)
+//			, Vector2::Zero
+//			, 4
+//			, 0.2f);
+//
+//			animator->CreateAnimation(
+//			L"SitDown"
+//			, catTexture
+//			, Vector2(0.0f , 128.0f)
+//			, Vector2(32.0f , 32.0f)
+//			, Vector2::Zero
+//			, 4
+//			, 0.2f);
+//
+//			animator->CreateAnimation(
+//			L"LayDown"
+//			, catTexture
+//			, Vector2(0.0f , 192.0f)
+//			, Vector2(32.0f , 32.0f)
+//			, Vector2::Zero
+//			, 4
+//			, 0.2f);
+//
+//			animator->PlayAnimation(L"SitDown" , false);
+//
+//			AddGameObject(cat , LayerType::Animal);
+//		}
 
 		// Bubble
 
@@ -200,17 +209,27 @@ namespace MegiEngine
 
 		// Black
 
-//		{
-//			GameObject* black = Instantiate<GameObject>(LayerType::Particle, Vector2(0,0));
-//
-//			Transform* tr =black ->GetComponent<Transform>();
-//
-//			auto blackTexture = Resources::Find<graphics::Texture>(L"Black");
+		{
+			GameObject* black = Instantiate<GameObject>(LayerType::Particle, Vector2(0,0));
+			Transform* tr =black ->GetComponent<Transform>();
+			tr->SetName(L"Transform");
+
+			auto blackTexture = Resources::Find<graphics::Texture>(L"Black");
 //			SpriteRenderer* sr =black ->AddComponent<SpriteRenderer>();
 //			sr->SetTexture(blackTexture);
-//
-//			AddGameObject(black , LayerType::Particle);
-//		}
+
+			Animator* animator = black->AddComponent<Animator>();
+			animator->CreateAnimation(
+			L"Idle"
+			, blackTexture
+			, Vector2(0.0f , 0.0f)
+			, Vector2(100.0f , 100.0f)
+			, Vector2::Zero
+			, 1
+			, 1.0f);
+
+			animator->PlayAnimation(L"Idle" , false);
+		}
 
 		// Hit Effect
 

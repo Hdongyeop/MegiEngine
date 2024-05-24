@@ -1,8 +1,13 @@
 #include "MegiInput.h"
 
+#include "MegiApplication.h"
+
+extern MegiEngine::Application application;
+
 namespace MegiEngine
 {
 	std::vector<Input::Key> Input::mKeys = { };
+	Math::Vector2 Input::mMousePosition = Math::Vector2::One;
 
 	int ASCII[(UINT)KeyCode::END] =
 	{
@@ -10,6 +15,7 @@ namespace MegiEngine
 		'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
 		'Z', 'X', 'C', 'V', 'B', 'N', 'M',
 		VK_LEFT, VK_RIGHT, VK_DOWN, VK_UP, VK_SPACE,
+		VK_LBUTTON, VK_MBUTTON, VK_RBUTTON,
 	};
 
 	void Input::Initialize()
@@ -43,20 +49,26 @@ namespace MegiEngine
 
 	void Input::UpdateKey(Key& key)
 	{
-		if (IsKeyDown(key.keyCode))
-			UpdateKeyDown(key);
-		else
-			UpdateKeyUp(key);
+		if ( GetFocus() )
+		{
+			if ( IsKeyDown(key.keyCode) )
+				UpdateKeyDown(key);
+			else
+				UpdateKeyUp(key);
+
+			GetMousePositionByWindow();
+		}
+		else ClearKeys();
 	}
 
 	bool Input::IsKeyDown(KeyCode keyCode)
 	{
-		return GetAsyncKeyState(ASCII[(UINT)keyCode]) & 0x8000;
+		return GetAsyncKeyState(ASCII[ ( UINT ) keyCode ]) & 0x8000;
 	}
 
 	void Input::UpdateKeyDown(Key& key)
 	{
-		if (key.pressed == true) key.state = KeyState::Press;
+		if ( key.pressed == true ) key.state = KeyState::Press;
 		else key.state = KeyState::Down;
 
 		key.pressed = true;
@@ -64,10 +76,33 @@ namespace MegiEngine
 
 	void Input::UpdateKeyUp(Key& key)
 	{
-		if (key.pressed == true) key.state = KeyState::Up;
+		if ( key.pressed == true ) key.state = KeyState::Up;
 		else key.state = KeyState::None;
 
 		key.pressed = false;
+	}
+
+	void Input::GetMousePositionByWindow()
+	{
+		POINT mousePos = {};
+		GetCursorPos(&mousePos);
+		ScreenToClient(application.GetHwnd() , &mousePos);
+
+		mMousePosition.x = mousePos.x;
+		mMousePosition.y = mousePos.y;
+	}
+
+	void Input::ClearKeys()
+	{
+		for(Key& key : mKeys)
+		{
+			if ( key.state == KeyState::Down || key.state == KeyState::Press )
+				key.state = KeyState::Up;
+			else if ( key.state == KeyState::Up )
+				key.state = KeyState::None;
+
+			key.pressed = false;
+		}
 	}
 }
 
