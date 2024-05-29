@@ -58,24 +58,35 @@ namespace MegiEngine
 		Vector2 pos = tr->GetPosition();
 
 		// 카메라 기반 위치 조정
-		pos = MainCamera->CalculatePosition(pos);
+		if(MainCamera) pos = MainCamera->CalculatePosition(pos);
 
 		// 현재 스프라이트 얻기
 		Sprite sprite = mAnimationSheet[ mIndex ];
-
 		// 이미지 타입별 처리
 		auto type = mTexture->GetTextureType();
 		if(type == graphics::Texture::TextureType::Bmp)
 		{
-			BLENDFUNCTION func = {};
-			func.BlendOp = AC_SRC_OVER;
-			func.BlendFlags = 0;
-			func.AlphaFormat = AC_SRC_ALPHA;
-			func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
+//			BLENDFUNCTION func = {};
+//			func.BlendOp = AC_SRC_OVER;
+//			func.BlendFlags = 0;
+//			func.AlphaFormat = AC_SRC_ALPHA;
+//			func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
 			HDC imgHdc = mTexture->GetHdc();
 
-			AlphaBlend(hdc
+//			AlphaBlend(hdc
+//			, pos.x
+//			, pos.y
+//			, sprite.size.x * scale.x
+//			, sprite.size.y * scale.y
+//			, imgHdc
+//			, sprite.leftTop.x
+//			, sprite.leftTop.y
+//			, sprite.size.x
+//			, sprite.size.y
+//			, func);
+
+			TransparentBlt(hdc
 			, pos.x
 			, pos.y
 			, sprite.size.x * scale.x
@@ -85,15 +96,15 @@ namespace MegiEngine
 			, sprite.leftTop.y
 			, sprite.size.x
 			, sprite.size.y
-			, func);
+			, RGB(255 , 0 , 255));
 		}
 		else if ( type == graphics::Texture::TextureType::Png )
 		{
 			// 투명화 시킬 픽셀의 색 범위
 			Gdiplus::ImageAttributes imgAtt = {};
 			imgAtt.SetColorKey
-			( Gdiplus::Color(255, 0, 255)
-			, Gdiplus::Color(255, 0, 255));
+			(Gdiplus::Color(255 , 0 , 255)
+			, Gdiplus::Color(255 , 0 , 255));
 
 			Gdiplus::Graphics graphics(hdc);
 
@@ -147,12 +158,12 @@ namespace MegiEngine
 		GameObject* gameObj = mAnimator->GetOwner();
 		Transform* tr = gameObj->GetComponent<Transform>();
 
-		Vector2 originSize = mAnimationSheet[mIndex].size;
+		Vector2 originSize = mAnimationSheet[ mIndex ].size;
 		Vector2 transformScale = tr->GetScale();
 
 		return Vector2(
 			originSize.x * transformScale.x ,
 			originSize.y * transformScale.y);
-;
+		;
 	}
 }

@@ -20,7 +20,12 @@ namespace MegiEngine
 		void AddGameObject(GameObject* gameObject);
 
 	private:
-		Type::LayerType mType;
+		void FindDeadGameObjects(OUT std::vector<GameObject*>& gameObjs);
+		void DeleteGameObjects(std::vector<GameObject*> gameObjs);
+		void eraseGameObject();
+
+	private:
+		// Type::LayerType mType;
 		std::vector<GameObject*> mGameObjects;
 	};
 

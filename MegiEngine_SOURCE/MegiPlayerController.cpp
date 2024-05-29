@@ -58,7 +58,7 @@ namespace MegiEngine
 
 	void PlayerController::AttackEffect()
 	{
-		GameObject* attackEffect = Instantiate<GameObject>(LayerType::Particle);
+		GameObject* attackEffect = Object::Instantiate<GameObject>(LayerType::Particle);
 
 		graphics::Texture* hitEffect = Resources::Find <graphics::Texture>(L"HitEffect");
 		Animator* animator = attackEffect->AddComponent<Animator>();
@@ -73,7 +73,7 @@ namespace MegiEngine
 		animator->GetCompleteEvent(L"Hit") =
 			[attackEffect]()
 			{
-				Destroy(attackEffect);
+				Object::Destroy(attackEffect);
 			};
 
 		animator->PlayAnimation(L"Hit" , false);
@@ -149,7 +149,7 @@ namespace MegiEngine
 		if(tr != NULL)
 		{
 			auto res = tr->GetPosition() + (dir * speed * Time::DeltaTime());
-			if ( CheckPositionIsValid(res) )
+			//if ( CheckPositionIsValid(res) )
 				tr->SetPosition(res);
 		}
 	}

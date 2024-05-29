@@ -8,7 +8,7 @@
 #include "MegiSceneManager.h"
 #include "MegiTransform.h"
 
-namespace MegiEngine
+namespace MegiEngine::Object
 {
 	template <typename T, std::enable_if_t<std::is_base_of_v<GameObject, T>, bool> = true>
 	static T* Instantiate(Type::LayerType type)
@@ -33,10 +33,5 @@ namespace MegiEngine
 		tr->SetPosition(position);
 
 		return gameObject;
-	}
-
-	static void Destroy(GameObject* obj)
-	{
-		obj->Death();
 	}
 }

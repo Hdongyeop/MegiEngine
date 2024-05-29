@@ -2,6 +2,16 @@
 
 #include "MegiTransform.h"
 
+namespace MegiEngine::Object
+{
+	void Destroy(GameObject* gameObject)
+	{
+		if ( gameObject == nullptr ) return;
+		gameObject->Death();
+	}
+
+}
+
 namespace MegiEngine
 {
 	GameObject::GameObject()

@@ -30,7 +30,7 @@ namespace MegiEngine
 		// Main Camera GameObject
 		{
 			GameObject* mainCamera = 
-				Instantiate<GameObject>(LayerType::None
+				Object::Instantiate<GameObject>(LayerType::None
 					, Vector2((float)application.GetWidth() / 2, (float)application.GetHeight() / 2));
 			Camera* cameraComponent = mainCamera->AddComponent<Camera>();
 			MainCamera = cameraComponent;
@@ -52,7 +52,7 @@ namespace MegiEngine
 		// Player GameObject
 
 		{
-			Player* player = Instantiate<Player>(LayerType::Player , Vector2(0, 0));
+			Player* player = Object::Instantiate<Player>(LayerType::Player , Vector2(0, 0));
 			Transform* tr = player->GetComponent<Transform>();
 			tr->SetName(L"Transform");
 			Animator* animator = player->AddComponent<Animator>();
@@ -209,27 +209,25 @@ namespace MegiEngine
 
 		// Black
 
-		{
-			GameObject* black = Instantiate<GameObject>(LayerType::Particle, Vector2(0,0));
-			Transform* tr =black ->GetComponent<Transform>();
-			tr->SetName(L"Transform");
-
-			auto blackTexture = Resources::Find<graphics::Texture>(L"Black");
-//			SpriteRenderer* sr =black ->AddComponent<SpriteRenderer>();
-//			sr->SetTexture(blackTexture);
-
-			Animator* animator = black->AddComponent<Animator>();
-			animator->CreateAnimation(
-			L"Idle"
-			, blackTexture
-			, Vector2(0.0f , 0.0f)
-			, Vector2(100.0f , 100.0f)
-			, Vector2::Zero
-			, 1
-			, 1.0f);
-
-			animator->PlayAnimation(L"Idle" , false);
-		}
+//		{
+//			GameObject* black = Instantiate<GameObject>(LayerType::Particle, Vector2(0,0));
+//			Transform* tr =black ->GetComponent<Transform>();
+//			tr->SetName(L"Transform");
+//
+//			auto blackTexture = Resources::Find<graphics::Texture>(L"Black");
+//
+//			Animator* animator = black->AddComponent<Animator>();
+//			animator->CreateAnimation(
+//			L"Idle"
+//			, blackTexture
+//			, Vector2(0.0f , 0.0f)
+//			, Vector2(100.0f , 100.0f)
+//			, Vector2::Zero
+//			, 1
+//			, 1.0f);
+//
+//			animator->PlayAnimation(L"Idle" , false);
+//		}
 
 		// Hit Effect
 
@@ -252,6 +250,20 @@ namespace MegiEngine
 //
 //			AddGameObject(hitEffect , LayerType::Player);
 //		}
+
+		// Mushroom
+
+		{
+			GameObject* mushroom = Object::Instantiate<GameObject>(LayerType::Particle);
+			Animator* animator = mushroom->AddComponent<Animator>();
+			animator->CreateAnimationByFolder(
+			L"MushroomIdle"
+			, L"..\\Resources\\Mushroom"
+			, Vector2::Zero
+			, 0.2f);
+
+			animator->PlayAnimation(L"MushroomIdle" , true);
+		}
 
 		Scene::Initialize();
 	}

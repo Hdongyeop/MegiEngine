@@ -2,11 +2,19 @@
 #include "CommonInclude.h"
 #include "MegiComponent.h"
 
+namespace MegiEngine::Object
+{
+	void Destroy(GameObject* gameObject);
+}
+
 namespace MegiEngine
 {
 	class GameObject
 	{
 	public:
+
+		friend void Object::Destroy(GameObject* obj);
+
 		enum class eState
 		{
 			Active,
@@ -52,10 +60,13 @@ namespace MegiEngine
 			if ( flag == true ) mState = eState::Active;
 			if ( flag == false) mState = eState::Dead;
 		}
-		// FIXME Destroy로만 호출되야 하는데 흠..
-		void Death() { mState = eState::Dead; }
+
+		bool IsActive() { return mState == eState::Active; }
+		bool IsDead() { return mState == eState::Dead; }
 
 	private:
+		// FIXME Destroy로만 호출되야 하는데 흠..
+		void Death() { mState = eState::Dead; }
 		void InitializeTransform();
 
 	private:

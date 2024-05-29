@@ -32,10 +32,7 @@ namespace MegiEngine
 		for (GameObject* gameObj : mGameObjects)
 		{
 			if(gameObj == nullptr) continue;
-
-			GameObject::eState state = gameObj->GetState();
-			if(state == GameObject::eState::Paused || state == GameObject::eState::Dead)
-				continue;
+			if(gameObj->IsActive() == false) continue;
 
 			gameObj->Update();
 		}
@@ -46,10 +43,7 @@ namespace MegiEngine
 		for (GameObject* gameObj : mGameObjects)
 		{
 			if(gameObj == nullptr) continue;
-
-			GameObject::eState state = gameObj->GetState();
-			if(state == GameObject::eState::Paused || state == GameObject::eState::Dead)
-				continue;
+			if(gameObj->IsActive() == false) continue;
 
 			gameObj->LateUpdate();
 		}
@@ -60,10 +54,7 @@ namespace MegiEngine
 		for (GameObject* gameObj : mGameObjects)
 		{
 			if(gameObj == nullptr) continue;
-
-			GameObject::eState state = gameObj->GetState();
-			if(state == GameObject::eState::Paused || state == GameObject::eState::Dead)
-				continue;
+			if(gameObj->IsActive() == false) continue;
 
 			gameObj->Render(hdc);
 		}
@@ -71,27 +62,47 @@ namespace MegiEngine
 
 	void Layer::Destroy()
 	{
-		for(auto iter = mGameObjects.begin(); iter != mGameObjects.end(); )
-		{
-			GameObject::eState state = ( *iter )->GetState();
-			if(state == GameObject::eState::Dead)
-			{
-				GameObject* deadObj = ( *iter );
-				iter = mGameObjects.erase(iter);
-
-				delete deadObj;
-				deadObj = nullptr;
-
-				continue;
-			}
-
-			++iter;
-		}
+		std::vector<GameObject*> deleteObjects;
+		// 메모리 해제할 녀석들 모으기
+		FindDeadGameObjects(deleteObjects);
+		// mGameObjects에서 지우기
+		eraseGameObject();
+		// 메모리 해제하기
+		DeleteGameObjects(deleteObjects);
 	}
 
 	void Layer::AddGameObject(GameObject* gameObject)
 	{
 		if ( gameObject == nullptr ) return;
 		mGameObjects.push_back(gameObject);
+	}
+
+	void Layer::FindDeadGameObjects(std::vector<GameObject*>& gameObjs)
+	{
+		for (GameObject* gameObj : mGameObjects)
+		{
+			GameObject::eState active = gameObj->GetState();
+			if ( active == GameObject::eState::Dead )
+				gameObjs.push_back(gameObj);
+		}
+	}
+
+	void Layer::DeleteGameObjects(std::vector<GameObject*> gameObjs)
+	{
+		for (GameObject* obj : gameObjs)
+		{
+			delete obj;
+			obj = nullptr;
+		}
+	}
+
+	void Layer::eraseGameObject()
+	{
+		// Predicate result가 true인 경우 삭제
+		std::erase_if(mGameObjects ,
+			[](GameObject* gameObj)
+			{
+				return ( gameObj )->IsDead();
+			});
 	}
 }

@@ -26,7 +26,7 @@ namespace MegiEngine
 		mTime += Time::DeltaTime();
 		if(mTime > mLimitTime)
 		{
-			Destroy(GetOwner());
+			Object::Destroy(GetOwner());
 		}
 	}
 

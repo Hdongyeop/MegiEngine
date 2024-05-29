@@ -13,17 +13,22 @@ namespace MegiEngine::graphics
 			None,
 		};
 
+		static Texture* Create(const std::wstring& name , UINT width , UINT height);
+
 		Texture();
 		~Texture();
 
 		HRESULT Load(const std::wstring& path) override;
-		UINT GetWidth() { return mWidth; }
-		UINT GetHeight() { return mHeight; }
-		HDC GetHdc() { return mHdc; }
-		TextureType GetTextureType() { return mType; }
-		Gdiplus::Image* GetImage() { return mImage; }
+		UINT GetWidth() const { return mWidth; }
+		void SetWidth(UINT width) { mWidth = width; }
+		UINT GetHeight() const { return mHeight; }
+		void SetHeight(UINT height) { mHeight = height; }
+		HDC GetHdc() const { return mHdc; }
+		TextureType GetTextureType() const { return mType; }
+		Gdiplus::Image* GetImage() const { return mImage; }
 
 	private:
+		bool mAlpha;
 		TextureType mType;
 		Gdiplus::Image* mImage;
 		HBITMAP mBitmap;
