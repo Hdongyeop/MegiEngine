@@ -66,37 +66,42 @@ namespace MegiEngine
 		auto type = mTexture->GetTextureType();
 		if(type == graphics::Texture::TextureType::Bmp)
 		{
-//			BLENDFUNCTION func = {};
-//			func.BlendOp = AC_SRC_OVER;
-//			func.BlendFlags = 0;
-//			func.AlphaFormat = AC_SRC_ALPHA;
-//			func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
-
 			HDC imgHdc = mTexture->GetHdc();
 
-//			AlphaBlend(hdc
-//			, pos.x
-//			, pos.y
-//			, sprite.size.x * scale.x
-//			, sprite.size.y * scale.y
-//			, imgHdc
-//			, sprite.leftTop.x
-//			, sprite.leftTop.y
-//			, sprite.size.x
-//			, sprite.size.y
-//			, func);
+			if(mTexture->HaveAlphaChannel())
+			{
+				BLENDFUNCTION func = {};
+				func.BlendOp = AC_SRC_OVER;
+				func.BlendFlags = 0;
+				func.AlphaFormat = AC_SRC_ALPHA;
+				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
-			TransparentBlt(hdc
-			, pos.x
-			, pos.y
-			, sprite.size.x * scale.x
-			, sprite.size.y * scale.y
-			, imgHdc
-			, sprite.leftTop.x
-			, sprite.leftTop.y
-			, sprite.size.x
-			, sprite.size.y
-			, RGB(255 , 0 , 255));
+				AlphaBlend(hdc
+					, pos.x + sprite.offset.x // - ( sprite.size.x / 2.0f ) 
+					, pos.y + sprite.offset.y // - ( sprite.size.y / 2.0f ) 
+					, sprite.size.x * scale.x
+					, sprite.size.y * scale.y
+					, imgHdc
+					, sprite.leftTop.x
+					, sprite.leftTop.y
+					, sprite.size.x
+					, sprite.size.y
+					, func);
+			}
+			else
+			{
+				TransparentBlt(hdc
+					, pos.x + sprite.offset.x // - ( sprite.size.x / 2.0f ) 
+					, pos.y + sprite.offset.y // - ( sprite.size.y / 2.0f ) 
+					, sprite.size.x * scale.x
+					, sprite.size.y * scale.y
+					, imgHdc
+					, sprite.leftTop.x
+					, sprite.leftTop.y
+					, sprite.size.x
+					, sprite.size.y
+					, RGB(255 , 0 , 255));
+			}
 		}
 		else if ( type == graphics::Texture::TextureType::Png )
 		{

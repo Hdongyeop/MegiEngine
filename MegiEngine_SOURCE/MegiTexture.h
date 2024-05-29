@@ -26,6 +26,7 @@ namespace MegiEngine::graphics
 		HDC GetHdc() const { return mHdc; }
 		TextureType GetTextureType() const { return mType; }
 		Gdiplus::Image* GetImage() const { return mImage; }
+		bool HaveAlphaChannel() const { return mAlpha; }
 
 	private:
 		bool mAlpha;

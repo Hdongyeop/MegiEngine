@@ -58,6 +58,11 @@ namespace MegiEngine::graphics
 			mWidth = info.bmWidth;
 			mHeight = info.bmHeight;
 
+			if ( info.bmBitsPixel == 32 )
+				mAlpha = true;
+			else if ( info.bmBitsPixel == 24 )
+				mAlpha = false;
+
 			HDC mainDC = application.GetHdc();
 			mHdc = CreateCompatibleDC(mainDC);
 
