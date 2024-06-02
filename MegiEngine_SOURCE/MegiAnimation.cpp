@@ -77,8 +77,8 @@ namespace MegiEngine
 				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
 				AlphaBlend(hdc
-					, pos.x + sprite.offset.x // - ( sprite.size.x / 2.0f ) 
-					, pos.y + sprite.offset.y // - ( sprite.size.y / 2.0f ) 
+					, pos.x + sprite.offset.x - ( sprite.size.x / 2.0f ) 
+					, pos.y + sprite.offset.y - ( sprite.size.y / 2.0f ) 
 					, sprite.size.x * scale.x
 					, sprite.size.y * scale.y
 					, imgHdc
@@ -91,8 +91,8 @@ namespace MegiEngine
 			else
 			{
 				TransparentBlt(hdc
-					, pos.x + sprite.offset.x // - ( sprite.size.x / 2.0f ) 
-					, pos.y + sprite.offset.y // - ( sprite.size.y / 2.0f ) 
+					, pos.x + sprite.offset.x - ( sprite.size.x / 2.0f ) 
+					, pos.y + sprite.offset.y - ( sprite.size.y / 2.0f ) 
 					, sprite.size.x * scale.x
 					, sprite.size.y * scale.y
 					, imgHdc
@@ -120,8 +120,8 @@ namespace MegiEngine
 			graphics.DrawImage(mTexture->GetImage()
 			, Gdiplus::Rect
 			(
-				pos.x // - ( sprite.size.x / 2.0f )
-				, pos.y // - ( sprite.size.y / 2.0f )
+				pos.x - ( sprite.size.x / 2.0f )
+				, pos.y - ( sprite.size.y / 2.0f )
 				, sprite.size.x * scale.x
 				, sprite.size.y * scale.y
 			)

@@ -11,7 +11,7 @@ namespace MegiEngine
 
 		// PNG
 		Resources::Load<graphics::Texture>(L"Background" , L"..\\Resources\\CloudOcean.png");
-		Resources::Load<graphics::Texture>(L"Player" , L"..\\Resources\\Player_Outline.png");
+		Resources::Load<graphics::Texture>(L"Player" , L"..\\Resources\\Player.png");
 		Resources::Load<graphics::Texture>(L"HitEffect" , L"..\\Resources\\HitEffect.png");
 		Resources::Load<graphics::Texture>(L"Bubble" , L"..\\Resources\\Bubble.png");
 		Resources::Load<graphics::Texture>(L"Black" , L"..\\Resources\\Black.png");

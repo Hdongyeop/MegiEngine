@@ -32,6 +32,7 @@ namespace MegiEngine
 		virtual void Render(HDC hdc);
 
 		template <typename T, std::enable_if_t<std::is_base_of_v<Component, T>, bool> = true>
+		// template <typename T>
 		T* AddComponent()
 		{
 			T* component = new T();

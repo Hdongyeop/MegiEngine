@@ -5,9 +5,10 @@ namespace MegiEngine::Type
 	enum class ComponentType
 	{
 		Transform,
+		Collider,
+		Script,
 		SpriteRenderer,
 		Animator,
-		Script,
 		Camera,
 		End,
 	};

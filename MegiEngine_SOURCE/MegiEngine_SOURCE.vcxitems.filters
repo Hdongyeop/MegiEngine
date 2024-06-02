@@ -73,6 +73,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollider.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCircleCollider2D.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
@@ -154,6 +163,15 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollider.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegCircleCollider2D.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

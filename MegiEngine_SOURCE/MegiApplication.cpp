@@ -74,7 +74,14 @@ namespace MegiEngine
 
 	void Application::clearRenderTarget()
 	{
+		// Gray
+		HBRUSH grayBrush = CreateSolidBrush(RGB(128 , 128 , 128));
+		HBRUSH oldBrush = ( HBRUSH ) SelectObject(mBackHdc , grayBrush);
+
 		Rectangle(mBackHdc, -1, -1, 1601, 901);
+
+		SelectObject(mBackHdc , oldBrush);
+		DeleteObject(grayBrush);
 	}
 
 	void Application::copyRenderTarget(HDC src, HDC dest)
