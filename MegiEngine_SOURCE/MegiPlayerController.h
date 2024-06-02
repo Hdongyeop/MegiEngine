@@ -35,6 +35,7 @@ namespace MegiEngine
 		class Animator* mAnimator;
 		Transform* tr;
 		float speed;
+		Math::Vector2 clickPos;
 	};
 
 

@@ -6,6 +6,7 @@
 #include "MegiTransform.h"
 #include "MegiAnimator.h"
 #include "MegiApplication.h"
+#include "MegiMoveToMousePos.h"
 #include "MegiObject.h"
 #include "MegiResources.h"
 
@@ -60,8 +61,15 @@ namespace MegiEngine
 	{
 		GameObject* attackEffect = Object::Instantiate<GameObject>(LayerType::Particle);
 
+		auto animator = attackEffect->AddComponent<Animator>();
+		auto moveToPos = attackEffect->AddComponent<MoveToMousePos>();
+
+		Vector2 clickDir = clickPos - GetOwner()->GetComponent<Transform>()->GetPosition();
+
+		moveToPos->SetDestPos(clickDir);
+		// moveToPos->SetRotation(clickDir);
+
 		graphics::Texture* hitEffect = Resources::Find <graphics::Texture>(L"HitEffect");
-		Animator* animator = attackEffect->AddComponent<Animator>();
 		animator->CreateAnimation(
 		L"Hit"
 		, hitEffect
@@ -110,8 +118,7 @@ namespace MegiEngine
 			mState = eState::GiveWater;
 			mAnimator->PlayAnimation(L"FrontGiveWater", false);
 
-			// TEST
-			Vector2 mousePos = Input::GetMousePosition();
+			clickPos = Input::GetMousePosition();
 		}
 	}
 

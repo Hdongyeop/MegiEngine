@@ -33,19 +33,19 @@ namespace MegiEngine
 		static void Initialize();
 		static void Update();
 
-		static bool GetKeyDown(KeyCode keyCode)
+		__forceinline static bool GetKeyDown(KeyCode keyCode)
 		{
 			return mKeys[(UINT)keyCode].state == KeyState::Down;
 		}
-		static bool GetKeyUp(KeyCode keyCode)
+		__forceinline static bool GetKeyUp(KeyCode keyCode)
 		{
 			return mKeys[(UINT)keyCode].state == KeyState::Up;
 		}
-		static bool GetKey(KeyCode keyCode)
+		__forceinline static bool GetKey(KeyCode keyCode)
 		{
 			return mKeys[(UINT)keyCode].state == KeyState::Press;
 		}
-		static Math::Vector2 GetMousePosition() { return mMousePosition; }
+		__forceinline static Math::Vector2 GetMousePosition() { return mMousePosition; }
 
 	private:
 		static void RegisterKeys();

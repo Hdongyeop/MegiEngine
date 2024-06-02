@@ -23,3 +23,4 @@
 #pragma comment(lib, "gdiplus.lib")
 
 #include "MegiEnums.h"
+#include "MegiMath.h"

@@ -28,6 +28,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayerController.h" />
@@ -56,6 +57,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayerController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiRenderer.cpp" />

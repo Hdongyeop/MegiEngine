@@ -70,6 +70,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
@@ -148,6 +151,9 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
