@@ -15,6 +15,5 @@ namespace MegiEngine
 		virtual void Render(HDC hdc);
 
 	private:
-		Math::Vector2 mSize;
 	};
 }

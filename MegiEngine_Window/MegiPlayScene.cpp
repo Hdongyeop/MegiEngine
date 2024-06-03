@@ -66,6 +66,7 @@ namespace MegiEngine
 			pc->SetName(L"PlayerController");
 			BoxCollider2D* collider = player->AddComponent<BoxCollider2D>();
 			collider->SetOffset(Vector2(-50.0f , -50.0f));
+			collider->SetSize(Vector2(100.0f , 100.0f));
 
 			auto playerTexture = Resources::Find<graphics::Texture>(L"Player");
 			animator->CreateAnimation(
@@ -265,6 +266,7 @@ namespace MegiEngine
 			Animator* animator = mushroom->AddComponent<Animator>();
 			BoxCollider2D* collider = mushroom->AddComponent<BoxCollider2D>();
 			collider->SetOffset(Vector2(-50.0f , -50.0f));
+			collider->SetSize(Vector2(100.0f , 100.0f));
 
 			animator->CreateAnimationByFolder(
 			L"MushroomIdle"

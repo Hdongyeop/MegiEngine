@@ -6,6 +6,7 @@
 #include "MegiTransform.h"
 #include "MegiAnimator.h"
 #include "MegiApplication.h"
+#include "MegiCollider.h"
 #include "MegiMoveToMousePos.h"
 #include "MegiObject.h"
 #include "MegiResources.h"
@@ -55,6 +56,22 @@ namespace MegiEngine
 		case eState::Attack:
 			break;
 		}
+	}
+
+	void PlayerController::OnCollisionEnter(Collider* other)
+	{
+		Transform* otherTr = other->GetOwner()->GetComponent<Transform>();
+		otherTr->SetPosition(otherTr->GetPosition() + Vector2(50.0f , 50.0f));
+	}
+
+	void PlayerController::OnCollisionStay(Collider* other)
+	{
+		Script::OnCollisionStay(other);
+	}
+
+	void PlayerController::OnCollisionExit(Collider* other)
+	{
+		Script::OnCollisionExit(other);
 	}
 
 	void PlayerController::AttackEffect()

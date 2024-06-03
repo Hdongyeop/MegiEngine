@@ -3,9 +3,6 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiSceneManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -30,9 +27,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayer.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayerController.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTexture.cpp">
       <Filter>Resource</Filter>
@@ -46,12 +40,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiResources.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiScript.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCamera.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiRenderer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -64,34 +52,43 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCat.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCatController.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollider.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCircleCollider2D.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollisionManager.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCircleCollider2D.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollider.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCatController.cpp">
+      <Filter>Components\CustomScripts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.cpp">
+      <Filter>Components\CustomScripts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayerController.cpp">
+      <Filter>Components\CustomScripts</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCamera.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiComponent.cpp">
+      <Filter>Components\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiScript.cpp">
+      <Filter>Components\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.cpp">
+      <Filter>Components\CustomScripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiSceneManager.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -119,9 +116,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayer.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayerController.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMath.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -138,12 +132,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiResources.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiScript.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCamera.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiRenderer.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -156,29 +144,41 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCat.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCatController.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiObject.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollider.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegCircleCollider2D.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollisionManager.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegCircleCollider2D.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollider.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCatController.h">
+      <Filter>Components\CustomScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.h">
+      <Filter>Components\CustomScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayerController.h">
+      <Filter>Components\CustomScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCamera.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiComponent.h">
+      <Filter>Components\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiScript.h">
+      <Filter>Components\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.h">
+      <Filter>Components\CustomScripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +193,15 @@
     </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{ed5f4ce5-f775-45f1-9e68-44d54e36c8ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider">
+      <UniqueIdentifier>{53ece4f7-cbb4-4e17-916a-6afb9868bad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\CustomScripts">
+      <UniqueIdentifier>{a83b4332-a073-478b-931e-7ac8263d17da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Base">
+      <UniqueIdentifier>{2a17b6a3-7d16-43a0-b767-ac7c7211e743}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

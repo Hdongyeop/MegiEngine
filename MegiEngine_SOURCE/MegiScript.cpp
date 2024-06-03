@@ -1,4 +1,6 @@
 #include "MegiScript.h"
+#include "MegiCollider.h"
+
 namespace MegiEngine
 {
 	Script::Script()
@@ -28,6 +30,18 @@ namespace MegiEngine
 	void Script::Render(HDC hdc)
 	{
 		Component::Render(hdc);
+	}
+
+	void Script::OnCollisionEnter(Collider* other)
+	{
+	}
+
+	void Script::OnCollisionStay(Collider* other)
+	{
+	}
+
+	void Script::OnCollisionExit(Collider* other)
+	{
 	}
 }
 
