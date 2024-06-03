@@ -136,13 +136,84 @@ namespace MegiEngine
 		Vector2 leftSize = left->GetSize();
 		Vector2 rightSize = right->GetSize();
 
+		ColliderType leftType = left->GetColliderType();
+		ColliderType rightType = right->GetColliderType();
+
 		// AABB 충돌 체크
-		if(fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.0f + rightSize.x / 2.0f)
-			&& fabs(leftPos.y - rightPos.y) < fabs((leftSize.y / 2.0f + rightSize.y / 2.0f)))
+		if(leftType == ColliderType::Rect2D && rightType == ColliderType::Rect2D)
 		{
-			return true;
+			// rect - rect
+			if ( fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.0f + rightSize.x / 2.0f)
+				&& fabs(leftPos.y - rightPos.y) < fabs(( leftSize.y / 2.0f + rightSize.y / 2.0f )) )
+			{
+				return true;
+			}
+		}
+
+		if(leftType == ColliderType::Circle2D && rightType == ColliderType::Circle2D)
+		{
+			// circle - circle
+			Vector2 leftCirclePos = leftPos + ( leftSize / 2.0f );
+			Vector2 rightCirclePos = rightPos + ( rightSize / 2.0f );
+
+			float distance = ( leftCirclePos - rightCirclePos ).Length();
+			if(distance <= (leftSize.x / 2.0f + rightSize.x / 2.0f))
+			{
+				return true;
+			}
+		}
+
+		if((leftType == ColliderType::Circle2D && rightType == ColliderType::Rect2D)
+			|| (leftType == ColliderType::Rect2D && rightType == ColliderType::Circle2D))
+		{
+			// circle - rect
+			Vector2 rectCenter = leftType == ColliderType::Circle2D ? rightPos : leftPos;
+			Vector2 rectSize = leftType == ColliderType::Circle2D ? rightSize : leftSize;
+			Vector2 circleCenter = leftType == ColliderType::Circle2D ? leftPos : rightPos;
+			Vector2 circleSize = leftType == ColliderType::Circle2D	? leftSize : rightSize;
+
+			UINT zone = GetRectZone(rectCenter , rectSize , circleCenter);
+			switch (zone)
+			{
+			case 1:
+			case 7:
+			case 3:
+			case 5:
+				if ( fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.0f + rightSize.x / 2.0f)
+					&& fabs(leftPos.y - rightPos.y) < fabs(( leftSize.y / 2.0f + rightSize.y / 2.0f )) )
+				{
+					return true;
+				}
+				break;
+			case 4:
+				return true;
+			default: // 모서리 영역
+				Vector2 checkEdge;
+				if ( zone == 0 ) checkEdge = Vector2(rectCenter.x - rectSize.x / 2.0f , rectCenter.y + rectSize.y / 2.0f);
+				else if ( zone == 2 ) checkEdge = Vector2(rectCenter.x + rectSize.x / 2.0f , rectCenter.y + rectSize.y / 2.0f);
+				else if ( zone == 8 ) checkEdge = Vector2(rectCenter.x - rectSize.x / 2.0f , rectCenter.y - rectSize.y / 2.0f);
+				else if ( zone == 6 ) checkEdge = Vector2(rectCenter.x - rectSize.x / 2.0f , rectCenter.y - rectSize.y / 2.0f);
+
+				// 모서리가 원의 내부에 있는지?
+				float distance = ( checkEdge - circleCenter ).Length();
+				if ( distance < circleSize.x / 2.0f )
+					return true;
+				break;
+			}
 		}
 
 		return false;
+	}
+
+	// https://dolphin.ivyro.net/file/mathematics/tutorial07.html
+	UINT CollisionManager::GetRectZone(Math::Vector2 rectPos , Math::Vector2 rectSize , Math::Vector2 circlePos)
+	{
+		UINT xZone = circlePos.x < ( rectPos.x - rectSize.x / 2.0f ) ? 0
+			: circlePos.x >(rectPos.x + rectSize.x / 2.0f) ? 2 : 1;
+		UINT yZone = circlePos.y < ( rectPos.y - rectSize.y / 2.0f ) ? 2
+			: circlePos.y >(rectPos.y + rectSize.y / 2.0f) ? 0 : 1;
+
+		UINT ret = xZone + 3 * yZone;
+		return ret;
 	}
 }

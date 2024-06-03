@@ -36,6 +36,9 @@ namespace MegiEngine
 		static bool Intersect(Collider* left , Collider* right);
 
 	private:
+		static UINT GetRectZone(Math::Vector2 rectPos , Math::Vector2 rectSize , Math::Vector2 circlePos);
+
+	private:
 		// Layer들 끼리 충돌 가능한지 써있는 마스킹
 		static std::bitset<(UINT)LayerType::MAX> mCollisionLayerMatrix[(UINT)LayerType::MAX ];
 		// 충돌 정보가 기록되는 Dict

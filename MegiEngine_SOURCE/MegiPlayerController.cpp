@@ -30,7 +30,7 @@ namespace MegiEngine
 	void PlayerController::Initialize()
 	{
 		tr = GetOwner()->GetComponent<Transform>();
-		speed = 100;
+		speed = 200;
 	}
 
 	void PlayerController::Update()

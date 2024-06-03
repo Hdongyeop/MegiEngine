@@ -6,7 +6,7 @@ namespace MegiEngine
 	class Collider : public Component
 	{
 	public:
-		Collider();
+		Collider(Type::ColliderType type);
 		~Collider();
 
 		virtual void Initialize();
@@ -23,6 +23,7 @@ namespace MegiEngine
 		UINT32 GetID() { return mID; }
 		Math::Vector2 GetSize() { return mSize; }
 		void SetSize(Math::Vector2 size) { mSize = size; }
+		Type::ColliderType GetColliderType() { return mType; }
 
 	private:
 		static UINT CollisionID;
@@ -30,6 +31,7 @@ namespace MegiEngine
 		UINT32 mID;
 		Math::Vector2 mOffset;
 		Math::Vector2 mSize;
+		Type::ColliderType mType;
 	};
 
 

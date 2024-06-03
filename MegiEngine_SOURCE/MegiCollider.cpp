@@ -7,8 +7,9 @@ namespace MegiEngine
 {
 	UINT Collider::CollisionID = 1;
 
-	Collider::Collider()
+	Collider::Collider(Type::ColliderType type)
 	: Component(Type::ComponentType::Collider)
+	, mType(type)
 	, mID(CollisionID++)
 	, mSize(Math::Vector2::One)
 	{

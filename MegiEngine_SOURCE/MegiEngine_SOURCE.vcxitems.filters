@@ -85,6 +85,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.cpp">
       <Filter>Components\CustomScripts</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiObject.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />

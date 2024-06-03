@@ -1,11 +1,13 @@
 #include "MegiBoxCollider2D.h"
 
 #include "MegiGameObject.h"
+#include "MegiRenderer.h"
 #include "MegiTransform.h"
 
 namespace MegiEngine
 {
 	BoxCollider2D::BoxCollider2D()
+	: Collider(Type::ColliderType::Rect2D)
 	{
 		
 	}
@@ -34,6 +36,8 @@ namespace MegiEngine
 	{
 		Transform* tr = GetOwner()->GetComponent < Transform >();
 		Vector2 pos = tr->GetPosition();
+		if ( MainCamera )
+			pos = MainCamera->CalculatePosition(pos);
 
 		Vector2 offset = GetOffset();
 

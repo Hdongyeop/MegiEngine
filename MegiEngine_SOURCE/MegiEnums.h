@@ -31,4 +31,11 @@ namespace MegiEngine::Type
 		Particle,
 		MAX = 16,
 	};
+
+	enum class ColliderType
+	{
+		Circle2D,
+		Rect2D,
+		End,
+	};
 }

@@ -1,5 +1,6 @@
 #include "MegiPlayScene.h"
 
+#include "MegCircleCollider2D.h"
 #include "MegiAnimator.h"
 #include "MegiApplication.h"
 #include "MegiBoxCollider2D.h"
@@ -64,7 +65,7 @@ namespace MegiEngine
 			animator->SetName(L"Animator");
 			PlayerController* pc = player->AddComponent < PlayerController >();
 			pc->SetName(L"PlayerController");
-			BoxCollider2D* collider = player->AddComponent<BoxCollider2D>();
+			CircleCollider2D* collider = player->AddComponent<CircleCollider2D>();
 			collider->SetOffset(Vector2(-50.0f , -50.0f));
 			collider->SetSize(Vector2(100.0f , 100.0f));
 
