@@ -82,6 +82,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCircleCollider2D.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollisionManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegCircleCollider2D.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollisionManager.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

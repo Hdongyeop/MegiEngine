@@ -18,6 +18,7 @@ namespace MegiEngine
 		virtual void Destroy();
 
 		void AddGameObject(GameObject* gameObject);
+		std::vector<GameObject*> GetGameObjects() const { return mGameObjects; }
 
 	private:
 		void FindDeadGameObjects(OUT std::vector<GameObject*>& gameObjs);

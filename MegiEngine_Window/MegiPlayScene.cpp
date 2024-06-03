@@ -13,6 +13,7 @@
 #include "MegiRenderer.h"
 #include "MegiCat.h"
 #include "MegiCatController.h"
+#include "MegiCollisionManager.h"
 
 extern MegiEngine::Application application;
 
@@ -28,6 +29,9 @@ namespace MegiEngine
 
 	void PlayScene::Initialize()
 	{
+		// Collider Interaction Check
+		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Animal , true);
+
 		// Main Camera GameObject
 		{
 			GameObject* mainCamera = 
@@ -257,8 +261,11 @@ namespace MegiEngine
 		// Mushroom
 
 		{
-			GameObject* mushroom = Object::Instantiate<GameObject>(LayerType::Particle);
+			GameObject* mushroom = Object::Instantiate<GameObject>(LayerType::Animal, Vector2(300, 300));
 			Animator* animator = mushroom->AddComponent<Animator>();
+			BoxCollider2D* collider = mushroom->AddComponent<BoxCollider2D>();
+			collider->SetOffset(Vector2(-50.0f , -50.0f));
+
 			animator->CreateAnimationByFolder(
 			L"MushroomIdle"
 			, L"..\\Resources\\Mushroom"

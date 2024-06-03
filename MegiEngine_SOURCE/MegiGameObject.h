@@ -66,7 +66,6 @@ namespace MegiEngine
 		bool IsDead() { return mState == eState::Dead; }
 
 	private:
-		// FIXME Destroy로만 호출되야 하는데 흠..
 		void Death() { mState = eState::Dead; }
 		void InitializeTransform();
 

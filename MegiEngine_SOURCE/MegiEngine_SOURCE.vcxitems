@@ -24,6 +24,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCat.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCatController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiEnums.h" />
@@ -57,6 +58,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCatController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCircleCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGameObject.cpp" />

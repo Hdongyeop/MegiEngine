@@ -1,5 +1,6 @@
 #include "MegiApplication.h"
 
+#include "MegiCollisionManager.h"
 #include "MegiInput.h"
 #include "MegiResources.h"
 #include "MegiSceneManager.h"
@@ -27,6 +28,7 @@ namespace MegiEngine
 		createBuffer(width , height);
 		initializeEtc();
 
+		CollisionManager::Initialize();
 		SceneManager::Initialize();
 	}
 
@@ -43,11 +45,13 @@ namespace MegiEngine
 		Input::Update();
 		Time::Update();
 
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
+		CollisionManager::LateUpdate();
 		SceneManager::LateUpdate();
 	}
 
@@ -55,6 +59,7 @@ namespace MegiEngine
 	{
 		clearRenderTarget();
 
+		CollisionManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 		Time::Render(mBackHdc);
 
