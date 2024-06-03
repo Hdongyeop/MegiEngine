@@ -127,6 +127,8 @@ namespace MegiEngine
 				= [pc]() {pc->AttackEffect(); };
 
 			animator->PlayAnimation(L"Idle" , false);
+
+			Object::DontDestroyOnLoad(player);
 		}
 
 		// Cat(AI)

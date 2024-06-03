@@ -64,6 +64,8 @@ namespace MegiEngine
 
 		bool IsActive() { return mState == eState::Active; }
 		bool IsDead() { return mState == eState::Dead; }
+		void SetLayerType(Type::LayerType type) { mLayerType = type; }
+		Type::LayerType GetLayerType() { return mLayerType; }
 
 	private:
 		void Death() { mState = eState::Dead; }
@@ -72,6 +74,7 @@ namespace MegiEngine
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;
+		Type::LayerType mLayerType;
 	};
 }
 

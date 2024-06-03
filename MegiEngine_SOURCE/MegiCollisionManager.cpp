@@ -16,6 +16,8 @@ namespace MegiEngine
 	void CollisionManager::Update()
 	{
 		Scene* scene = SceneManager::GetActiveScene();
+		Scene* dontDestroyOnLoad = SceneManager::GetDontDestroyOnLoad();
+
 		for (UINT row = 0; row < (UINT)LayerType::MAX; row++)
 		{
 			for (UINT col = 0; col < ( UINT ) LayerType::MAX; col++ )
@@ -23,6 +25,7 @@ namespace MegiEngine
 				if(mCollisionLayerMatrix[row][col] == true)
 				{
 					LayerCollision(scene , ( LayerType ) row , ( LayerType ) col);
+					LayerCollision(scene , dontDestroyOnLoad , ( LayerType ) row , ( LayerType ) col);
 				}
 			}
 		}
@@ -59,6 +62,31 @@ namespace MegiEngine
 	{
 		const std::vector<GameObject*>& lefts = scene->GetLayer(left)->GetGameObjects();
 		const std::vector<GameObject*>& rights = scene->GetLayer(right)->GetGameObjects();
+
+		for (GameObject* left : lefts)
+		{
+			if ( left->IsActive() == false ) continue;
+
+			Collider* leftCol = left->GetComponent < Collider >();
+			if ( leftCol == nullptr ) continue;
+
+			for (GameObject* right : rights)
+			{
+				if ( right->IsActive() == false ) continue;
+
+				Collider* rightCol = right->GetComponent<Collider>();
+				if ( rightCol == nullptr ) continue;
+				if ( left == right ) continue;
+
+				ColliderCollision(leftCol , rightCol);
+			}
+		}
+	}
+
+	void CollisionManager::LayerCollision(Scene* scene1, Scene* scene2, LayerType left, LayerType right)
+	{
+		const std::vector<GameObject*>& lefts = scene1->GetLayer(left)->GetGameObjects();
+		const std::vector<GameObject*>& rights = scene2->GetLayer(right)->GetGameObjects();
 
 		for (GameObject* left : lefts)
 		{

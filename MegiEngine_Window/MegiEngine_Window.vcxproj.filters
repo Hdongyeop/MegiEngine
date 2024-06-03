@@ -24,6 +24,10 @@
     <ClInclude Include="MegiTitleScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="MegiDontDestroyOnLoad.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegiPlayScene.cpp">
@@ -32,5 +36,11 @@
     <ClCompile Include="MegiTitleScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="MegiDontDestroyOnLoad.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MegiEngine_Window.rc" />
   </ItemGroup>
 </Project>

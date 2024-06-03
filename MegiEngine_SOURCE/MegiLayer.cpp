@@ -65,8 +65,8 @@ namespace MegiEngine
 		std::vector<GameObject*> deleteObjects;
 		// 메모리 해제할 녀석들 모으기
 		FindDeadGameObjects(deleteObjects);
-		// mGameObjects에서 지우기
-		eraseGameObject();
+		// Dead State GO들 mGameObjects에서 지우기
+		EraseDeadGameObject();
 		// 메모리 해제하기
 		DeleteGameObjects(deleteObjects);
 	}
@@ -75,6 +75,15 @@ namespace MegiEngine
 	{
 		if ( gameObject == nullptr ) return;
 		mGameObjects.push_back(gameObject);
+	}
+
+	void Layer::EraseGameObject(GameObject* eraseGameObj)
+	{
+		std::erase_if(mGameObjects ,
+			[eraseGameObj](GameObject* gameObj)
+			{
+				return gameObj == eraseGameObj;
+			});
 	}
 
 	void Layer::FindDeadGameObjects(std::vector<GameObject*>& gameObjs)
@@ -96,7 +105,7 @@ namespace MegiEngine
 		}
 	}
 
-	void Layer::eraseGameObject()
+	void Layer::EraseDeadGameObject()
 	{
 		// Predicate result가 true인 경우 삭제
 		std::erase_if(mGameObjects ,

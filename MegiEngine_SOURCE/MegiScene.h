@@ -25,6 +25,7 @@ namespace MegiEngine
 		void AddGameObject(GameObject* const gameObject, const Type::LayerType type);
 		void CreateLayers();
 		Layer* GetLayer(Type::LayerType type);
+		void EraseGameObject(GameObject* gameObject);
 
 	private:
 		std::vector<Layer*> mLayers;

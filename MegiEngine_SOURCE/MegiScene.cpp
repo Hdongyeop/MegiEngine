@@ -88,4 +88,10 @@ namespace MegiEngine
 	{
 		return mLayers[ ( UINT ) type ];
 	}
+
+	void Scene::EraseGameObject(GameObject* gameObject)
+	{
+		Type::LayerType layerType = gameObject->GetLayerType();
+		mLayers[ ( UINT ) layerType ]->EraseGameObject(gameObject);
+	}
 }
