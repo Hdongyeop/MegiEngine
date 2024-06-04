@@ -23,13 +23,17 @@
     <ClInclude Include="MegiLoadResource.h" />
     <ClInclude Include="MegiLoadScene.h" />
     <ClInclude Include="MegiPlayScene.h" />
+    <ClInclude Include="MegiTile.h" />
     <ClInclude Include="MegiTitleScene.h" />
+    <ClInclude Include="MegiToolScene.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegiDontDestroyOnLoad.cpp" />
     <ClCompile Include="MegiPlayScene.cpp" />
+    <ClCompile Include="MegiTile.cpp" />
     <ClCompile Include="MegiTitleScene.cpp" />
+    <ClCompile Include="MegiToolScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MegiEngine_Window.rc" />

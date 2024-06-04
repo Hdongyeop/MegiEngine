@@ -4,8 +4,11 @@
 #include "framework.h"
 #include "Editor_Window.h"
 #include "../MegiEngine_SOURCE/MegiApplication.h"
+#include "../MegiEngine_SOURCE/MegiResources.h"
+#include "../MegiEngine_SOURCE/MegiTexture.h"
 #include "../MegiEngine_Window/MegiLoadResource.h"
 #include "../MegiEngine_Window/MegiLoadScene.h"
+#include "../MegiEngine_Window/MegiToolScene.h"
 
 #pragma comment(lib, "../x64/Debug/MegiEngine_Window.lib")
 
@@ -15,6 +18,7 @@ using namespace MegiEngine;
 
 // 전역 변수:
 Application application;
+UINT toolTextureSize = 2;
 
 ULONG_PTR gpToken;
 Gdiplus::GdiplusStartupInput gpsi;
@@ -24,7 +28,7 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
-ATOM                MyRegisterClass(HINSTANCE hInstance);
+ATOM                MyRegisterClass(HINSTANCE hInstance, const wchar_t* name, WNDPROC proc);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
@@ -43,7 +47,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_EDITORWINDOW, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
+    MyRegisterClass(hInstance, szWindowClass, WndProc);
+    MyRegisterClass(hInstance, L"TILEWINDOW", WndTileProc);
 
     // 애플리케이션 초기화를 수행합니다:
     if (!InitInstance (hInstance, nCmdShow))
@@ -80,14 +85,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     return (int) msg.wParam;
 }
 
-ATOM MyRegisterClass(HINSTANCE hInstance)
+ATOM MyRegisterClass(HINSTANCE hInstance, const wchar_t* name, WNDPROC proc)
 {
     WNDCLASSEXW wcex;
 
     wcex.cbSize = sizeof(WNDCLASSEX);
 
     wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
+    wcex.lpfnWndProc    = proc;
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
@@ -95,7 +100,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
 	wcex.lpszMenuName = NULL; // MAKEINTRESOURCEW(IDC_EDITORWINDOW);
-    wcex.lpszClassName  = szWindowClass;
+    wcex.lpszClassName  = name;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     return RegisterClassExW(&wcex);
@@ -111,6 +116,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
+   HWND toolHwnd = CreateWindowW(L"TILEWINDOW" , L"TileWindow" , WS_OVERLAPPEDWINDOW
+   , 0 , 0 , width , height , nullptr , nullptr , hInstance , nullptr);
+
    application.Initialize(hWnd, width, height);
 
    if ( !hWnd )
@@ -119,9 +127,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    }
 
    // Window Settings
-   SetMenu(hWnd , NULL);
    ShowWindow(hWnd , nCmdShow);
    UpdateWindow(hWnd);
+
+//   ShowWindow(toolHwnd , nCmdShow);
+//   UpdateWindow(toolHwnd);
 
    // GdiPlus
    Gdiplus::GdiplusStartup(&gpToken , &gpsi , NULL);
@@ -131,7 +141,19 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    MegiEngine::LoadScene();
 
    int a = 0;
-   srand((unsigned int)&a);
+   srand(( unsigned int ) &a);
+
+   // Tile 윈도우 크기 조정
+   graphics::Texture* texture = Resources::Find<graphics::Texture>(L"SpringFloor");
+   RECT rect = { 0, 0, texture->GetWidth() * toolTextureSize, texture->GetHeight() * toolTextureSize };
+   AdjustWindowRect(&rect , WS_OVERLAPPEDWINDOW , false);
+
+   UINT toolWidth = rect.right - rect.left;
+   UINT toolHeight = rect.bottom - rect.top;
+
+   SetWindowPos(toolHwnd , nullptr , width , 100 , toolWidth , toolHeight , 0);
+   ShowWindow(toolHwnd , true);
+   UpdateWindow(toolHwnd);
 
    return TRUE;
 }

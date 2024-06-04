@@ -8,6 +8,7 @@ namespace MegiEngine
 	{
 		// BMP
 		Resources::Load<graphics::Texture>(L"Cat" , L"..\\Resources\\Cat.bmp");
+		Resources::Load<graphics::Texture>(L"SpringFloor" , L"..\\Resources\\SpringFloor.bmp");
 
 		// PNG
 		Resources::Load<graphics::Texture>(L"Background" , L"..\\Resources\\CloudOcean.png");

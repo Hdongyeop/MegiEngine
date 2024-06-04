@@ -26,6 +26,7 @@ namespace MegiEngine::Type
 	{
 		None,
 		Background,
+		Tile,
 		Animal,
 		Player,
 		Particle,

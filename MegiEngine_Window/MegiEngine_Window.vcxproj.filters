@@ -28,6 +28,12 @@
     <ClInclude Include="MegiDontDestroyOnLoad.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="MegiToolScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MegiTile.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegiPlayScene.cpp">
@@ -38,6 +44,12 @@
     </ClCompile>
     <ClCompile Include="MegiDontDestroyOnLoad.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MegiToolScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MegiTile.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

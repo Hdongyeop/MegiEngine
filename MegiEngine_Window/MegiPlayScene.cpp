@@ -37,7 +37,7 @@ namespace MegiEngine
 		{
 			GameObject* mainCamera = 
 				Object::Instantiate<GameObject>(LayerType::None
-					, Vector2((float)application.GetWidth() / 2, (float)application.GetHeight() / 2));
+					, Vector2(358.0f , 469.5f));
 			Camera* cameraComponent = mainCamera->AddComponent<Camera>();
 			MainCamera = cameraComponent;
 		}
@@ -128,7 +128,7 @@ namespace MegiEngine
 
 			animator->PlayAnimation(L"Idle" , false);
 
-			Object::DontDestroyOnLoad(player);
+			// Object::DontDestroyOnLoad(player);
 		}
 
 		// Cat(AI)

@@ -3,9 +3,6 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiSceneManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTransform.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -88,13 +85,16 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiObject.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.cpp">
+      <Filter>Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiTilemapRenderer.cpp">
+      <Filter>Components\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiSceneManager.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTransform.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -183,6 +183,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.h">
       <Filter>Components\CustomScripts</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.h">
+      <Filter>Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiTilemapRenderer.h">
+      <Filter>Components\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -205,6 +211,9 @@
     </Filter>
     <Filter Include="Components\Base">
       <UniqueIdentifier>{2a17b6a3-7d16-43a0-b767-ac7c7211e743}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Renderer">
+      <UniqueIdentifier>{70998f89-502a-4900-bbce-4ae4d9e98bf2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
