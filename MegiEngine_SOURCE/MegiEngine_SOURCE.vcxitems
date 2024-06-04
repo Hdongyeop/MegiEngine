@@ -21,6 +21,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCameraMovement.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCat.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCatController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollider.h" />
@@ -55,6 +56,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCameraMovement.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCat.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCatController.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCircleCollider2D.cpp" />

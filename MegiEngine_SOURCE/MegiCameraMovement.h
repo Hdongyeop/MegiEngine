@@ -1,22 +1,22 @@
 #pragma once
-#include "MegiGameObject.h"
+#include "MegiScript.h"
 
 namespace MegiEngine
 {
-	class Tile : public GameObject
+	class CameraMovement : public Script
 	{
 	public:
-		Tile();
-		~Tile();
+		CameraMovement();
+		~CameraMovement();
 
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
 
-		void SetIndexPosition(int x , int y);
-
 	private:
 
 	};
+
+
 }

@@ -18,6 +18,7 @@ namespace MegiEngine
 		void SetTexture(graphics::Texture* texture) { mTexture = texture; }
 		void SetSize(Math::Vector2 size) { mSize = size; }
 		void SetIndex(Math::Vector2 index) { mIndex = index; }
+		Math::Vector2 GetIndex() const { return mIndex; }
 
 	public:
 		static Math::Vector2 TileSize;

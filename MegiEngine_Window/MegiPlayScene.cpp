@@ -15,6 +15,8 @@
 #include "MegiCat.h"
 #include "MegiCatController.h"
 #include "MegiCollisionManager.h"
+#include "MegiTile.h"
+#include "MegiTilemapRenderer.h"
 
 extern MegiEngine::Application application;
 
@@ -30,6 +32,9 @@ namespace MegiEngine
 
 	void PlayScene::Initialize()
 	{
+		const wchar_t* tilemapName = L"..\\Resources\\kuku";
+		LoadTileMap(tilemapName);
+
 		// Collider Interaction Check
 		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Animal , true);
 
@@ -314,5 +319,39 @@ namespace MegiEngine
 	void PlayScene::OnExit()
 	{
 		Scene::OnExit();
+	}
+
+	void PlayScene::LoadTileMap(const wchar_t* fileName)
+	{
+		FILE* pFile = nullptr;
+		_wfopen_s(&pFile , fileName , L"rb");
+
+		while ( true )
+		{
+			int idxX = 0;
+			int idxY = 0;
+
+			int posX = 0;
+			int posY = 0;
+
+
+			if ( fread(&idxX , sizeof(int) , 1 , pFile) == NULL )
+				break;
+			if ( fread(&idxY , sizeof(int) , 1 , pFile) == NULL )
+				break;
+			if ( fread(&posX , sizeof(int) , 1 , pFile) == NULL )
+				break;
+			if ( fread(&posY , sizeof(int) , 1 , pFile) == NULL )
+				break;
+
+			Tile* tile = Object::Instantiate<Tile>(LayerType::Tile , Vector2(posX , posY));
+			TilemapRenderer* tmr = tile->AddComponent<TilemapRenderer>();
+			tmr->SetTexture(Resources::Find<graphics::Texture>(L"SpringFloor"));
+			tmr->SetIndex(Vector2(idxX , idxY));
+
+			//mTiles.push_back(tile);
+		}
+
+		fclose(pFile);
 	}
 }

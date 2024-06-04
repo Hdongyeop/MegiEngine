@@ -91,6 +91,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTilemapRenderer.cpp">
       <Filter>Components\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiCameraMovement.cpp">
+      <Filter>Components\CustomScripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTilemapRenderer.h">
       <Filter>Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiCameraMovement.h">
+      <Filter>Components\CustomScripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

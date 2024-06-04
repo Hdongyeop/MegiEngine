@@ -8,6 +8,7 @@ namespace MegiEngine
 	{
 	public:
 		Vector2 CalculatePosition(Vector2 pos) { return pos - mDistance; }
+		Vector2 CalculateTilePosition(Vector2 pos) { return pos + mDistance; }
 
 		Camera();
 		~Camera();

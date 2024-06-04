@@ -3,6 +3,8 @@
 
 namespace MegiEngine
 {
+	class Tile;
+
 	class ToolScene : public Scene
 	{
 	public:
@@ -17,7 +19,11 @@ namespace MegiEngine
 		void OnEnter() override;
 		void OnExit() override;
 
+		void Save();
+		void Load();
+
 	private:
+		std::vector<Tile*> mTiles;
 
 	};
 }

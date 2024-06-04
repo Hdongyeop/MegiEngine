@@ -18,5 +18,6 @@ namespace MegiEngine
 		void OnExit() override;
 
 	private:
+		void LoadTileMap(const wchar_t* fileName);
 	};
 }
