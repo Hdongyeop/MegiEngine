@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MegiDontDestroyOnLoad.h" />
+    <ClInclude Include="MegiFloor.h" />
+    <ClInclude Include="MegiFloorScript.h" />
     <ClInclude Include="MegiLoadResource.h" />
     <ClInclude Include="MegiLoadScene.h" />
     <ClInclude Include="MegiPlayScene.h" />
@@ -30,6 +32,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegiDontDestroyOnLoad.cpp" />
+    <ClCompile Include="MegiFloor.cpp" />
+    <ClCompile Include="MegiFloorScript.cpp" />
     <ClCompile Include="MegiPlayScene.cpp" />
     <ClCompile Include="MegiTile.cpp" />
     <ClCompile Include="MegiTitleScene.cpp" />

@@ -15,6 +15,9 @@
 #include "MegiCat.h"
 #include "MegiCatController.h"
 #include "MegiCollisionManager.h"
+#include "MegiFloor.h"
+#include "MegiFloorScript.h"
+#include "MegiRigidbody.h"
 #include "MegiTile.h"
 #include "MegiTilemapRenderer.h"
 
@@ -61,8 +64,11 @@ namespace MegiEngine
 
 		{
 			Player* player = Object::Instantiate<Player>(LayerType::Player , Vector2(0, 0));
+			player->SetName(L"Player");
 			Transform* tr = player->GetComponent<Transform>();
 			tr->SetName(L"Transform");
+			Rigidbody* rb = player->AddComponent<Rigidbody>();
+			rb->SetApplyGravity(true);
 			Animator* animator = player->AddComponent<Animator>();
 			animator->SetName(L"Animator");
 			PlayerController* pc = player->AddComponent < PlayerController >();
@@ -70,6 +76,9 @@ namespace MegiEngine
 			CircleCollider2D* collider = player->AddComponent<CircleCollider2D>();
 			collider->SetOffset(Vector2(-50.0f , -50.0f));
 			collider->SetSize(Vector2(100.0f , 100.0f));
+//			BoxCollider2D* collider = player->AddComponent<BoxCollider2D>();
+//			collider->SetOffset(Vector2(-50.0f , -50.0f));
+//			collider->SetSize(Vector2(100.0f , 100.0f));
 
 			auto playerTexture = Resources::Find<graphics::Texture>(L"Player");
 			animator->CreateAnimation(
@@ -131,6 +140,17 @@ namespace MegiEngine
 			animator->PlayAnimation(L"Idle" , false);
 
 			// Object::DontDestroyOnLoad(player);
+		}
+
+		// Floor
+
+		{
+			Floor* floor = Object::Instantiate<Floor>(LayerType::Floor , Vector2(100.0f , 600.0f));
+			floor->SetName(L"Floor");
+			BoxCollider2D* floorCol = floor->AddComponent<BoxCollider2D>();
+			floorCol->SetOffset(Vector2(-150.0f , -50.0f));
+			floorCol->SetSize(Vector2(300.0f , 100.0f));
+			floor->AddComponent<FloorScript>();
 		}
 
 		// Cat(AI)
@@ -269,6 +289,9 @@ namespace MegiEngine
 		{
 			GameObject* mushroom = Object::Instantiate<GameObject>(LayerType::Animal, Vector2(300, 300));
 			Animator* animator = mushroom->AddComponent<Animator>();
+//			CircleCollider2D* collider = mushroom->AddComponent<CircleCollider2D>();
+//			collider->SetOffset(Vector2(-50.0f , -50.0f));
+//			collider->SetSize(Vector2(100.0f , 100.0f));
 			BoxCollider2D* collider = mushroom->AddComponent<BoxCollider2D>();
 			collider->SetOffset(Vector2(-50.0f , -50.0f));
 			collider->SetSize(Vector2(100.0f , 100.0f));
@@ -313,6 +336,7 @@ namespace MegiEngine
 		Scene::OnEnter();
 
 		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Animal, true);
+		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Floor, true);
 	}
 
 	void PlayScene::OnExit()

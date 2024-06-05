@@ -40,6 +40,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiResources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiRigidbody.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScript.h" />
@@ -75,6 +76,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiRigidbody.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiScript.cpp" />

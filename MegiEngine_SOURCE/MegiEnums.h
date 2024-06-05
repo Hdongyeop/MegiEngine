@@ -6,6 +6,7 @@ namespace MegiEngine::Type
 	{
 		Transform,
 		Collider,
+		Rigidbody,
 		Script,
 		SpriteRenderer,
 		Animator,
@@ -29,6 +30,7 @@ namespace MegiEngine::Type
 		Tile,
 		Animal,
 		Player,
+		Floor,
 		Particle,
 		MAX = 16,
 	};

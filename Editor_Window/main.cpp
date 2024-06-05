@@ -116,10 +116,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
-   HWND toolHwnd = CreateWindowW(L"TILEWINDOW" , L"TileWindow" , WS_OVERLAPPEDWINDOW
-   , 0 , 0 , width , height , nullptr , nullptr , hInstance , nullptr);
-
-   application.Initialize(hWnd, width, height);
+   application.Initialize(hWnd , width , height);
 
    if ( !hWnd )
    {
@@ -130,10 +127,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd , nCmdShow);
    UpdateWindow(hWnd);
 
-//   ShowWindow(toolHwnd , nCmdShow);
-//   UpdateWindow(toolHwnd);
+   //   ShowWindow(toolHwnd , nCmdShow);
+   //   UpdateWindow(toolHwnd);
 
-   // GdiPlus
+	  // GdiPlus
    Gdiplus::GdiplusStartup(&gpToken , &gpsi , NULL);
 
    //load scenes
@@ -143,17 +140,25 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    int a = 0;
    srand(( unsigned int ) &a);
 
-   // Tile 윈도우 크기 조정
-   graphics::Texture* texture = Resources::Find<graphics::Texture>(L"SpringFloor");
-   RECT rect = { 0, 0, texture->GetWidth() * toolTextureSize, texture->GetHeight() * toolTextureSize };
-   AdjustWindowRect(&rect , WS_OVERLAPPEDWINDOW , false);
+   Scene* activeScene = SceneManager::GetActiveScene();
+   std::wstring name = activeScene->GetName();
+   if ( name == L"ToolScene" )
+   {
+	   HWND toolHwnd = CreateWindowW(L"TILEWINDOW" , L"TileWindow" , WS_OVERLAPPEDWINDOW
+	   , 0 , 0 , width , height , nullptr , nullptr , hInstance , nullptr);
 
-   UINT toolWidth = rect.right - rect.left;
-   UINT toolHeight = rect.bottom - rect.top;
+	   // Tile 윈도우 크기 조정
+	   graphics::Texture* texture = Resources::Find<graphics::Texture>(L"SpringFloor");
+	   RECT rect = { 0, 0, texture->GetWidth() * toolTextureSize, texture->GetHeight() * toolTextureSize };
+	   AdjustWindowRect(&rect , WS_OVERLAPPEDWINDOW , false);
 
-   SetWindowPos(toolHwnd , nullptr , width , 100 , toolWidth , toolHeight , 0);
-   ShowWindow(toolHwnd , true);
-   UpdateWindow(toolHwnd);
+	   UINT toolWidth = rect.right - rect.left;
+	   UINT toolHeight = rect.bottom - rect.top;
+
+	   SetWindowPos(toolHwnd , nullptr , width , 100 , toolWidth , toolHeight , 0);
+	   ShowWindow(toolHwnd , true);
+	   UpdateWindow(toolHwnd);
+   }
 
    return TRUE;
 }

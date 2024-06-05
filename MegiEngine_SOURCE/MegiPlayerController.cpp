@@ -10,6 +10,7 @@
 #include "MegiMoveToMousePos.h"
 #include "MegiObject.h"
 #include "MegiResources.h"
+#include "MegiRigidbody.h"
 
 extern MegiEngine::Application application;
 
@@ -60,8 +61,8 @@ namespace MegiEngine
 
 	void PlayerController::OnCollisionEnter(Collider* other)
 	{
-		Transform* otherTr = other->GetOwner()->GetComponent<Transform>();
-		otherTr->SetPosition(otherTr->GetPosition() + Vector2(50.0f , 50.0f));
+//		Transform* otherTr = other->GetOwner()->GetComponent<Transform>();
+//		otherTr->SetPosition(otherTr->GetPosition() + Vector2(50.0f , 50.0f));
 	}
 
 	void PlayerController::OnCollisionStay(Collider* other)
@@ -110,25 +111,31 @@ namespace MegiEngine
 
 	void PlayerController::Idle()
 	{
+		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
+
 		if(Input::GetKeyDown(KeyCode::D))
 		{
 			mState = eState::Walk;
 			mAnimator->PlayAnimation(L"RightWalk");
+			// rb->AddForce(Vector2(200.0f , 0.0f));
 		}
 		else if(Input::GetKeyDown(KeyCode::A))
 		{
 			mState = eState::Walk;
 			mAnimator->PlayAnimation(L"LeftWalk");
+			// rb->AddForce(Vector2(-200.0f , 0.0f));
 		}
 		else if(Input::GetKeyDown(KeyCode::W))
 		{
 			mState = eState::Walk;
 			mAnimator->PlayAnimation(L"UpWalk");
+			// rb->AddForce(Vector2(0.0f, -200.0f));
 		}
 		else if(Input::GetKeyDown(KeyCode::S))
 		{
 			mState = eState::Walk;
 			mAnimator->PlayAnimation(L"DownWalk");
+			// rb->AddForce(Vector2(0.0f, 200.0f));
 		}
 		else if(Input::GetKeyDown(KeyCode::LMB))
 		{
@@ -141,23 +148,28 @@ namespace MegiEngine
 
 	void PlayerController::Move()
 	{
+		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
 		Vector2 dir = Vector2::Zero;
 		
 		if(Input::GetKey(KeyCode::W))
 		{
 			dir.y -= 1;
+			// rb->AddForce(Vector2(0.0f, -200.0f));
 		}
 		else if(Input::GetKey(KeyCode::S))
 		{
 			dir.y += 1;
+			// rb->AddForce(Vector2(0.0f, 200.0f));
 		}
 		else if(Input::GetKey(KeyCode::A))
 		{
 			dir.x -= 1;
+			// rb->AddForce(Vector2(-200.0f , 0.0f));
 		}
 		else if(Input::GetKey(KeyCode::D))
 		{
 			dir.x += 1;
+			// rb->AddForce(Vector2(200.0f , 0.0f));
 		}
 
 		if(Input::GetKeyUp(KeyCode::W) 
@@ -174,7 +186,7 @@ namespace MegiEngine
 		{
 			auto res = tr->GetPosition() + (dir * speed * Time::DeltaTime());
 			//if ( CheckPositionIsValid(res) )
-				tr->SetPosition(res);
+				// tr->SetPosition(res);
 		}
 	}
 

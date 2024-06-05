@@ -34,6 +34,12 @@
     <ClInclude Include="MegiTile.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="MegiFloor.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="MegiFloorScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MegiPlayScene.cpp">
@@ -49,6 +55,12 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="MegiTile.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="MegiFloor.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="MegiFloorScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
   </ItemGroup>

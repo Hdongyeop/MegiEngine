@@ -96,6 +96,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiSceneManager.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiRigidbody.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
@@ -197,6 +200,9 @@
       <Filter>Components\CustomScripts</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiSceneManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiRigidbody.h">
       <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>

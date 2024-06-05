@@ -138,8 +138,8 @@ namespace MegiEngine
 		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
 		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
 
-		Vector2 leftPos = leftTr->GetPosition() + left->GetOffset();
-		Vector2 rightPos = rightTr->GetPosition() + right->GetOffset();
+		Vector2 leftPos = leftTr->GetPosition();// +left->GetOffset();
+		Vector2 rightPos = rightTr->GetPosition();// +right->GetOffset();
 
 		Vector2 leftSize = left->GetSize();
 		Vector2 rightSize = right->GetSize();
@@ -199,7 +199,7 @@ namespace MegiEngine
 				Vector2 checkEdge;
 				if ( zone == 0 ) checkEdge = Vector2(rectCenter.x - rectSize.x / 2.0f , rectCenter.y + rectSize.y / 2.0f);
 				else if ( zone == 2 ) checkEdge = Vector2(rectCenter.x + rectSize.x / 2.0f , rectCenter.y + rectSize.y / 2.0f);
-				else if ( zone == 8 ) checkEdge = Vector2(rectCenter.x - rectSize.x / 2.0f , rectCenter.y - rectSize.y / 2.0f);
+				else if ( zone == 8 ) checkEdge = Vector2(rectCenter.x + rectSize.x / 2.0f , rectCenter.y - rectSize.y / 2.0f);
 				else if ( zone == 6 ) checkEdge = Vector2(rectCenter.x - rectSize.x / 2.0f , rectCenter.y - rectSize.y / 2.0f);
 
 				// 모서리가 원의 내부에 있는지?

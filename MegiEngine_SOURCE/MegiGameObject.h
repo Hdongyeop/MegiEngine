@@ -9,7 +9,7 @@ namespace MegiEngine::Object
 
 namespace MegiEngine
 {
-	class GameObject
+	class GameObject : public Entity
 	{
 	public:
 
