@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTransform.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -94,10 +93,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCameraMovement.cpp">
       <Filter>Components\CustomScripts</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiSceneManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTransform.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -194,6 +195,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCameraMovement.h">
       <Filter>Components\CustomScripts</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiSceneManager.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

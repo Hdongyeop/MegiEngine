@@ -35,9 +35,6 @@ namespace MegiEngine
 		const wchar_t* tilemapName = L"..\\Resources\\kuku";
 		LoadTileMap(tilemapName);
 
-		// Collider Interaction Check
-		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Animal , true);
-
 		// Main Camera GameObject
 		{
 			GameObject* mainCamera = 
@@ -314,6 +311,8 @@ namespace MegiEngine
 	void PlayScene::OnEnter()
 	{
 		Scene::OnEnter();
+
+		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Animal, true);
 	}
 
 	void PlayScene::OnExit()

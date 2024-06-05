@@ -1,5 +1,7 @@
 #include "MegiScene.h"
 
+#include "MegiCollisionManager.h"
+
 namespace MegiEngine
 {
 	Scene::Scene()
@@ -68,6 +70,7 @@ namespace MegiEngine
 
 	void Scene::OnExit()
 	{
+		CollisionManager::Clear();
 	}
 
 	void Scene::AddGameObject(GameObject* gameObject, const Type::LayerType type)
