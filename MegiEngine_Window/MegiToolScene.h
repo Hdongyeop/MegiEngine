@@ -23,6 +23,10 @@ namespace MegiEngine
 		void Load();
 
 	private:
+		void RenderGrid(HDC hdc);
+		void CreateTileObject();
+
+	private:
 		std::vector<Tile*> mTiles;
 
 	};

@@ -27,10 +27,6 @@ namespace MegiEngine
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		MainCamera = cameraComp;
 
-//		Tile* tile = Object::Instantiate<Tile>(Type::LayerType::Tile);
-//		TilemapRenderer* tmr = tile->AddComponent<TilemapRenderer>();
-//		tmr->SetTexture(Resources::Find<graphics::Texture>(L"SpringFloor"));
-
 		Scene::Initialize();
 	}
 
@@ -45,27 +41,7 @@ namespace MegiEngine
 
 		if(Input::GetKeyDown(KeyCode::LMB))
 		{
-			Vector2 pos = Input::GetMousePosition();
-			// 마우스 포지션은 카메라가 움직이면 움직이는 대로 같이 +- 된다.
-			pos = MainCamera->CalculateTilePosition(pos);
-
-			if(pos.x >= 0.0f && pos.y >= 0.0f)
-			{
-				int idxX = pos.x / TilemapRenderer::TileSize.x;
-				int idxY = pos.y / TilemapRenderer::TileSize.y;
-
-				Tile* tile = Object::Instantiate<Tile>(LayerType::Tile);
-				TilemapRenderer* tmr = tile->AddComponent<TilemapRenderer>();
-				tmr->SetTexture(Resources::Find<graphics::Texture>(L"SpringFloor"));
-				tmr->SetIndex(TilemapRenderer::SelectedIndex);
-				tile->SetIndexPosition(idxX , idxY);
-				mTiles.push_back(tile);
-			}
-			else
-			{
-
-			}
-
+			CreateTileObject();
 		}
 
 		if ( Input::GetKeyDown(KeyCode::S) ) Save();
@@ -77,23 +53,7 @@ namespace MegiEngine
 	{
 		Scene::Render(hdc);
 
-		for ( size_t i = 0; i < 50; i++ )
-		{
-			Vector2 pos = MainCamera->CalculatePosition(
-			Vector2(TilemapRenderer::TileSize.x * i , 0.0f));
-
-			MoveToEx(hdc , pos.x, 0 , NULL);
-			LineTo(hdc , pos.x, 1000);
-		}
-
-		for ( size_t i = 0; i < 50; i++ )
-		{
-			Vector2 pos = MainCamera->CalculatePosition(
-			Vector2(0.0f, TilemapRenderer::TileSize.y * i));
-
-			MoveToEx(hdc , 0 , pos.y, NULL);
-			LineTo(hdc , 1000 , pos.y);
-		}
+		RenderGrid(hdc);
 
 		wchar_t str[ 50 ] = L"Tool Scene";
 		int len = wcsnlen_s(str , 50);
@@ -208,6 +168,51 @@ namespace MegiEngine
 		}
 
 		fclose(pFile);
+	}
+
+	void ToolScene::RenderGrid(HDC hdc)
+	{
+		for ( size_t i = 0; i < 50; i++ )
+		{
+			Vector2 pos = MainCamera->CalculatePosition(
+			Vector2(TilemapRenderer::TileSize.x * i , 0.0f));
+
+			MoveToEx(hdc , pos.x , 0 , NULL);
+			LineTo(hdc , pos.x , 1000);
+		}
+
+		for ( size_t i = 0; i < 50; i++ )
+		{
+			Vector2 pos = MainCamera->CalculatePosition(
+			Vector2(0.0f , TilemapRenderer::TileSize.y * i));
+
+			MoveToEx(hdc , 0 , pos.y , NULL);
+			LineTo(hdc , 1000 , pos.y);
+		}
+	}
+
+	void ToolScene::CreateTileObject()
+	{
+		Vector2 pos = Input::GetMousePosition();
+		// 마우스 포지션은 카메라가 움직이면 움직이는 대로 같이 +- 된다.
+		pos = MainCamera->CalculateTilePosition(pos);
+
+		if ( pos.x >= 0.0f && pos.y >= 0.0f )
+		{
+			int idxX = pos.x / TilemapRenderer::TileSize.x;
+			int idxY = pos.y / TilemapRenderer::TileSize.y;
+
+			Tile* tile = Object::Instantiate<Tile>(LayerType::Tile);
+			TilemapRenderer* tmr = tile->AddComponent<TilemapRenderer>();
+			tmr->SetTexture(Resources::Find<graphics::Texture>(L"SpringFloor"));
+			tmr->SetIndex(TilemapRenderer::SelectedIndex);
+			tile->SetIndexPosition(idxX , idxY);
+			mTiles.push_back(tile);
+		}
+		else
+		{
+
+		}
 	}
 }
 

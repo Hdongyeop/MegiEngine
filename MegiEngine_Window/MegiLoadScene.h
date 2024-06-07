@@ -12,6 +12,6 @@ namespace MegiEngine
 		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 		SceneManager::CreateScene<ToolScene>(L"ToolScene");
 
-		SceneManager::LoadScene(L"PlayScene");
+		SceneManager::LoadScene(L"ToolScene");
 	}
 }
