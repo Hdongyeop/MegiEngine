@@ -11,6 +11,7 @@
 #include "MegiObject.h"
 #include "MegiResources.h"
 #include "MegiRigidbody.h"
+#include "MegiUIManager.h"
 
 extern MegiEngine::Application application;
 
@@ -117,25 +118,29 @@ namespace MegiEngine
 		{
 			mState = eState::Walk;
 			mAnimator->PlayAnimation(L"RightWalk");
-			// rb->AddForce(Vector2(200.0f , 0.0f));
+			rb->AddForce(Vector2(200.0f , 0.0f));
 		}
 		else if(Input::GetKeyDown(KeyCode::A))
 		{
 			mState = eState::Walk;
 			mAnimator->PlayAnimation(L"LeftWalk");
-			// rb->AddForce(Vector2(-200.0f , 0.0f));
+			rb->AddForce(Vector2(-200.0f , 0.0f));
 		}
 		else if(Input::GetKeyDown(KeyCode::W))
 		{
 			mState = eState::Walk;
 			mAnimator->PlayAnimation(L"UpWalk");
-			// rb->AddForce(Vector2(0.0f, -200.0f));
+
+			Vector2 velocity = rb->GetVelocity();
+			velocity.y = -500.0f;
+			rb->SetVelocity(velocity);
+			rb->SetGround(false);
 		}
 		else if(Input::GetKeyDown(KeyCode::S))
 		{
 			mState = eState::Walk;
 			mAnimator->PlayAnimation(L"DownWalk");
-			// rb->AddForce(Vector2(0.0f, 200.0f));
+			rb->AddForce(Vector2(0.0f, 200.0f));
 		}
 		else if(Input::GetKeyDown(KeyCode::LMB))
 		{
@@ -143,6 +148,18 @@ namespace MegiEngine
 			mAnimator->PlayAnimation(L"FrontGiveWater", false);
 
 			clickPos = Input::GetMousePosition();
+		}
+
+		if ( Input::GetKeyDown(KeyCode::I) )
+		{
+			UIManager::Push(UIType::HpBar);
+			//UIManager::Push(eUIType::Button);
+		}
+
+		if ( Input::GetKeyDown(KeyCode::O) )
+		{
+			UIManager::Pop(UIType::HpBar);
+
 		}
 	}
 
@@ -154,22 +171,22 @@ namespace MegiEngine
 		if(Input::GetKey(KeyCode::W))
 		{
 			dir.y -= 1;
-			// rb->AddForce(Vector2(0.0f, -200.0f));
+			rb->AddForce(Vector2(0.0f, 200.0f));
 		}
 		else if(Input::GetKey(KeyCode::S))
 		{
 			dir.y += 1;
-			// rb->AddForce(Vector2(0.0f, 200.0f));
+			rb->AddForce(Vector2(0.0f, -200.0f));
 		}
 		else if(Input::GetKey(KeyCode::A))
 		{
 			dir.x -= 1;
-			// rb->AddForce(Vector2(-200.0f , 0.0f));
+			rb->AddForce(Vector2(-200.0f , 0.0f));
 		}
 		else if(Input::GetKey(KeyCode::D))
 		{
 			dir.x += 1;
-			// rb->AddForce(Vector2(200.0f , 0.0f));
+			rb->AddForce(Vector2(200.0f , 0.0f));
 		}
 
 		if(Input::GetKeyUp(KeyCode::W) 

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTransform.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -23,7 +22,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayer.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTexture.cpp">
       <Filter>Resource</Filter>
     </ClCompile>
@@ -99,9 +97,18 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiRigidbody.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIHUD.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIButton.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTransform.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -129,7 +136,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMath.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiEnums.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -205,6 +211,16 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiRigidbody.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiLayer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIHUD.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIButton.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

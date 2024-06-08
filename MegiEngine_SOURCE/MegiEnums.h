@@ -41,4 +41,11 @@ namespace MegiEngine::Type
 		Rect2D,
 		End,
 	};
+
+	enum class UIType
+	{
+		HpBar,
+		Button,
+		End,
+	};
 }

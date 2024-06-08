@@ -5,6 +5,7 @@
 #include "MegiResources.h"
 #include "MegiSceneManager.h"
 #include "MegiTime.h"
+#include "MegiUIManager.h"
 
 namespace MegiEngine
 {
@@ -29,6 +30,7 @@ namespace MegiEngine
 		initializeEtc();
 
 		CollisionManager::Initialize();
+		UIManager::Initialize();
 		SceneManager::Initialize();
 	}
 
@@ -46,12 +48,14 @@ namespace MegiEngine
 		Time::Update();
 
 		CollisionManager::Update();
+		UIManager::Update();
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
 		CollisionManager::LateUpdate();
+		UIManager::LateUpdate();
 		SceneManager::LateUpdate();
 	}
 
@@ -60,6 +64,7 @@ namespace MegiEngine
 		clearRenderTarget();
 
 		CollisionManager::Render(mBackHdc);
+		UIManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 		Time::Render(mBackHdc);
 
@@ -69,6 +74,7 @@ namespace MegiEngine
 	void Application::Release()
 	{
 		SceneManager::Release();
+		UIManager::Release();
 		Resources::Release();
 	}
 

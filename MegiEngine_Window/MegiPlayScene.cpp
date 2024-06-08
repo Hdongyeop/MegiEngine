@@ -20,6 +20,7 @@
 #include "MegiRigidbody.h"
 #include "MegiTile.h"
 #include "MegiTilemapRenderer.h"
+#include "MegiUIManager.h"
 
 extern MegiEngine::Application application;
 
@@ -337,10 +338,14 @@ namespace MegiEngine
 
 		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Animal, true);
 		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Floor, true);
+
+		UIManager::Push(UIType::Button);
 	}
 
 	void PlayScene::OnExit()
 	{
+		UIManager::Pop(UIType::Button);
+
 		Scene::OnExit();
 	}
 

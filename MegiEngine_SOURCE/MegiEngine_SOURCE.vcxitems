@@ -49,6 +49,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTilemapRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIButton.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIHUD.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.h" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +89,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTilemapRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIButton.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIHUD.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.cpp" />
   </ItemGroup>
 </Project>
