@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiTransform.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTime.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -70,12 +67,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCamera.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiComponent.cpp">
-      <Filter>Components\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiScript.cpp">
-      <Filter>Components\Base</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.cpp">
       <Filter>Components\CustomScripts</Filter>
     </ClCompile>
@@ -103,15 +94,33 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIBase.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIHUD.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIButton.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiTransform.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiComponent.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiScript.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIBase.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIHUD.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiFmod.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioClip.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioSource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioListener.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiTransform.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTime.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -187,12 +196,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCamera.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiComponent.h">
-      <Filter>Components\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiScript.h">
-      <Filter>Components\Base</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.h">
       <Filter>Components\CustomScripts</Filter>
     </ClInclude>
@@ -217,10 +220,31 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIManager.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIBase.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIHUD.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIButton.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiTransform.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiComponent.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiScript.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIBase.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIHUD.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiFmod.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioSource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioListener.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -241,11 +265,11 @@
     <Filter Include="Components\CustomScripts">
       <UniqueIdentifier>{a83b4332-a073-478b-931e-7ac8263d17da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Base">
-      <UniqueIdentifier>{2a17b6a3-7d16-43a0-b767-ac7c7211e743}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\Renderer">
       <UniqueIdentifier>{70998f89-502a-4900-bbce-4ae4d9e98bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{9564e215-20a9-4601-82c4-cb23e1ca8752}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

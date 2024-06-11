@@ -19,6 +19,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCameraMovement.h" />
@@ -29,6 +32,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiLayer.h" />
@@ -59,6 +63,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioClip.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiBoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCameraMovement.cpp" />
@@ -69,6 +76,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />

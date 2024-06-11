@@ -3,6 +3,8 @@
 #include "MegCircleCollider2D.h"
 #include "MegiAnimator.h"
 #include "MegiApplication.h"
+#include "MegiAudioListener.h"
+#include "MegiAudioSource.h"
 #include "MegiBoxCollider2D.h"
 #include "MegiInput.h"
 #include "MegiObject.h"
@@ -77,9 +79,8 @@ namespace MegiEngine
 			CircleCollider2D* collider = player->AddComponent<CircleCollider2D>();
 			collider->SetOffset(Vector2(-50.0f , -50.0f));
 			collider->SetSize(Vector2(100.0f , 100.0f));
-//			BoxCollider2D* collider = player->AddComponent<BoxCollider2D>();
-//			collider->SetOffset(Vector2(-50.0f , -50.0f));
-//			collider->SetSize(Vector2(100.0f , 100.0f));
+			AudioListener* al = player->AddComponent<AudioListener>();
+			al->SetName(L"AudioListener");
 
 			auto playerTexture = Resources::Find<graphics::Texture>(L"Player");
 			animator->CreateAnimation(
@@ -151,7 +152,11 @@ namespace MegiEngine
 			BoxCollider2D* floorCol = floor->AddComponent<BoxCollider2D>();
 			floorCol->SetOffset(Vector2(-150.0f , -50.0f));
 			floorCol->SetSize(Vector2(300.0f , 100.0f));
-			floor->AddComponent<FloorScript>();
+			FloorScript* fs = floor->AddComponent<FloorScript>();
+			AudioSource* as = floor->AddComponent<AudioSource>();
+			AudioClip* ac = Resources::Load<AudioClip>(L"BGSound" , L"..\\Resources\\Sound\\smw_bonus_game_end.wav");
+			as->SetClip(ac);
+			// as->Play();
 		}
 
 		// Cat(AI)

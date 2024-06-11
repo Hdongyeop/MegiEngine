@@ -1,6 +1,7 @@
 #include "MegiApplication.h"
 
 #include "MegiCollisionManager.h"
+#include "MegiFmod.h"
 #include "MegiInput.h"
 #include "MegiResources.h"
 #include "MegiSceneManager.h"
@@ -29,6 +30,7 @@ namespace MegiEngine
 		createBuffer(width , height);
 		initializeEtc();
 
+		Fmod::Initialize();
 		CollisionManager::Initialize();
 		UIManager::Initialize();
 		SceneManager::Initialize();

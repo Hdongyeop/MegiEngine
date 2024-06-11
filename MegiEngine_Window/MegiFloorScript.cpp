@@ -1,5 +1,6 @@
 #include "MegiFloorScript.h"
 
+#include "MegiAudioSource.h"
 #include "MegiCollider.h"
 #include "MegiGameObject.h"
 #include "MegiRigidbody.h"
@@ -55,6 +56,11 @@ namespace MegiEngine
 
 			playerTR->SetPosition(playerPos);
 		}
+
+		AudioSource* as = GetOwner()->GetComponent<AudioSource>();
+		as->Stop();
+		as->SetLoop(false);
+		as->Play();
 
 		playerRB->SetGround(true);
 	}

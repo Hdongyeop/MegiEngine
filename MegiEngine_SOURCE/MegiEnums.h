@@ -11,6 +11,8 @@ namespace MegiEngine::Type
 		SpriteRenderer,
 		Animator,
 		Camera,
+		AudioListener,
+		AudioSource,
 		End,
 	};
 
