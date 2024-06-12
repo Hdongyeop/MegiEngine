@@ -46,7 +46,7 @@ namespace MegiEngine
 				Vector2 gravity = mGravity;
 				gravity.Normalize();
 
-				float dot = Vector2::Dot(mVelocity , gravity);
+				float dot = mVelocity.Dot(gravity);
 				mVelocity -= gravity * dot;
 			}
 			else
@@ -58,7 +58,7 @@ namespace MegiEngine
 			// 최대 속도 제한
 			Vector2 gravity = mGravity;
 			gravity.Normalize();
-			float dot = Vector2::Dot(mVelocity , gravity);
+			float dot = mVelocity.Dot(gravity);
 			gravity *= dot;
 
 			Vector2 sideVelocity = mVelocity - gravity;
@@ -81,7 +81,8 @@ namespace MegiEngine
 		{
 			// 속도에 반대 방향으로 마찰력 작용
 			Math::Vector2 friction = -mVelocity;
-			friction = friction.Normalize() * mFriction * mMass * Time::DeltaTime();
+			friction.Normalize();
+			friction = friction * mFriction * mMass * Time::DeltaTime();
 
 			// 마찰력으로 인한 속도 감소량이 현재 속도보다 큰 경우
 			if ( mVelocity.Length() <= friction.Length() )
@@ -99,7 +100,7 @@ namespace MegiEngine
 		pos = pos + mVelocity * Time::DeltaTime();
 		tr->SetPosition(pos);
 
-		mForce.Clear();
+		mForce = Vector2::Zero;
 	}
 
 	void Rigidbody::LateUpdate()

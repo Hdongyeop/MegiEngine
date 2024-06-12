@@ -15,7 +15,7 @@
 #include <filesystem>
 #include <math.h>
 
-#include "MegiMath.h"
+#include <wrl.h>
 
 #include <mmsystem.h>
 #include <dinput.h>

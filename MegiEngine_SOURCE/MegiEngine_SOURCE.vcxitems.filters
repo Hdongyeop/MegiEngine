@@ -115,10 +115,21 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiFmod.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioClip.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioSource.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.cpp">
+      <Filter>DX</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioClip.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioListener.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioSource.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiFmod.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTime.h">
@@ -241,10 +252,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIManager.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiFmod.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioClip.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioSource.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.h">
+      <Filter>DX</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioClip.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioListener.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioSource.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiFmod.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -270,6 +292,12 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{9564e215-20a9-4601-82c4-cb23e1ca8752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX">
+      <UniqueIdentifier>{8ec497fc-786a-44af-844c-38d4f883fe9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{1e36c618-3f8b-4430-b601-4c716972d2c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

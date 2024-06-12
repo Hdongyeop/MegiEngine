@@ -13,11 +13,11 @@ namespace MegiEngine
 	void UIManager::Initialize()
 	{
 		// UI 객체 생성
-		UIHUD* hud = new UIHUD();
-		mUIs.insert(std::make_pair(UIType::HpBar , hud));
-
-		UIButton* button = new UIButton();
-		mUIs.insert(std::make_pair(UIType::Button , button));
+//		UIHUD* hud = new UIHUD();
+//		mUIs.insert(std::make_pair(UIType::HpBar , hud));
+//
+//		UIButton* button = new UIButton();
+//		mUIs.insert(std::make_pair(UIType::Button , button));
 	}
 
 	void UIManager::OnLoad(UIType type)

@@ -34,6 +34,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMath.h" />
@@ -78,6 +79,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiMath.cpp" />
