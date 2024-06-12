@@ -27,6 +27,7 @@ namespace MegiEngine::graphics
 		TextureType GetTextureType() const { return mType; }
 		Gdiplus::Image* GetImage() const { return mImage; }
 		bool HaveAlphaChannel() const { return mAlpha; }
+		COLORREF GetPixel(int x , int y);
 
 	private:
 		bool mAlpha;

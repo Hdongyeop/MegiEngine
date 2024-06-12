@@ -10,6 +10,7 @@ namespace MegiEngine
 		Resources::Load<graphics::Texture>(L"Cat" , L"..\\Resources\\Cat.bmp");
 		Resources::Load<graphics::Texture>(L"SpringFloor" , L"..\\Resources\\SpringFloor.bmp");
 		Resources::Load<graphics::Texture>(L"HPBAR" , L"..\\Resources\\HPBAR.bmp");
+		Resources::Load<graphics::Texture>(L"PixelMap" , L"..\\Resources\\pixelMap.bmp");
 
 		// PNG
 		Resources::Load<graphics::Texture>(L"Background" , L"..\\Resources\\CloudOcean.png");

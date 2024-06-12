@@ -58,6 +58,8 @@ namespace MegiEngine
 		case eState::Attack:
 			break;
 		}
+
+		CheckOnGround();
 	}
 
 	void PlayerController::OnCollisionEnter(Collider* other)
@@ -227,5 +229,24 @@ namespace MegiEngine
 		if ( pos.y < 0 || pos.y + spriteSize.y > appHeight ) return false;
 
 		return true;
+	}
+
+	void PlayerController::CheckOnGround()
+	{
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
+		COLORREF color = mPixelMap->GetPixel(pos.x , pos.y + 50);
+
+		Rigidbody* playerRb = GetOwner()->GetComponent<Rigidbody>();
+		if(color == RGB(255, 0, 0))
+		{
+			playerRb->SetGround(true);
+			pos.y -= 1;
+			tr->SetPosition(pos);
+		}
+		else
+		{
+			playerRb->SetGround(false);
+		}
 	}
 }

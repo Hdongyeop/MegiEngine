@@ -76,6 +76,7 @@ namespace MegiEngine
 			animator->SetName(L"Animator");
 			PlayerController* pc = player->AddComponent < PlayerController >();
 			pc->SetName(L"PlayerController");
+			pc->SetPixelMapTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
 			CircleCollider2D* collider = player->AddComponent<CircleCollider2D>();
 			collider->SetOffset(Vector2(-50.0f , -50.0f));
 			collider->SetSize(Vector2(100.0f , 100.0f));
@@ -147,11 +148,13 @@ namespace MegiEngine
 		// Floor
 
 		{
-			Floor* floor = Object::Instantiate<Floor>(LayerType::Floor , Vector2(100.0f , 600.0f));
+			Floor* floor = Object::Instantiate<Floor>(LayerType::Background , Vector2(0.0f, 0.0f));
 			floor->SetName(L"Floor");
-			BoxCollider2D* floorCol = floor->AddComponent<BoxCollider2D>();
-			floorCol->SetOffset(Vector2(-150.0f , -50.0f));
-			floorCol->SetSize(Vector2(300.0f , 100.0f));
+			SpriteRenderer* sr = floor->AddComponent<SpriteRenderer>();
+			sr->SetTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
+//			BoxCollider2D* floorCol = floor->AddComponent<BoxCollider2D>();
+//			floorCol->SetOffset(Vector2(-150.0f , -50.0f));
+//			floorCol->SetSize(Vector2(300.0f , 100.0f));
 			FloorScript* fs = floor->AddComponent<FloorScript>();
 			AudioSource* as = floor->AddComponent<AudioSource>();
 			AudioClip* ac = Resources::Load<AudioClip>(L"BGSound" , L"..\\Resources\\Sound\\smw_bonus_game_end.wav");

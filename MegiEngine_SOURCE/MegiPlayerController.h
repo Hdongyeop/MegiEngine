@@ -1,5 +1,6 @@
 #pragma once
 #include "MegiScript.h"
+#include "MegiTexture.h"
 
 namespace MegiEngine
 {
@@ -27,12 +28,14 @@ namespace MegiEngine
 		void OnCollisionExit(Collider* other) override;
 
 		void AttackEffect();
+		void SetPixelMapTexture(graphics::Texture* texture) { mPixelMap = texture; }
 
 	private:
 		void Idle();
 		void Move();
 		void GiveWater();
 		bool CheckPositionIsValid(Math::Vector2 pos);
+		void CheckOnGround();
 
 	private:
 		eState mState;
@@ -40,6 +43,7 @@ namespace MegiEngine
 		Transform* tr;
 		float speed;
 		Math::Vector2 clickPos;
+		graphics::Texture* mPixelMap;
 	};
 
 
