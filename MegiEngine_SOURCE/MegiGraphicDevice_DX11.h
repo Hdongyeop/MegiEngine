@@ -7,7 +7,7 @@
 
 #include "CommonInclude.h"
 
-namespace MegiEngine::Graphics
+namespace MegiEngine::graphics
 {
 	class GraphicDevice_DX11
 	{
@@ -15,6 +15,7 @@ namespace MegiEngine::Graphics
 		GraphicDevice_DX11();
 		~GraphicDevice_DX11();
 
+		void Initialize();
 		void Draw();
 
 	private:
@@ -22,7 +23,7 @@ namespace MegiEngine::Graphics
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> mContext;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> mRenderTarget;
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRenderTargetView;
-		Microsoft::WRL::ComPtr<ID3D11Texture2D> mDepthStencilBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> mDepthStencil;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDepthStencilView;
 		Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
 		Microsoft::WRL::ComPtr<ID3D11SamplerState> mSamplers;

@@ -1,5 +1,7 @@
 #pragma once
 #include "CommonInclude.h"
+#include "MegiGraphicDevice_DX11.h"
+#include "MegiTexture.h"
 
 namespace MegiEngine
 {
@@ -31,6 +33,8 @@ namespace MegiEngine
 		void initializeEtc();
 
 	private:
+		std::unique_ptr<graphics::GraphicDevice_DX11> mGraphicDevice;
+	
 		HWND mHwnd;
 		HDC mHdc;
 

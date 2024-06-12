@@ -30,6 +30,9 @@ namespace MegiEngine
 		createBuffer(width , height);
 		initializeEtc();
 
+		mGraphicDevice = std::make_unique<graphics::GraphicDevice_DX11>();
+		mGraphicDevice->Initialize();
+
 		Fmod::Initialize();
 		CollisionManager::Initialize();
 		UIManager::Initialize();
@@ -63,14 +66,15 @@ namespace MegiEngine
 
 	void Application::Render()
 	{
-		clearRenderTarget();
+		// clearRenderTarget();
+		mGraphicDevice->Draw();
 
 		CollisionManager::Render(mBackHdc);
 		UIManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 		Time::Render(mBackHdc);
 
-		copyRenderTarget(mBackHdc , mHdc);
+		// copyRenderTarget(mBackHdc , mHdc);
 	}
 
 	void Application::Release()
