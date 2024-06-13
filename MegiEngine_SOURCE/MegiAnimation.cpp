@@ -58,7 +58,7 @@ namespace MegiEngine
 		Vector2 pos = tr->GetPosition();
 
 		// 카메라 기반 위치 조정
-		if(MainCamera) pos = MainCamera->CalculatePosition(pos);
+		if(Renderer::MainCamera) pos = Renderer::MainCamera->CalculatePosition(pos);
 
 		// 현재 스프라이트 얻기
 		Sprite sprite = mAnimationSheet[ mIndex ];

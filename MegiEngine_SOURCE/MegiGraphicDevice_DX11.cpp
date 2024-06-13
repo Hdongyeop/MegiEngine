@@ -1,5 +1,6 @@
 #include "MegiGraphicDevice_DX11.h"
 #include "MegiApplication.h"
+#include "MegiRenderer.h"
 
 extern MegiEngine::Application application;
 
@@ -84,7 +85,7 @@ namespace MegiEngine::graphics
 
 		D3D11_TEXTURE2D_DESC depthStencilDesc = {};
 		depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-		depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT; // Depth 24bit, Stencil 8bit
 		depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
 		depthStencilDesc.Width = application.GetWidth();
 		depthStencilDesc.Height = application.GetHeight();
@@ -98,17 +99,118 @@ namespace MegiEngine::graphics
 		if ( FAILED(mDevice->CreateDepthStencilView(mDepthStencil.Get() , nullptr , mDepthStencilView.GetAddressOf())) )
 			return;
 
-		int a = 0;
-
 #pragma endregion
 
+		DWORD shaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
+		shaderFlags |= D3DCOMPILE_DEBUG;
+		shaderFlags |= D3DCOMPILE_SKIP_OPTIMIZATION;
+
+#pragma region Vertex Shader
+		{
+			ID3DBlob* errorBlob = nullptr;
+			D3DCompileFromFile(L"..\\Shaders_SOURCE\\TriangleVS.hlsl" , nullptr
+			, D3D_COMPILE_STANDARD_FILE_INCLUDE , "main"
+			, "vs_5_0" , shaderFlags , 0
+			, &Renderer::vsBlob , &errorBlob);
+
+			mDevice->CreateVertexShader(
+			Renderer::vsBlob->GetBufferPointer()
+			, Renderer::vsBlob->GetBufferSize()
+			, nullptr , &Renderer::vsShader);
+		}
+#pragma endregion
+
+#pragma region Pixel Shader
+		{
+			ID3DBlob* errorBlob = nullptr;
+			D3DCompileFromFile(L"..\\Shaders_SOURCE\\TrianglePS.hlsl" , nullptr
+			, D3D_COMPILE_STANDARD_FILE_INCLUDE , "main"
+			, "ps_5_0" , shaderFlags , 0
+			, &Renderer::psBlob , &errorBlob);
+
+			mDevice->CreatePixelShader(
+			Renderer::psBlob->GetBufferPointer()
+			, Renderer::psBlob->GetBufferSize()
+			, nullptr , &Renderer::psShader);
+		}
+#pragma endregion
+
+		D3D11_INPUT_ELEMENT_DESC inputLayoutDesces[ 2 ] = {};
+		inputLayoutDesces[ 0 ].AlignedByteOffset = 0;
+		inputLayoutDesces[ 0 ].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+		inputLayoutDesces[ 0 ].InputSlot = 0;
+		inputLayoutDesces[ 0 ].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		inputLayoutDesces[ 0 ].SemanticName = "POSITION";
+		inputLayoutDesces[ 0 ].SemanticIndex = 0;
+
+		inputLayoutDesces[ 1 ].AlignedByteOffset = 12;
+		inputLayoutDesces[ 1 ].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		inputLayoutDesces[ 1 ].InputSlot = 0;
+		inputLayoutDesces[ 1 ].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		inputLayoutDesces[ 1 ].SemanticName = "COLOR";
+		inputLayoutDesces[ 1 ].SemanticIndex = 0;
+
+		mDevice->CreateInputLayout(inputLayoutDesces , 2
+		, Renderer::vsBlob->GetBufferPointer()
+		, Renderer::vsBlob->GetBufferSize()
+		, &Renderer::inputLayouts);
+
+		D3D11_BUFFER_DESC bufferDesc = {};
+		bufferDesc.ByteWidth = sizeof(Renderer::Vertex) * 3;
+		bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
+		bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+		//xyz
+		//rgba
+		Renderer::vertexes[ 0 ].pos = Vector3(0.f , 0.5f , 0.0f);
+		Renderer::vertexes[ 0 ].color = Vector4(0.0f , 1.0f , 0.0f , 1.0f);
+
+		Renderer::vertexes[ 1 ].pos = Vector3(0.5f , -0.5f , 0.0f);
+		Renderer::vertexes[ 1 ].color = Vector4(1.0f , 0.0f , 0.0f , 1.0f);
+
+		Renderer::vertexes[ 2 ].pos = Vector3(-0.5f , -0.5f , 0.0f);
+		Renderer::vertexes[ 2 ].color = Vector4(0.0f , 0.0f , 1.0f , 1.0f);
+
+		D3D11_SUBRESOURCE_DATA sub = { Renderer::vertexes };
+
+		mDevice->CreateBuffer(&bufferDesc , &sub , &Renderer::vertexBuffer);
 	}
 
 	void GraphicDevice_DX11::Draw()
 	{
+		// 화면 지우기
 		FLOAT backgroundColor[ 4 ] = { 0.2f, 0.2f, 0.2f, 1.0f };
 		mContext->ClearRenderTargetView(mRenderTargetView.Get() , backgroundColor);
+		mContext->ClearDepthStencilView(mDepthStencilView.Get() , D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL , 1.f , 0);
 
+		// 뷰포트 설정
+		D3D11_VIEWPORT viewPort =
+		{
+			0, 0, (FLOAT)application.GetWidth(), (FLOAT)application.GetHeight(),
+			0.0f, 1.0f
+		};
+		mContext->RSSetViewports(1 , &viewPort);
+
+		// 렌더 타겟 설정(추후 여러개의 렌더타겟도 설정 가능, Deffered Rendering 등)
+		mContext->OMSetRenderTargets(1 , mRenderTargetView.GetAddressOf() , mDepthStencilView.Get());
+
+		// 인풋레이아웃 설정
+		mContext->IASetInputLayout(Renderer::inputLayouts);
+		mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+		// 쉐이더 설정
+		UINT vertexSize = sizeof(Renderer::Vertex);
+		UINT offset = 0;
+		mContext->IASetVertexBuffers(0 , 1 , &Renderer::vertexBuffer , &vertexSize , &offset);
+
+		mContext->VSSetShader(Renderer::vsShader , 0 , 0);
+		mContext->PSSetShader(Renderer::psShader , 0 , 0);
+
+		// 렌더 타겟에 물체를 그려준다
+		mContext->Draw(3 , 0);
+
+		// 렌더 타겟에 있는 이미지를 윈도우에 그려준다
 		mSwapChain->Present(1 , 0);
 	}
 }

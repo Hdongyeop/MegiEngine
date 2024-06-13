@@ -25,7 +25,7 @@ namespace MegiEngine
 			, Vector2(358.0f , 469.5f));
 		camera->AddComponent<CameraMovement>();
 		Camera* cameraComp = camera->AddComponent<Camera>();
-		MainCamera = cameraComp;
+		Renderer::MainCamera = cameraComp;
 
 		Scene::Initialize();
 	}
@@ -174,7 +174,7 @@ namespace MegiEngine
 	{
 		for ( size_t i = 0; i < 50; i++ )
 		{
-			Vector2 pos = MainCamera->CalculatePosition(
+			Vector2 pos = Renderer::MainCamera->CalculatePosition(
 			Vector2(TilemapRenderer::TileSize.x * i , 0.0f));
 
 			MoveToEx(hdc , pos.x , 0 , NULL);
@@ -183,7 +183,7 @@ namespace MegiEngine
 
 		for ( size_t i = 0; i < 50; i++ )
 		{
-			Vector2 pos = MainCamera->CalculatePosition(
+			Vector2 pos = Renderer::MainCamera->CalculatePosition(
 			Vector2(0.0f , TilemapRenderer::TileSize.y * i));
 
 			MoveToEx(hdc , 0 , pos.y , NULL);
@@ -195,7 +195,7 @@ namespace MegiEngine
 	{
 		Vector2 pos = Input::GetMousePosition();
 		// 마우스 포지션은 카메라가 움직이면 움직이는 대로 같이 +- 된다.
-		pos = MainCamera->CalculateTilePosition(pos);
+		pos = Renderer::MainCamera->CalculateTilePosition(pos);
 
 		if ( pos.x >= 0.0f && pos.y >= 0.0f )
 		{

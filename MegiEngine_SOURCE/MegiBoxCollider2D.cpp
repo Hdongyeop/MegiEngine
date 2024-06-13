@@ -36,8 +36,8 @@ namespace MegiEngine
 	{
 		Transform* tr = GetOwner()->GetComponent < Transform >();
 		Vector2 pos = tr->GetPosition();
-		if ( MainCamera )
-			pos = MainCamera->CalculatePosition(pos);
+		if (Renderer::MainCamera )
+			pos = Renderer::MainCamera->CalculatePosition(pos);
 
 		Vector2 offset = GetOffset();
 

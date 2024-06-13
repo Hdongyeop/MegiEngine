@@ -50,7 +50,7 @@ namespace MegiEngine
 		float rot = tr->GetRotation();
 		Vector2 scale = tr->GetScale();
 
-		pos = MainCamera->CalculatePosition(pos);
+		pos = Renderer::MainCamera->CalculatePosition(pos);
 		if ( mTexture->GetTextureType()	== graphics::Texture::TextureType::Bmp )
 		{
 			if ( mTexture->HaveAlphaChannel() )

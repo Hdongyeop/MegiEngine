@@ -41,7 +41,7 @@ namespace MegiEngine
 		Vector2 pos = tr->GetPosition();
 
 		// 메인 카메라에 맞게 위치 변환
-		pos = MainCamera->CalculatePosition(pos);
+		pos = Renderer::MainCamera->CalculatePosition(pos);
 
 		float rotation = tr->GetRotation();
 		Vector2 scale = tr->GetScale();
