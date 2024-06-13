@@ -35,6 +35,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMath.h" />

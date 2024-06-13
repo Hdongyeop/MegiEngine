@@ -3,6 +3,7 @@
 #include "MegiCollisionManager.h"
 #include "MegiFmod.h"
 #include "MegiInput.h"
+#include "MegiRenderer.h"
 #include "MegiResources.h"
 #include "MegiSceneManager.h"
 #include "MegiTime.h"
@@ -31,6 +32,7 @@ namespace MegiEngine
 		initializeEtc();
 
 		mGraphicDevice = std::make_unique<graphics::GraphicDevice_DX11>();
+		Renderer::Initialize();
 		mGraphicDevice->Initialize();
 
 		Fmod::Initialize();
@@ -82,6 +84,8 @@ namespace MegiEngine
 		SceneManager::Release();
 		UIManager::Release();
 		Resources::Release();
+
+		Renderer::Release();
 	}
 
 	void Application::Destroy()
@@ -95,7 +99,7 @@ namespace MegiEngine
 		HBRUSH grayBrush = CreateSolidBrush(RGB(128 , 128 , 128));
 		HBRUSH oldBrush = ( HBRUSH ) SelectObject(mBackHdc , grayBrush);
 
-		Rectangle(mBackHdc, -1, -1, 1601, 901);
+		::Rectangle(mBackHdc, -1, -1, 1601, 901);
 
 		SelectObject(mBackHdc , oldBrush);
 		DeleteObject(grayBrush);

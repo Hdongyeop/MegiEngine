@@ -15,8 +15,6 @@
 #include <filesystem>
 #include <math.h>
 
-#include <wrl.h>
-
 #include <mmsystem.h>
 #include <dinput.h>
 #pragma comment(lib, "Msimg32.lib")
@@ -27,3 +25,4 @@
 
 #include "MegiEnums.h"
 #include "MegiMath.h"
+#include "MegiGraphics.h"
