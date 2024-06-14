@@ -1,6 +1,8 @@
 #include "MegiGraphicDevice_DX11.h"
 #include "MegiApplication.h"
 #include "MegiRenderer.h"
+#include "MegiResources.h"
+#include "MegiShader.h"
 
 extern MegiEngine::Application application;
 
@@ -9,6 +11,9 @@ namespace MegiEngine::graphics
 	GraphicDevice_DX11::GraphicDevice_DX11()
 	{
 		GetDevice() = this;
+
+		if ( !CreateDevice() ) 
+			assert(NULL && "Create Device Failed!");
 	}
 
 	GraphicDevice_DX11::~GraphicDevice_DX11()
@@ -93,7 +98,7 @@ namespace MegiEngine::graphics
 
 		ID3DBlob* errorBlob = nullptr;
 		const std::wstring shaderFilePath = L"..\\Shaders_SOURCE\\";
-		D3DCompileFromFile((shaderFilePath + fileName).c_str(), nullptr
+		D3DCompileFromFile((shaderFilePath + fileName + L"VS.hlsl").c_str(), nullptr
 		, D3D_COMPILE_STANDARD_FILE_INCLUDE , "main"
 		, "vs_5_0" , shaderFlags , 0
 		, ppCode, &errorBlob);
@@ -126,7 +131,7 @@ namespace MegiEngine::graphics
 
 		ID3DBlob* errorBlob = nullptr;
 		const std::wstring shaderFilePath = L"..\\Shaders_SOURCE\\";
-		D3DCompileFromFile((shaderFilePath + fileName).c_str(), nullptr
+		D3DCompileFromFile((shaderFilePath + fileName + L"PS.hlsl").c_str(), nullptr
 		, D3D_COMPILE_STANDARD_FILE_INCLUDE , "main"
 		, "ps_5_0" , shaderFlags , 0
 		, ppCode, &errorBlob);
@@ -173,6 +178,16 @@ namespace MegiEngine::graphics
 		return true;
 	}
 
+	void GraphicDevice_DX11::BindVS(ID3D11VertexShader* pVertexShader)
+	{
+		mContext->VSSetShader(pVertexShader , 0 , 0);
+	}
+
+	void GraphicDevice_DX11::BindPS(ID3D11PixelShader* pPixelShader)
+	{
+		mContext->PSSetShader(pPixelShader , 0 , 0);
+	}
+
 	void GraphicDevice_DX11::BindConstantBuffer(ShaderStage stage, CBType type, ID3D11Buffer* buffer)
 	{
 		UINT slot = ( UINT ) type;
@@ -211,8 +226,6 @@ namespace MegiEngine::graphics
 
 	void GraphicDevice_DX11::Initialize()
 	{
-		if (!(CreateDevice()) )
-			assert(NULL && "Create Device failed!!");
 
 #pragma region SwapChain DESC
 
@@ -277,12 +290,6 @@ namespace MegiEngine::graphics
 		if (!(CreateDepthStencilView(mDepthStencil.Get() , nullptr , mDepthStencilView.GetAddressOf())) )
 			assert(NULL && "Create depthstencil View failed!!");
 
-		if (!(CreateVertexShader(L"TriangleVS.hlsl" , &Renderer::vsBlob , &Renderer::vsShader)) )
-			assert(NULL && "Create vertex shader failed!!");
-
-		if (!(CreatePixelShader(L"TrianglePS.hlsl" , &Renderer::psBlob , &Renderer::psShader)) )
-			assert(NULL && "Create pixel shader failed!!");
-
 #pragma region InputLayout DESC
 
 		D3D11_INPUT_ELEMENT_DESC inputLayoutDesces[ 2 ] = {};
@@ -302,9 +309,11 @@ namespace MegiEngine::graphics
 
 #pragma endregion
 
+		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
+
 		if (!(CreateInputLayout(inputLayoutDesces , 2
-			, Renderer::vsBlob->GetBufferPointer()
-			, Renderer::vsBlob->GetBufferSize()
+			, triangle->GetVSBlob()->GetBufferPointer()
+			, triangle->GetVSBlob()->GetBufferSize()
 			, &Renderer::inputLayouts)) )
 			assert(NULL && "Create input layout failed!");
 
@@ -394,8 +403,8 @@ namespace MegiEngine::graphics
 		mContext->IASetIndexBuffer(Renderer::indexBuffer , DXGI_FORMAT_R32_UINT , 0);
 		BindConstantBuffer(ShaderStage::VS , CBType::Transform , Renderer::constantBuffer);
 
-		mContext->VSSetShader(Renderer::vsShader , 0 , 0);
-		mContext->PSSetShader(Renderer::psShader , 0 , 0);
+		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
+		triangle->Bind();
 
 		// 렌더 타겟에 물체를 그려준다
 		mContext->Draw(3 , 0);

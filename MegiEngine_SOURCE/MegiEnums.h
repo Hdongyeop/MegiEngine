@@ -19,8 +19,9 @@ namespace MegiEngine::Type
 	enum class ResourceType
 	{
 		Texture,
-		AudioClip,
 		Animation,
+		AudioClip,
+		Shader,
 		Prefab,
 		End,
 	};

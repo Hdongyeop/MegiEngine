@@ -46,6 +46,8 @@ namespace MegiEngine::graphics
 			const D3D11_BUFFER_DESC* pDesc ,
 			const D3D11_SUBRESOURCE_DATA* pInitialData ,
 			ID3D11Buffer** ppBuffer);
+		void BindVS(ID3D11VertexShader* pVertexShader);
+		void BindPS(ID3D11PixelShader* pPixelShader);
 		void BindConstantBuffer(ShaderStage stage , CBType type , ID3D11Buffer* buffer);
 
 		void Initialize();
