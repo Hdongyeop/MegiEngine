@@ -38,7 +38,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiPlayer.h" />
@@ -50,6 +52,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTilemapRenderer.h" />
@@ -83,7 +86,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiMoveToMousePos.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiPlayer.cpp" />
@@ -95,6 +100,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiSpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiTilemapRenderer.cpp" />

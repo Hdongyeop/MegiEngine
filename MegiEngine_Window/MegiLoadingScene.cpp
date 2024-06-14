@@ -8,6 +8,8 @@ namespace MegiEngine
 {
 	LoadingScene::LoadingScene()
 	: loadComplete(false)
+	, mMutex()
+	, mResourcesLoadThread()
 	{
 	}
 

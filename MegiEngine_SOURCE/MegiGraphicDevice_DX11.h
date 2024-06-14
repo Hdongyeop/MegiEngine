@@ -1,12 +1,9 @@
 #pragma once
-#include <d3d11.h>
-#include <d3dcompiler.h>
-#include <wrl.h>
 
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "d3dcompiler.lib")
+#include "MegiGraphics.h"
 
-#include "CommonInclude.h"
+// Sample Example DX11
+// https://github.com/kevinmoran/BeginnerDirect3D11
 
 namespace MegiEngine::graphics
 {

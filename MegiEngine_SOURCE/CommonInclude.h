@@ -27,4 +27,3 @@
 
 #include "MegiEnums.h"
 #include "MegiMath.h"
-#include "MegiGraphics.h"

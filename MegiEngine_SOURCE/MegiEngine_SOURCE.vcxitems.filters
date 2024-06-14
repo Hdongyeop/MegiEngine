@@ -115,9 +115,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.cpp">
-      <Filter>DX</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiAudioClip.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
@@ -129,6 +126,18 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiFmod.cpp">
       <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.cpp">
+      <Filter>DX\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiShader.cpp">
+      <Filter>DX</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMesh.cpp">
+      <Filter>DX</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiMaterial.cpp">
+      <Filter>DX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,9 +261,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIManager.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.h">
-      <Filter>DX</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiAudioClip.h">
       <Filter>Audio</Filter>
     </ClInclude>
@@ -267,7 +273,21 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiFmod.h">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.h">
+      <Filter>DX\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphics.h">
+      <Filter>DX\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiShader.h">
+      <Filter>DX</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiMesh.h">
+      <Filter>DX</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiMaterial.h">
+      <Filter>DX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -299,6 +319,9 @@
     </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{1e36c618-3f8b-4430-b601-4c716972d2c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX\Core">
+      <UniqueIdentifier>{bc1874bf-533e-4c13-b2e1-47fe9fb4178f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
