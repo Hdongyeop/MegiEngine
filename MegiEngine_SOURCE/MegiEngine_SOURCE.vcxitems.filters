@@ -130,13 +130,16 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.cpp">
       <Filter>DX\Core</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MegiShader.cpp">
-      <Filter>DX</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiMesh.cpp">
       <Filter>DX</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiMaterial.cpp">
+      <Filter>DX</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiShader.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiVertexBuffer.cpp">
       <Filter>DX</Filter>
     </ClCompile>
   </ItemGroup>
@@ -279,13 +282,16 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphics.h">
       <Filter>DX\Core</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MegiShader.h">
-      <Filter>DX</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMesh.h">
       <Filter>DX</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMaterial.h">
+      <Filter>DX</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiShader.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiVertexBuffer.h">
       <Filter>DX</Filter>
     </ClInclude>
   </ItemGroup>

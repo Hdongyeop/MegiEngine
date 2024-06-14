@@ -62,6 +62,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIButton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIHUD.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiUIManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiVertexBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.h" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +111,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIButton.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIHUD.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiUIManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiVertexBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiWillBeDestroied.cpp" />
   </ItemGroup>
 </Project>

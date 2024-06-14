@@ -11,6 +11,12 @@
 
 namespace MegiEngine::graphics
 {
+	struct Vertex
+	{
+		Math::Vector3 pos;
+		Math::Vector4 color;
+	};
+
 	enum class ShaderStage
 	{
 		VS,			// Vertex Shader

@@ -188,6 +188,12 @@ namespace MegiEngine::graphics
 		mContext->PSSetShader(pPixelShader , 0 , 0);
 	}
 
+	void GraphicDevice_DX11::BindVertexBuffer(UINT startSlot, UINT NumBuffers, ID3D11Buffer* const* ppVertexBuffers,
+		const UINT* pStrides, const UINT* pOffsets)
+	{
+		mContext->IASetVertexBuffers(startSlot , NumBuffers , ppVertexBuffers , pStrides , pOffsets);
+	}
+
 	void GraphicDevice_DX11::BindConstantBuffer(ShaderStage stage, CBType type, ID3D11Buffer* buffer)
 	{
 		UINT slot = ( UINT ) type;
@@ -317,20 +323,7 @@ namespace MegiEngine::graphics
 			, &Renderer::inputLayouts)) )
 			assert(NULL && "Create input layout failed!");
 
-#pragma region Vertex Buffer DESC
-
-		D3D11_BUFFER_DESC bufferDesc = {};
-		bufferDesc.ByteWidth = sizeof(Renderer::Vertex) * 4;
-		bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-		bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-		D3D11_SUBRESOURCE_DATA sub = { Renderer::vertexes };
-
-#pragma endregion
-
-		if (!(CreateBuffer(&bufferDesc , &sub , &Renderer::vertexBuffer)) )
-			assert(NULL && "Create vertex buffer failed!");
+		Renderer::vertexBuffer.Create(Renderer::vertexes);
 
 #pragma region Index Buffer DESC
 
@@ -397,9 +390,8 @@ namespace MegiEngine::graphics
 		}
 
 		// 쉐이더 설정
-		UINT vertexSize = sizeof(Renderer::Vertex);
 		UINT offset = 0;
-		mContext->IASetVertexBuffers(0 , 1 , &Renderer::vertexBuffer , &vertexSize , &offset);
+		Renderer::vertexBuffer.Bind();
 		mContext->IASetIndexBuffer(Renderer::indexBuffer , DXGI_FORMAT_R32_UINT , 0);
 		BindConstantBuffer(ShaderStage::VS , CBType::Transform , Renderer::constantBuffer);
 

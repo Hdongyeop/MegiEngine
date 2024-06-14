@@ -8,8 +8,8 @@ namespace MegiEngine::Renderer
 	Camera* MainCamera = nullptr;
 
 
-	Vertex vertexes[ 4 ] = {};
-	ID3D11Buffer* vertexBuffer = nullptr;
+	std::vector<graphics::Vertex> vertexes = {};
+	graphics::VertexBuffer vertexBuffer;
 
 	std::vector<UINT> indices;
 	ID3D11Buffer* indexBuffer = nullptr;
@@ -20,6 +20,8 @@ namespace MegiEngine::Renderer
 
 	void LoadTriangleMesh()
 	{
+		vertexes.resize(4);
+
 		vertexes[ 0 ].pos = Vector3(-.5f , -.5f , 0.0f);
 		vertexes[ 0 ].color = Vector4(0.0f , 1.0f , 0.0f , 1.0f);
 
@@ -55,8 +57,6 @@ namespace MegiEngine::Renderer
 
 	void Release()
 	{
-		vertexBuffer->Release();
-
 		inputLayouts->Release();
 
 		indexBuffer->Release();
