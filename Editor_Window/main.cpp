@@ -6,7 +6,6 @@
 #include "../MegiEngine_SOURCE/MegiApplication.h"
 #include "../MegiEngine_SOURCE/MegiResources.h"
 #include "../MegiEngine_SOURCE/MegiTexture.h"
-#include "../MegiEngine_Window/MegiLoadResource.h"
 #include "../MegiEngine_Window/MegiLoadScene.h"
 #include "../MegiEngine_Window/MegiToolScene.h"
 
@@ -135,7 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    Gdiplus::GdiplusStartup(&gpToken , &gpsi , NULL);
 
    //load scenes
-   MegiEngine::LoadResource();
+   // MegiEngine::LoadResource(); -> LoadingScene에서 하는걸로 수정
    MegiEngine::LoadScene();
 
    InitToolScene(hInstance);
@@ -148,27 +147,27 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 BOOL InitToolScene(HINSTANCE hInstance)
 {
-   Scene* activeScene = SceneManager::GetActiveScene();
-   std::wstring name = activeScene->GetName();
-   if ( name == L"ToolScene" )
-   {
-	   HWND toolHwnd = CreateWindowW(L"TILEWINDOW" , L"TileWindow" , WS_OVERLAPPEDWINDOW
-	   , 0 , 0 , CW_USEDEFAULT, 0, nullptr , nullptr , hInstance , nullptr);
+	Scene* activeScene = SceneManager::GetActiveScene();
+	std::wstring name = activeScene->GetName();
+	if ( name == L"ToolScene" )
+	{
+		HWND toolHwnd = CreateWindowW(L"TILEWINDOW" , L"TileWindow" , WS_OVERLAPPEDWINDOW
+		, 0 , 0 , CW_USEDEFAULT , 0 , nullptr , nullptr , hInstance , nullptr);
 
-	   // Tile 윈도우 크기 조정
-	   graphics::Texture* texture = Resources::Find<graphics::Texture>(L"SpringFloor");
-	   RECT rect = { 0, 0, texture->GetWidth() * toolTextureSize, texture->GetHeight() * toolTextureSize };
-	   AdjustWindowRect(&rect , WS_OVERLAPPEDWINDOW , false);
+		// Tile 윈도우 크기 조정
+		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"SpringFloor");
+		RECT rect = { 0, 0, texture->GetWidth() * toolTextureSize, texture->GetHeight() * toolTextureSize };
+		AdjustWindowRect(&rect , WS_OVERLAPPEDWINDOW , false);
 
-	   UINT toolWidth = rect.right - rect.left;
-	   UINT toolHeight = rect.bottom - rect.top;
+		UINT toolWidth = rect.right - rect.left;
+		UINT toolHeight = rect.bottom - rect.top;
 
-	   SetWindowPos(toolHwnd , nullptr , 672, 100 , toolWidth , toolHeight , 0);
-	   ShowWindow(toolHwnd , true);
-	   UpdateWindow(toolHwnd);
-   }
-	
-   return TRUE;
+		SetWindowPos(toolHwnd , nullptr , 672 , 100 , toolWidth , toolHeight , 0);
+		ShowWindow(toolHwnd , true);
+		UpdateWindow(toolHwnd);
+	}
+
+	return TRUE;
 }
 
 

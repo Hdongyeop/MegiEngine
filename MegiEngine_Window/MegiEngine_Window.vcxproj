@@ -22,7 +22,7 @@
     <ClInclude Include="MegiDontDestroyOnLoad.h" />
     <ClInclude Include="MegiFloor.h" />
     <ClInclude Include="MegiFloorScript.h" />
-    <ClInclude Include="MegiLoadResource.h" />
+    <ClInclude Include="MegiLoadingScene.h" />
     <ClInclude Include="MegiLoadScene.h" />
     <ClInclude Include="MegiPlayScene.h" />
     <ClInclude Include="MegiTile.h" />
@@ -34,6 +34,7 @@
     <ClCompile Include="MegiDontDestroyOnLoad.cpp" />
     <ClCompile Include="MegiFloor.cpp" />
     <ClCompile Include="MegiFloorScript.cpp" />
+    <ClCompile Include="MegiLoadingScene.cpp" />
     <ClCompile Include="MegiPlayScene.cpp" />
     <ClCompile Include="MegiTile.cpp" />
     <ClCompile Include="MegiTitleScene.cpp" />

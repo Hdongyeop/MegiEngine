@@ -59,5 +59,8 @@ namespace MegiEngine::Renderer
 		psShader->Release();
 
 		inputLayouts->Release();
+
+		indexBuffer->Release();
+		constantBuffer->Release();
 	}
 }

@@ -69,15 +69,15 @@ namespace MegiEngine
 	{
 		Scene::OnEnter();
 
-		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Animal, true);
-		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Floor, true);
+//		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Animal, true);
+//		CollisionManager::CollisionLayerCheck(LayerType::Player , LayerType::Floor, true);
 
-		UIManager::Push(UIType::Button);
+		//UIManager::Push(UIType::Button);
 	}
 
 	void PlayScene::OnExit()
 	{
-		UIManager::Pop(UIType::Button);
+		//UIManager::Pop(UIType::Button);
 
 		Scene::OnExit();
 	}

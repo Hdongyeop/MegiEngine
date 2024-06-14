@@ -14,6 +14,8 @@
 #include <functional>
 #include <filesystem>
 #include <math.h>
+#include <mutex>
+#include <thread>
 
 #include <mmsystem.h>
 #include <dinput.h>
