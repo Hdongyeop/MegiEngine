@@ -1,6 +1,8 @@
 #pragma once
 #include "MegiCamera.h"
+#include "MegiConstantBuffer.h"
 #include "MegiGraphicDevice_DX11.h"
+#include "MegiIndexBuffer.h"
 #include "MegiVertexBuffer.h"
 
 namespace MegiEngine::Renderer
@@ -11,9 +13,9 @@ namespace MegiEngine::Renderer
 	extern graphics::VertexBuffer vertexBuffer;
 
 	extern std::vector<UINT> indices;
-	extern ID3D11Buffer* indexBuffer;
+	extern graphics::IndexBuffer indexBuffer;
 
-	extern ID3D11Buffer* constantBuffer;
+	extern graphics::ConstantBuffer constantBuffers[ ( UINT ) graphics::CBType::End ];
 
 	extern ID3D11InputLayout* inputLayouts;
 

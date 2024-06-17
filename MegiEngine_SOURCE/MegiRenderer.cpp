@@ -7,14 +7,13 @@ namespace MegiEngine::Renderer
 {
 	Camera* MainCamera = nullptr;
 
-
 	std::vector<graphics::Vertex> vertexes = {};
 	graphics::VertexBuffer vertexBuffer;
 
 	std::vector<UINT> indices;
-	ID3D11Buffer* indexBuffer = nullptr;
+	graphics::IndexBuffer indexBuffer;
 
-	ID3D11Buffer* constantBuffer = nullptr;
+	graphics::ConstantBuffer constantBuffers[ ( UINT ) graphics::CBType::End ] = {};
 
 	ID3D11InputLayout* inputLayouts = nullptr;
 
@@ -49,17 +48,20 @@ namespace MegiEngine::Renderer
 		Resources::Load<graphics::Shader>(L"TriangleShader" , L"..\\Shaders_SOURCE\\Triangle");
 	}
 
+	void LoadConstantBuffers()
+	{
+		constantBuffers[ ( UINT ) graphics::CBType::Transform ].Create(graphics::CBType::Transform , sizeof(Vector4));
+	}
+
 	void Initialize()
 	{
 		LoadMeshes();
 		LoadShaders();
+		LoadConstantBuffers();
 	}
 
 	void Release()
 	{
 		inputLayouts->Release();
-
-		indexBuffer->Release();
-		constantBuffer->Release();
 	}
 }

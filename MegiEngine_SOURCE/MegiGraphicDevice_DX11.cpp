@@ -178,6 +178,19 @@ namespace MegiEngine::graphics
 		return true;
 	}
 
+	void GraphicDevice_DX11::SetDataBuffer(ID3D11Buffer* buffer, void* data, UINT size)
+	{
+		D3D11_MAPPED_SUBRESOURCE sub = {};
+		mContext->Map(buffer , 0 , D3D11_MAP_WRITE_DISCARD , 0 , &sub);
+		memcpy(sub.pData , data , size);
+		mContext->Unmap(buffer , 0);
+	}
+
+	void GraphicDevice_DX11::BindIndexBuffer(ID3D11Buffer* pIndexBuffer, DXGI_FORMAT format, UINT offset)
+	{
+		mContext->IASetIndexBuffer(pIndexBuffer , format , offset);
+	}
+
 	void GraphicDevice_DX11::BindVS(ID3D11VertexShader* pVertexShader)
 	{
 		mContext->VSSetShader(pVertexShader , 0 , 0);
@@ -324,39 +337,7 @@ namespace MegiEngine::graphics
 			assert(NULL && "Create input layout failed!");
 
 		Renderer::vertexBuffer.Create(Renderer::vertexes);
-
-#pragma region Index Buffer DESC
-
-		D3D11_BUFFER_DESC indexBufferDesc = {};
-		indexBufferDesc.ByteWidth = sizeof(UINT) * Renderer::indices.size();
-		indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		indexBufferDesc.CPUAccessFlags = 0;
-		// indexBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-		D3D11_SUBRESOURCE_DATA indicesData = {Renderer::indices.data()};
-
-#pragma endregion
-
-		if (!(CreateBuffer(&indexBufferDesc , &indicesData , &Renderer::indexBuffer)) )
-			assert(NULL && "Create index buffer failed!");
-
-#pragma region Constant Buffer DESC
-
-		D3D11_BUFFER_DESC constantBufferDesc = {};
-		constantBufferDesc.ByteWidth = sizeof(Vector4);
-		constantBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		constantBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-		constantBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-		Vector4 pos(.5f , .0f , .0f , 1.f);
-		D3D11_SUBRESOURCE_DATA constantBufferData = {};
-		constantBufferData.pSysMem = &pos;
-
-#pragma endregion
-
-		if ( !( CreateBuffer(&constantBufferDesc , &constantBufferData , &Renderer::constantBuffer) ) )
-			assert(NULL && "Create constant buffer failed!");
+		Renderer::indexBuffer.Create(Renderer::indices);
 	}
 
 	void GraphicDevice_DX11::Draw()
@@ -381,20 +362,15 @@ namespace MegiEngine::graphics
 		mContext->IASetInputLayout(Renderer::inputLayouts);
 		mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		D3D11_MAPPED_SUBRESOURCE mappedSubresource;
-		Vector4 newPos(-.5f , .0f , .0f , 1.f);
-		if(!FAILED(mContext->Map(Renderer::constantBuffer , 0 , D3D11_MAP_WRITE_DISCARD , 0 , &mappedSubresource)))
-		{
-			memcpy(mappedSubresource.pData , &newPos , sizeof(Vector4));
-			mContext->Unmap(Renderer::constantBuffer , 0);
-		}
-
-		// 쉐이더 설정
-		UINT offset = 0;
 		Renderer::vertexBuffer.Bind();
-		mContext->IASetIndexBuffer(Renderer::indexBuffer , DXGI_FORMAT_R32_UINT , 0);
-		BindConstantBuffer(ShaderStage::VS , CBType::Transform , Renderer::constantBuffer);
+		Renderer::indexBuffer.Bind();
 
+		// 상수 버퍼 데이터 변환
+		Vector4 newPos(0.5f, 0.0f, 0.0f, 1.0f);
+		Renderer::constantBuffers[ ( UINT ) CBType::Transform ].SetData(&newPos);
+		Renderer::constantBuffers[ ( UINT ) CBType::Transform ].Bind(ShaderStage::VS);
+
+		// 쉐이더
 		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
 		triangle->Bind();
 

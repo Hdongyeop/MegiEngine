@@ -140,8 +140,12 @@
       <Filter>Resource</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiVertexBuffer.cpp">
-      <Filter>DX</Filter>
+      <Filter>DX\Buffers</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiConstantBuffer.cpp">
+      <Filter>DX\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiIndexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiTime.h">
@@ -292,8 +296,12 @@
       <Filter>Resource</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiVertexBuffer.h">
-      <Filter>DX</Filter>
+      <Filter>DX\Buffers</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiConstantBuffer.h">
+      <Filter>DX\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiIndexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -328,6 +336,9 @@
     </Filter>
     <Filter Include="DX\Core">
       <UniqueIdentifier>{bc1874bf-533e-4c13-b2e1-47fe9fb4178f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX\Buffers">
+      <UniqueIdentifier>{7c80215a-caf6-41be-9bef-5ed0e223eae1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

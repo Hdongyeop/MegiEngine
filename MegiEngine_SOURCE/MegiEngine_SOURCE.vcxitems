@@ -30,12 +30,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiGraphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MegiIndexBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MegiMaterial.h" />
@@ -81,10 +83,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiGraphicDevice_DX11.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MegiIndexBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MegiMaterial.cpp" />
