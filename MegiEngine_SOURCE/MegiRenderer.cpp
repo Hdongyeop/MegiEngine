@@ -8,10 +8,9 @@ namespace MegiEngine::Renderer
 	Camera* MainCamera = nullptr;
 
 	std::vector<graphics::Vertex> vertexes = {};
-	graphics::VertexBuffer vertexBuffer;
-
 	std::vector<UINT> indices;
-	graphics::IndexBuffer indexBuffer;
+
+	Mesh* mesh = nullptr;
 
 	graphics::ConstantBuffer constantBuffers[ ( UINT ) graphics::CBType::End ] = {};
 
@@ -19,7 +18,9 @@ namespace MegiEngine::Renderer
 
 	void LoadTriangleMesh()
 	{
-		vertexes.resize(4);
+		mesh = new Mesh();
+
+		vertexes.resize(3);
 
 		vertexes[ 0 ].pos = Vector3(-.5f , -.5f , 0.0f);
 		vertexes[ 0 ].color = Vector4(0.0f , 1.0f , 0.0f , 1.0f);
@@ -30,12 +31,12 @@ namespace MegiEngine::Renderer
 		vertexes[ 2 ].pos = Vector3(.5f , .5f , 0.0f);
 		vertexes[ 2 ].color = Vector4(0.0f , 0.0f , 1.0f , 1.0f);
 
-		vertexes[ 3 ].pos = Vector3(.5f , -.5f , 0.0f);
-		vertexes[ 3 ].color = Vector4(0.0f , 0.0f , 1.0f , 1.0f);
-
 		indices.push_back(0);
+		indices.push_back(1);
 		indices.push_back(2);
-		indices.push_back(3);
+
+		mesh->CreateVB(vertexes);
+		mesh->CreateIB(indices);
 	}
 
 	void LoadMeshes()
@@ -63,5 +64,6 @@ namespace MegiEngine::Renderer
 	void Release()
 	{
 		inputLayouts->Release();
+		delete mesh;
 	}
 }

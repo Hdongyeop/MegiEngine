@@ -27,6 +27,7 @@ namespace MegiEngine
 		Animation();
 		~Animation();
 
+		HRESULT Save(const std::wstring& path) override;
 		HRESULT Load(const std::wstring& path) override;
 
 		void Update();

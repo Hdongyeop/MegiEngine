@@ -18,6 +18,7 @@ namespace MegiEngine::graphics
 		Texture();
 		~Texture();
 
+		HRESULT Save(const std::wstring& path) override;
 		HRESULT Load(const std::wstring& path) override;
 		UINT GetWidth() const { return mWidth; }
 		UINT GetHeight() const { return mHeight; }

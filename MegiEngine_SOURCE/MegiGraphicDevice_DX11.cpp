@@ -187,6 +187,11 @@ namespace MegiEngine::graphics
 		mContext->Unmap(buffer , 0);
 	}
 
+	void GraphicDevice_DX11::BindPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology)
+	{
+		mContext->IASetPrimitiveTopology(topology);
+	}
+
 	void GraphicDevice_DX11::BindIndexBuffer(ID3D11Buffer* pIndexBuffer , DXGI_FORMAT format , UINT offset)
 	{
 		mContext->IASetIndexBuffer(pIndexBuffer , format , offset);
@@ -336,9 +341,6 @@ namespace MegiEngine::graphics
 			, triangle->GetVSBlob()->GetBufferSize()
 			, &Renderer::inputLayouts) ) )
 			assert(NULL && "Create input layout failed!");
-
-		Renderer::vertexBuffer.Create(Renderer::vertexes);
-		Renderer::indexBuffer.Create(Renderer::indices);
 	}
 
 	void GraphicDevice_DX11::Draw()
@@ -362,10 +364,8 @@ namespace MegiEngine::graphics
 
 		// 인풋레이아웃 설정
 		mContext->IASetInputLayout(Renderer::inputLayouts);
-		mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		Renderer::vertexBuffer.Bind();
-		Renderer::indexBuffer.Bind();
+		Renderer::mesh->Bind();
 
 		// 상수 버퍼 데이터 변환
 		Vector4 newPos(0.5f , 0.0f , 0.0f , 1.0f);

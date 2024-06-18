@@ -10,6 +10,7 @@ namespace MegiEngine::graphics
 		Shader();
 		virtual ~Shader();
 
+		HRESULT Save(const std::wstring& path) override;
 		HRESULT Load(const std::wstring& path) override;
 
 		bool Create(const ShaderStage stage , const std::wstring& fileName);
