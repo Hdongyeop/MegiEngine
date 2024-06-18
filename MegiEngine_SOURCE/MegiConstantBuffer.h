@@ -11,8 +11,8 @@ namespace MegiEngine::graphics
 
 		bool Create(CBType type , UINT size , void* data = NULL);
 
-		void SetData(void* data);
-		void Bind(ShaderStage stage);
+		void SetData(void* data) const;
+		void Bind(ShaderStage stage) const;
 
 	private:
 		UINT mSize;

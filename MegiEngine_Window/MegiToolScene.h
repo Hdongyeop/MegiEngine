@@ -14,7 +14,7 @@ namespace MegiEngine
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
-		void Render(HDC hdc) override;
+		void Render() override;
 
 		void OnEnter() override;
 		void OnExit() override;
@@ -23,12 +23,11 @@ namespace MegiEngine
 		void Load();
 
 	private:
-		void RenderGrid(HDC hdc);
+		void RenderGrid();
 		void CreateTileObject();
 
 	private:
 		std::vector<Tile*> mTiles;
-
 	};
 }
 

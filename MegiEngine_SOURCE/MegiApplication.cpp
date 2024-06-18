@@ -71,10 +71,10 @@ namespace MegiEngine
 		// clearRenderTarget();
 		mGraphicDevice->Draw();
 
-		CollisionManager::Render(mBackHdc);
-		UIManager::Render(mBackHdc);
-		SceneManager::Render(mBackHdc);
-		Time::Render(mBackHdc);
+		CollisionManager::Render();
+		UIManager::Render();
+		SceneManager::Render();
+		Time::Render();
 
 		// copyRenderTarget(mBackHdc , mHdc);
 	}
@@ -115,7 +115,7 @@ namespace MegiEngine
 		mHwnd = hWnd;
 		mHdc = GetDC(hWnd);
 
-		RECT rect = { 0, 0, width, height };
+		RECT rect = { 0, 0, (LONG)width, (LONG)height };
 		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
 
 		int windowStartX = 100;

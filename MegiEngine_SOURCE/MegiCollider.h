@@ -12,18 +12,18 @@ namespace MegiEngine
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
 
 		virtual void OnCollisionEnter(Collider* other);
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
-		Math::Vector2 GetOffset() { return mOffset; }
+		Math::Vector2 GetOffset() const { return mOffset; }
 		void SetOffset(Math::Vector2 offset) { mOffset = offset; }
-		UINT32 GetID() { return mID; }
-		Math::Vector2 GetSize() { return mSize; }
+		UINT32 GetID() const { return mID; }
+		Math::Vector2 GetSize() const { return mSize; }
 		void SetSize(Math::Vector2 size) { mSize = size; }
-		Type::ColliderType GetColliderType() { return mType; }
+		Type::ColliderType GetColliderType() const { return mType; }
 
 	private:
 		static UINT CollisionID;

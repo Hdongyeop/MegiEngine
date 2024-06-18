@@ -60,12 +60,12 @@ namespace MegiEngine
 		}
 	}
 
-	void GameObject::Render(HDC hdc)
+	void GameObject::Render()
 	{
 		for (auto _mComponent : mComponents)
 		{
 			if ( _mComponent == nullptr ) continue;
-			_mComponent->Render(hdc);
+			_mComponent->Render();
 		}
 	}
 

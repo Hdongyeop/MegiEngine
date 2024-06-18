@@ -12,13 +12,13 @@ namespace MegiEngine
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
 
+		Math::Vector2 GetVelocity() const { return mVelocity; }
 		void SetMass(float mass) { mMass = mass; }
 		void AddForce(Math::Vector2 force) { mForce = force; }
 		void SetGround(bool ground) { mGround = ground; }
 		void SetVelocity(Math::Vector2 velocity) { mVelocity = velocity; }
-		Math::Vector2 GetVelocity() const { return mVelocity; }
 		void SetApplyGravity(bool flag) { applyGravity = flag; }
 
 	private:

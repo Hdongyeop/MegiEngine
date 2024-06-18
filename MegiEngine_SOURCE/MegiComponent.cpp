@@ -23,7 +23,7 @@ namespace MegiEngine
 	{
 	}
 
-	void Component::Render(HDC hdc)
+	void Component::Render()
 	{
 	}
 }

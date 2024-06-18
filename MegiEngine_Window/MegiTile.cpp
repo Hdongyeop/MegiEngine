@@ -28,9 +28,9 @@ namespace MegiEngine
 		GameObject::LateUpdate();
 	}
 
-	void Tile::Render(HDC hdc)
+	void Tile::Render()
 	{
-		GameObject::Render(hdc);
+		GameObject::Render();
 	}
 
 	void Tile::SetIndexPosition(int x, int y)

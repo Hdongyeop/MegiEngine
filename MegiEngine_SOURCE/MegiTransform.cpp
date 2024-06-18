@@ -28,8 +28,8 @@ namespace MegiEngine
 		Component::LateUpdate();
 	}
 
-	void Transform::Render(HDC hdc)
+	void Transform::Render()
 	{
-		Component::Render(hdc);
+		Component::Render();
 	}
 }

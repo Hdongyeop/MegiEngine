@@ -30,7 +30,7 @@ namespace MegiEngine
 		HRESULT Load(const std::wstring& path) override;
 
 		void Update();
-		void Render(HDC hdc);
+		void Render();
 
 		void CreateAnimation(const std::wstring& name
 		, graphics::Texture* spriteSheet
@@ -42,7 +42,7 @@ namespace MegiEngine
 
 		void Reset();
 
-		bool IsComplete() { return mbComplete; }
+		bool IsComplete() const { return mbComplete; }
 		void SetAnimator(class Animator* animator) { mAnimator = animator; }
 
 		Math::Vector2 GetSizeOfSprite();

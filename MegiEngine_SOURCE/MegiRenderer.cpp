@@ -50,7 +50,7 @@ namespace MegiEngine::Renderer
 
 	void LoadConstantBuffers()
 	{
-		constantBuffers[ ( UINT ) graphics::CBType::Transform ].Create(graphics::CBType::Transform , sizeof(Vector4));
+		constantBuffers[ CAST_UINT(graphics::CBType::Transform) ].Create(graphics::CBType::Transform , sizeof(Vector4));
 	}
 
 	void Initialize()

@@ -14,7 +14,7 @@ namespace MegiEngine
 
 		void Play();
 		void Stop();
-		void Set3DAttributes(const Math::Vector2 pos);
+		void Set3DAttributes(const Math::Vector3 pos);
 		void SetLoop(bool loop) { mLoop = loop; }
 
 	private:

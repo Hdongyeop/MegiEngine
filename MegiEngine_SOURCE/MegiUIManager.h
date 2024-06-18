@@ -14,7 +14,7 @@ namespace MegiEngine
 		static void OnLoad(UIType type);
 		static void Update();
 		static void LateUpdate();
-		static void Render(HDC hdc);
+		static void Render();
 		static void OnComplete(UIBase* addUI);
 		static void OnFail();
 		static void Release();

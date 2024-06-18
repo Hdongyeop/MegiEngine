@@ -58,9 +58,9 @@ namespace MegiEngine
 		Script::LateUpdate();
 	}
 
-	void CatController::Render(HDC hdc)
+	void CatController::Render()
 	{
-		Script::Render(hdc);
+		Script::Render();
 	}
 
 	void CatController::SitDown()

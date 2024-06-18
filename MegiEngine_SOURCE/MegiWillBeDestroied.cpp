@@ -35,8 +35,8 @@ namespace MegiEngine
 		Component::LateUpdate();
 	}
 
-	void WillBeDestroied::Render(HDC hdc)
+	void WillBeDestroied::Render()
 	{
-		Component::Render(hdc);
+		Component::Render();
 	}
 }

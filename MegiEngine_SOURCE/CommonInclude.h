@@ -27,3 +27,6 @@
 
 #include "MegiEnums.h"
 #include "MegiMath.h"
+
+#define CAST_UINT(value) static_cast<UINT>(value)
+#define CAST_FLOAT(value) static_cast<float>(value)

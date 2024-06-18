@@ -67,7 +67,7 @@ namespace MegiEngine
 		}
 	}
 
-	void UIManager::Render(HDC hdc)
+	void UIManager::Render()
 	{
 		if ( mUIBases.size() <= 0 ) return;
 
@@ -87,7 +87,7 @@ namespace MegiEngine
 
 		for (UIBase* ui : buff)
 		{
-			ui->Render(hdc);
+			ui->Render();
 			mUIBases.push(ui);
 		}
 	}

@@ -34,9 +34,8 @@ namespace MegiEngine
 		Component::LateUpdate();
 	}
 
-	void Collider::Render(HDC hdc)
+	void Collider::Render()
 	{
-		Component::Render(hdc);
 	}
 
 	void Collider::OnCollisionEnter(Collider* other)

@@ -24,8 +24,8 @@ namespace MegiEngine
 
 	void Camera::Initialize()
 	{
-		mResolution.x = application.GetWidth();
-		mResolution.y = application.GetHeight();
+		mResolution.x = CAST_FLOAT(application.GetWidth());
+		mResolution.y = CAST_FLOAT(application.GetHeight());
 	}
 
 	void Camera::Update()
@@ -49,8 +49,7 @@ namespace MegiEngine
 		Component::LateUpdate();
 	}
 
-	void Camera::Render(HDC hdc)
+	void Camera::Render()
 	{
-		Component::Render(hdc);
 	}
 }

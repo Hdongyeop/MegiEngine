@@ -39,9 +39,9 @@ namespace MegiEngine
 		if ( mEnabled ) OnLateUpdate();
 	}
 
-	void UIBase::Render(HDC hdc)
+	void UIBase::Render()
 	{
-		if ( mEnabled ) OnRender(hdc);
+		if ( mEnabled ) OnRender();
 	}
 
 	void UIBase::UIClear()
@@ -69,7 +69,7 @@ namespace MegiEngine
 	{
 	}
 
-	void UIBase::OnRender(HDC hdc)
+	void UIBase::OnRender()
 	{
 	}
 

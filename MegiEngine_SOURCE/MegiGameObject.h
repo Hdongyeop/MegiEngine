@@ -29,7 +29,7 @@ namespace MegiEngine
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
 
 		template <typename T, std::enable_if_t<std::is_base_of_v<Component, T>, bool> = true>
 		// template <typename T>
@@ -62,10 +62,10 @@ namespace MegiEngine
 			if ( flag == false) mState = eState::Dead;
 		}
 
-		bool IsActive() { return mState == eState::Active; }
-		bool IsDead() { return mState == eState::Dead; }
+		bool IsActive() const { return mState == eState::Active; }
+		bool IsDead() const { return mState == eState::Dead; }
 		void SetLayerType(Type::LayerType type) { mLayerType = type; }
-		Type::LayerType GetLayerType() { return mLayerType; }
+		Type::LayerType GetLayerType() const { return mLayerType; }
 
 	private:
 		void Death() { mState = eState::Dead; }

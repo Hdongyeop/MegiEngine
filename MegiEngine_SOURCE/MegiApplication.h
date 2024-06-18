@@ -21,9 +21,9 @@ namespace MegiEngine
 		void Destroy();
 
 		HDC GetHdc() const { return mHdc; }
-		HWND GetHwnd() { return mHwnd; }
-		UINT GetWidth() { return mWidth; }
-		UINT GetHeight() { return mHeight; }
+		HWND GetHwnd() const { return mHwnd; }
+		UINT GetWidth() const { return mWidth; }
+		UINT GetHeight() const { return mHeight; }
 
 	private:
 		void clearRenderTarget();

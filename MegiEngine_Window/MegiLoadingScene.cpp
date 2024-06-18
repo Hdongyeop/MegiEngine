@@ -44,9 +44,9 @@ namespace MegiEngine
 		Scene::LateUpdate();
 	}
 
-	void LoadingScene::Render(HDC hdc)
+	void LoadingScene::Render()
 	{
-		Scene::Render(hdc);
+		Scene::Render();
 	}
 
 	void LoadingScene::OnEnter()

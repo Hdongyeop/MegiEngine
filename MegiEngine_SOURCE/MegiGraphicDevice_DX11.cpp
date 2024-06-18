@@ -28,11 +28,12 @@ namespace MegiEngine::graphics
 		//		creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
 		//#endif
 
-		HRESULT hr = D3D11CreateDevice(0 , D3D_DRIVER_TYPE_HARDWARE ,
+		if ( FAILED(D3D11CreateDevice(0 , D3D_DRIVER_TYPE_HARDWARE ,
 			0 , creationFlags ,
 			featureLevels , ARRAYSIZE(featureLevels) ,
 			D3D11_SDK_VERSION , mDevice.GetAddressOf() ,
-			0 , mContext.GetAddressOf());
+			0 , mContext.GetAddressOf())) )
+			return false;
 
 		return true;
 	}
@@ -52,7 +53,7 @@ namespace MegiEngine::graphics
 		if ( FAILED(pAdapter->GetParent(__uuidof( IDXGIFactory ) , ( void** ) pFactory.GetAddressOf())) )
 			return false;
 
-		if ( FAILED(pFactory->CreateSwapChain(mDevice.Get() , &desc, mSwapChain.GetAddressOf())) )
+		if ( FAILED(pFactory->CreateSwapChain(mDevice.Get() , &desc , mSwapChain.GetAddressOf())) )
 			return false;
 
 		return true;
@@ -76,7 +77,7 @@ namespace MegiEngine::graphics
 	bool GraphicDevice_DX11::CreateDepthStencilView(ID3D11Resource* pResource ,
 		const D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc , ID3D11DepthStencilView** ppDSView)
 	{
-		if ( FAILED(mDevice->CreateDepthStencilView(pResource, pDesc , ppDSView)))
+		if ( FAILED(mDevice->CreateDepthStencilView(pResource , pDesc , ppDSView)) )
 			return false;
 		return true;
 	}
@@ -98,12 +99,12 @@ namespace MegiEngine::graphics
 
 		ID3DBlob* errorBlob = nullptr;
 		const std::wstring shaderFilePath = L"..\\Shaders_SOURCE\\";
-		D3DCompileFromFile((shaderFilePath + fileName + L"VS.hlsl").c_str(), nullptr
+		D3DCompileFromFile(( shaderFilePath + fileName + L"VS.hlsl" ).c_str() , nullptr
 		, D3D_COMPILE_STANDARD_FILE_INCLUDE , "main"
 		, "vs_5_0" , shaderFlags , 0
-		, ppCode, &errorBlob);
+		, ppCode , &errorBlob);
 
-		if(errorBlob)
+		if ( errorBlob )
 		{
 			OutputDebugStringA(( char* ) errorBlob->GetBufferPointer());
 			errorBlob->Release();
@@ -111,10 +112,10 @@ namespace MegiEngine::graphics
 			return false;
 		}
 
-		if(FAILED(mDevice->CreateVertexShader(
-		(*ppCode)->GetBufferPointer()
-		, (*ppCode)->GetBufferSize()
-		, nullptr , ppVertexShader)))
+		if ( FAILED(mDevice->CreateVertexShader(
+			( *ppCode )->GetBufferPointer()
+			, ( *ppCode )->GetBufferSize()
+			, nullptr , ppVertexShader)) )
 		{
 			return false;
 		}
@@ -131,12 +132,12 @@ namespace MegiEngine::graphics
 
 		ID3DBlob* errorBlob = nullptr;
 		const std::wstring shaderFilePath = L"..\\Shaders_SOURCE\\";
-		D3DCompileFromFile((shaderFilePath + fileName + L"PS.hlsl").c_str(), nullptr
+		D3DCompileFromFile(( shaderFilePath + fileName + L"PS.hlsl" ).c_str() , nullptr
 		, D3D_COMPILE_STANDARD_FILE_INCLUDE , "main"
 		, "ps_5_0" , shaderFlags , 0
-		, ppCode, &errorBlob);
+		, ppCode , &errorBlob);
 
-		if(errorBlob)
+		if ( errorBlob )
 		{
 			OutputDebugStringA(( char* ) errorBlob->GetBufferPointer());
 			errorBlob->Release();
@@ -144,10 +145,10 @@ namespace MegiEngine::graphics
 			return false;
 		}
 
-		if(FAILED(mDevice->CreatePixelShader(
-		(*ppCode)->GetBufferPointer()
-		, (*ppCode)->GetBufferSize()
-		, nullptr , ppPixelShader)))
+		if ( FAILED(mDevice->CreatePixelShader(
+			( *ppCode )->GetBufferPointer()
+			, ( *ppCode )->GetBufferSize()
+			, nullptr , ppPixelShader)) )
 		{
 			return false;
 		}
@@ -170,15 +171,15 @@ namespace MegiEngine::graphics
 		return true;
 	}
 
-	bool GraphicDevice_DX11::CreateBuffer(const D3D11_BUFFER_DESC * pDesc , const D3D11_SUBRESOURCE_DATA * pInitialData ,
-		ID3D11Buffer * *ppBuffer)
+	bool GraphicDevice_DX11::CreateBuffer(const D3D11_BUFFER_DESC* pDesc , const D3D11_SUBRESOURCE_DATA* pInitialData ,
+		ID3D11Buffer** ppBuffer)
 	{
 		if ( FAILED(mDevice->CreateBuffer(pDesc , pInitialData , ppBuffer)) )
 			return false;
 		return true;
 	}
 
-	void GraphicDevice_DX11::SetDataBuffer(ID3D11Buffer* buffer, void* data, UINT size)
+	void GraphicDevice_DX11::SetDataBuffer(ID3D11Buffer* buffer , void* data , UINT size)
 	{
 		D3D11_MAPPED_SUBRESOURCE sub = {};
 		mContext->Map(buffer , 0 , D3D11_MAP_WRITE_DISCARD , 0 , &sub);
@@ -186,7 +187,7 @@ namespace MegiEngine::graphics
 		mContext->Unmap(buffer , 0);
 	}
 
-	void GraphicDevice_DX11::BindIndexBuffer(ID3D11Buffer* pIndexBuffer, DXGI_FORMAT format, UINT offset)
+	void GraphicDevice_DX11::BindIndexBuffer(ID3D11Buffer* pIndexBuffer , DXGI_FORMAT format , UINT offset)
 	{
 		mContext->IASetIndexBuffer(pIndexBuffer , format , offset);
 	}
@@ -201,16 +202,16 @@ namespace MegiEngine::graphics
 		mContext->PSSetShader(pPixelShader , 0 , 0);
 	}
 
-	void GraphicDevice_DX11::BindVertexBuffer(UINT startSlot, UINT NumBuffers, ID3D11Buffer* const* ppVertexBuffers,
-		const UINT* pStrides, const UINT* pOffsets)
+	void GraphicDevice_DX11::BindVertexBuffer(UINT startSlot , UINT NumBuffers , ID3D11Buffer* const* ppVertexBuffers ,
+		const UINT* pStrides , const UINT* pOffsets)
 	{
 		mContext->IASetVertexBuffers(startSlot , NumBuffers , ppVertexBuffers , pStrides , pOffsets);
 	}
 
-	void GraphicDevice_DX11::BindConstantBuffer(ShaderStage stage, CBType type, ID3D11Buffer* buffer)
+	void GraphicDevice_DX11::BindConstantBuffer(ShaderStage stage , CBType type , ID3D11Buffer* buffer)
 	{
 		UINT slot = ( UINT ) type;
-		switch (stage)
+		switch ( stage )
 		{
 		case ShaderStage::VS:
 			mContext->VSSetConstantBuffers(slot , 1 , &buffer);
@@ -280,13 +281,13 @@ namespace MegiEngine::graphics
 
 #pragma endregion
 
-		if (!(CreateSwapChain(swapChainDesc)) )
+		if ( !( CreateSwapChain(swapChainDesc) ) )
 			assert(NULL && "Create Swapchain failed!!");
 
-		if (!(GetBuffer(0 , __uuidof( ID3D11Texture2D ) , (void**) mRenderTarget.GetAddressOf())))
+		if ( !( GetBuffer(0 , __uuidof( ID3D11Texture2D ) , ( void** ) mRenderTarget.GetAddressOf()) ) )
 			assert(NULL && "Couldn't bring rendertarget!!");
 
-		if (!(CreateRenderTargetView(mRenderTarget.Get() , nullptr , mRenderTargetView.GetAddressOf())) )
+		if ( !( CreateRenderTargetView(mRenderTarget.Get() , nullptr , mRenderTargetView.GetAddressOf()) ) )
 			assert(NULL && "Create RenderTargetView failed!!");
 
 #pragma region DepthSencil DESC
@@ -303,10 +304,10 @@ namespace MegiEngine::graphics
 
 #pragma endregion
 
-		if (!(CreateTexture2D(&depthStencilDesc , nullptr , mDepthStencil.GetAddressOf())) )
+		if ( !( CreateTexture2D(&depthStencilDesc , nullptr , mDepthStencil.GetAddressOf()) ) )
 			assert(NULL && "Create depthstencil texture failed!!");
 
-		if (!(CreateDepthStencilView(mDepthStencil.Get() , nullptr , mDepthStencilView.GetAddressOf())) )
+		if ( !( CreateDepthStencilView(mDepthStencil.Get() , nullptr , mDepthStencilView.GetAddressOf()) ) )
 			assert(NULL && "Create depthstencil View failed!!");
 
 #pragma region InputLayout DESC
@@ -330,10 +331,10 @@ namespace MegiEngine::graphics
 
 		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
 
-		if (!(CreateInputLayout(inputLayoutDesces , 2
+		if ( !( CreateInputLayout(inputLayoutDesces , 2
 			, triangle->GetVSBlob()->GetBufferPointer()
 			, triangle->GetVSBlob()->GetBufferSize()
-			, &Renderer::inputLayouts)) )
+			, &Renderer::inputLayouts) ) )
 			assert(NULL && "Create input layout failed!");
 
 		Renderer::vertexBuffer.Create(Renderer::vertexes);
@@ -350,7 +351,8 @@ namespace MegiEngine::graphics
 		// 뷰포트 설정
 		D3D11_VIEWPORT viewPort =
 		{
-			0, 0, ( FLOAT ) application.GetWidth(), ( FLOAT ) application.GetHeight(),
+			0, 0,
+			CAST_FLOAT(application.GetWidth()), CAST_FLOAT(application.GetHeight()),
 			0.0f, 1.0f
 		};
 		mContext->RSSetViewports(1 , &viewPort);
@@ -366,9 +368,9 @@ namespace MegiEngine::graphics
 		Renderer::indexBuffer.Bind();
 
 		// 상수 버퍼 데이터 변환
-		Vector4 newPos(0.5f, 0.0f, 0.0f, 1.0f);
-		Renderer::constantBuffers[ ( UINT ) CBType::Transform ].SetData(&newPos);
-		Renderer::constantBuffers[ ( UINT ) CBType::Transform ].Bind(ShaderStage::VS);
+		Vector4 newPos(0.5f , 0.0f , 0.0f , 1.0f);
+		Renderer::constantBuffers[ CAST_UINT(CBType::Transform) ].SetData(&newPos);
+		Renderer::constantBuffers[ CAST_UINT(CBType::Transform) ].Bind(ShaderStage::VS);
 
 		// 쉐이더
 		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");

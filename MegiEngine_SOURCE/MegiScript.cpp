@@ -27,9 +27,9 @@ namespace MegiEngine
 		Component::LateUpdate();
 	}
 
-	void Script::Render(HDC hdc)
+	void Script::Render()
 	{
-		Component::Render(hdc);
+		Component::Render();
 	}
 
 	void Script::OnCollisionEnter(Collider* other)

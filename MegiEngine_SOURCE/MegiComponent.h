@@ -13,14 +13,11 @@ namespace MegiEngine
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
 
-		void SetOwner(GameObject* owner)
-		{
-			mOwner = owner;
-		}
-		GameObject* GetOwner() { return mOwner; }
-		Type::ComponentType GetComponentType() { return mType; }
+		void SetOwner(GameObject* owner) { mOwner = owner; }
+		GameObject* GetOwner() const { return mOwner; }
+		Type::ComponentType GetComponentType() const { return mType; }
 
 	private:
 		GameObject* mOwner;

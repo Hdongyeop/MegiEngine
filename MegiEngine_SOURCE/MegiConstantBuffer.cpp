@@ -5,7 +5,8 @@
 namespace MegiEngine::graphics
 {
 	ConstantBuffer::ConstantBuffer()
-	:mSize(0)
+	: mSize(0)
+	, mType(CBType::None)
 	{
 	}
 
@@ -31,17 +32,17 @@ namespace MegiEngine::graphics
 		else success = GetDevice()->CreateBuffer(&desc , &sub , buffer.GetAddressOf());
 
 		if ( !success )
-			assert(NULL , "Create constant buffer failed!");
+			assert(NULL /*, "Create constant buffer failed!"*/);
 
 		return true;
 	}
 
-	void ConstantBuffer::SetData(void* data)
+	void ConstantBuffer::SetData(void* data) const
 	{
 		GetDevice()->SetDataBuffer(buffer.Get() , data , mSize);
 	}
 
-	void ConstantBuffer::Bind(ShaderStage stage)
+	void ConstantBuffer::Bind(ShaderStage stage) const
 	{
 		GetDevice()->BindConstantBuffer(stage , mType , buffer.Get());
 	}

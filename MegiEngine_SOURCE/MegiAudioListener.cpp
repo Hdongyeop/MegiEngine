@@ -28,13 +28,12 @@ namespace MegiEngine
 	void AudioListener::LateUpdate()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
 
-		Fmod::Set3DListenerAttributes(&pos);
+		Vector3 pos;
+		Fmod::Set3DListenerAttributes(pos);
 	}
 
-	void AudioListener::Render(HDC hdc)
+	void AudioListener::Render()
 	{
-		Component::Render(hdc);
 	}
 }

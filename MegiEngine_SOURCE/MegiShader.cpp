@@ -15,8 +15,8 @@ namespace MegiEngine::graphics
 
 	HRESULT Shader::Load(const std::wstring& path)
 	{
-		int findNameBeginOffset = path.rfind(L"\\") + 1;
-		int fileNameLength = path.length() - findNameBeginOffset;
+		size_t findNameBeginOffset = path.rfind(L"\\") + 1;
+		size_t fileNameLength = path.length() - findNameBeginOffset;
 
 		const std::wstring fileName(path.substr(findNameBeginOffset , fileNameLength));
 

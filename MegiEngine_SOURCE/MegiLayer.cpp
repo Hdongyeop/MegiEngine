@@ -49,14 +49,14 @@ namespace MegiEngine
 		}
 	}
 
-	void Layer::Render(HDC hdc)
+	void Layer::Render()
 	{
 		for (GameObject* gameObj : mGameObjects)
 		{
 			if(gameObj == nullptr) continue;
 			if(gameObj->IsActive() == false) continue;
 
-			gameObj->Render(hdc);
+			gameObj->Render();
 		}
 	}
 

@@ -33,7 +33,7 @@ namespace MegiEngine
 		void InActive();
 		void Update();
 		void LateUpdate();
-		void Render(HDC hdc);
+		void Render();
 		// ui가 사라질 때 호출되는 함수
 		void UIClear();
 
@@ -42,7 +42,7 @@ namespace MegiEngine
 		virtual void OnInActive();
 		virtual void OnUpdate();
 		virtual void OnLateUpdate();
-		virtual void OnRender(HDC hdc);
+		virtual void OnRender();
 		virtual void OnClear();
 
 		UIType GetType() const { return mType; }

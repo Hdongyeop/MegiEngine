@@ -15,7 +15,6 @@ namespace MegiEngine
 
 	void CollisionManager::Update()
 	{
-		Scene* scene = SceneManager::GetActiveScene();
 		Scene* dontDestroyOnLoad = SceneManager::GetDontDestroyOnLoad();
 
 		for (UINT row = 0; row < (UINT)LayerType::MAX; row++)
@@ -24,7 +23,7 @@ namespace MegiEngine
 			{
 				if(mCollisionLayerMatrix[row][col] == true)
 				{
-					LayerCollision(scene , ( LayerType ) row , ( LayerType ) col);
+					LayerCollision(( LayerType ) row , ( LayerType ) col);
 				}
 			}
 		}
@@ -34,7 +33,7 @@ namespace MegiEngine
 	{
 	}
 
-	void CollisionManager::Render(HDC hdc)
+	void CollisionManager::Render()
 	{
 	}
 
@@ -63,7 +62,7 @@ namespace MegiEngine
 		mCollisionLayerMatrix[ row ][ col ] = enable;
 	}
 
-	void CollisionManager::LayerCollision(Scene* scene , LayerType left , LayerType right)
+	void CollisionManager::LayerCollision(LayerType left , LayerType right)
 	{
 		const std::vector<GameObject*>& lefts = SceneManager::GetGameObjects(left);
 		const std::vector<GameObject*>& rights = SceneManager::GetGameObjects(right);

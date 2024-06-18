@@ -108,8 +108,7 @@ namespace MegiEngine
 		Component::LateUpdate();
 	}
 
-	void Rigidbody::Render(HDC hdc)
+	void Rigidbody::Render()
 	{
-		Component::Render(hdc);
 	}
 }

@@ -28,7 +28,6 @@ namespace MegiEngine
 		void OnCollisionExit(Collider* other) override;
 
 		void AttackEffect();
-		void SetPixelMapTexture(graphics::Texture* texture) { mPixelMap = texture; }
 
 	private:
 		void Idle();
@@ -43,7 +42,6 @@ namespace MegiEngine
 		Transform* tr;
 		float speed;
 		Math::Vector2 clickPos;
-		graphics::Texture* mPixelMap;
 	};
 
 

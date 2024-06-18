@@ -53,8 +53,8 @@ namespace MegiEngine
 		Script::LateUpdate();
 	}
 
-	void CameraMovement::Render(HDC hdc)
+	void CameraMovement::Render()
 	{
-		Script::Render(hdc);
+		Script::Render();
 	}
 }

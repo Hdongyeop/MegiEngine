@@ -20,21 +20,16 @@ namespace MegiEngine::graphics
 
 		HRESULT Load(const std::wstring& path) override;
 		UINT GetWidth() const { return mWidth; }
-		void SetWidth(UINT width) { mWidth = width; }
 		UINT GetHeight() const { return mHeight; }
-		void SetHeight(UINT height) { mHeight = height; }
-		HDC GetHdc() const { return mHdc; }
 		TextureType GetTextureType() const { return mType; }
-		Gdiplus::Image* GetImage() const { return mImage; }
 		bool HaveAlphaChannel() const { return mAlpha; }
-		COLORREF GetPixel(int x , int y);
+
+		void SetWidth(UINT width) { mWidth = width; }
+		void SetHeight(UINT height) { mHeight = height; }
 
 	private:
 		bool mAlpha;
 		TextureType mType;
-		Gdiplus::Image* mImage;
-		HBITMAP mBitmap;
-		HDC mHdc;
 
 		UINT mWidth;
 		UINT mHeight;

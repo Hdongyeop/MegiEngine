@@ -31,9 +31,9 @@ namespace MegiEngine
 		Script::LateUpdate();
 	}
 
-	void FloorScript::Render(HDC hdc)
+	void FloorScript::Render()
 	{
-		Script::Render(hdc);
+		Script::Render();
 	}
 
 	void FloorScript::OnCollisionEnter(Collider* other)

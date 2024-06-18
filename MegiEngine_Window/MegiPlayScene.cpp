@@ -29,6 +29,7 @@ extern MegiEngine::Application application;
 namespace MegiEngine
 {
 	PlayScene::PlayScene()
+	: mPlayer(nullptr)
 	{
 	}
 
@@ -38,12 +39,15 @@ namespace MegiEngine
 
 	void PlayScene::Initialize()
 	{
+		mPlayer = Object::Instantiate<Player>(LayerType::Player);
+		Object::DontDestroyOnLoad(mPlayer);
 
 		Scene::Initialize();
 	}
 
 	void PlayScene::Update()
 	{
+
 		Scene::Update();
 	}
 
@@ -56,13 +60,9 @@ namespace MegiEngine
 		}
 	}
 
-	void PlayScene::Render(HDC hdc)
+	void PlayScene::Render()
 	{
-		Scene::Render(hdc);
-
-		wchar_t str[ 50 ] = L"Play Scene";
-		int len = wcsnlen_s(str , 50);
-		TextOut(hdc , 0 , 0 , str , len);
+		Scene::Render();
 	}
 
 	void PlayScene::OnEnter()
@@ -80,39 +80,5 @@ namespace MegiEngine
 		//UIManager::Pop(UIType::Button);
 
 		Scene::OnExit();
-	}
-
-	void PlayScene::LoadTileMap(const wchar_t* fileName)
-	{
-		FILE* pFile = nullptr;
-		_wfopen_s(&pFile , fileName , L"rb");
-
-		while ( true )
-		{
-			int idxX = 0;
-			int idxY = 0;
-
-			int posX = 0;
-			int posY = 0;
-
-
-			if ( fread(&idxX , sizeof(int) , 1 , pFile) == NULL )
-				break;
-			if ( fread(&idxY , sizeof(int) , 1 , pFile) == NULL )
-				break;
-			if ( fread(&posX , sizeof(int) , 1 , pFile) == NULL )
-				break;
-			if ( fread(&posY , sizeof(int) , 1 , pFile) == NULL )
-				break;
-
-			Tile* tile = Object::Instantiate<Tile>(LayerType::Tile , Vector2(posX , posY));
-			TilemapRenderer* tmr = tile->AddComponent<TilemapRenderer>();
-			tmr->SetTexture(Resources::Find<graphics::Texture>(L"SpringFloor"));
-			tmr->SetIndex(Vector2(idxX , idxY));
-
-			//mTiles.push_back(tile);
-		}
-
-		fclose(pFile);
 	}
 }

@@ -49,15 +49,15 @@ namespace MegiEngine
 
 	}
 
-	void ToolScene::Render(HDC hdc)
+	void ToolScene::Render()
 	{
-		Scene::Render(hdc);
+		Scene::Render();
 
-		RenderGrid(hdc);
+		RenderGrid();
 
-		wchar_t str[ 50 ] = L"Tool Scene";
-		int len = wcsnlen_s(str , 50);
-		TextOut(hdc , 0 , 0 , str , len);
+//		wchar_t str[ 50 ] = L"Tool Scene";
+//		int len = wcsnlen_s(str , 50);
+//		TextOut(hdc , 0 , 0 , str , len);
 	}
 
 	void ToolScene::OnEnter()
@@ -170,25 +170,25 @@ namespace MegiEngine
 		fclose(pFile);
 	}
 
-	void ToolScene::RenderGrid(HDC hdc)
+	void ToolScene::RenderGrid()
 	{
-		for ( size_t i = 0; i < 50; i++ )
-		{
-			Vector2 pos = Renderer::MainCamera->CalculatePosition(
-			Vector2(TilemapRenderer::TileSize.x * i , 0.0f));
-
-			MoveToEx(hdc , pos.x , 0 , NULL);
-			LineTo(hdc , pos.x , 1000);
-		}
-
-		for ( size_t i = 0; i < 50; i++ )
-		{
-			Vector2 pos = Renderer::MainCamera->CalculatePosition(
-			Vector2(0.0f , TilemapRenderer::TileSize.y * i));
-
-			MoveToEx(hdc , 0 , pos.y , NULL);
-			LineTo(hdc , 1000 , pos.y);
-		}
+//		for ( size_t i = 0; i < 50; i++ )
+//		{
+//			Vector2 pos = Renderer::MainCamera->CalculatePosition(
+//			Vector2(TilemapRenderer::TileSize.x * i , 0.0f));
+//
+//			MoveToEx(hdc , pos.x , 0 , NULL);
+//			LineTo(hdc , pos.x , 1000);
+//		}
+//
+//		for ( size_t i = 0; i < 50; i++ )
+//		{
+//			Vector2 pos = Renderer::MainCamera->CalculatePosition(
+//			Vector2(0.0f , TilemapRenderer::TileSize.y * i));
+//
+//			MoveToEx(hdc , 0 , pos.y , NULL);
+//			LineTo(hdc , 1000 , pos.y);
+//		}
 	}
 
 	void ToolScene::CreateTileObject()
@@ -241,21 +241,21 @@ LRESULT CALLBACK WndTileProc(HWND hWnd , UINT message , WPARAM wParam , LPARAM l
 	case WM_PAINT:
 	{
 		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hWnd , &ps);
-
-		//Rectangle(hdc, 100, 100, 200, 200);
-		MegiEngine::graphics::Texture* texture
-			= MegiEngine::Resources::Find<MegiEngine::graphics::Texture>(L"SpringFloor");
-
-		TransparentBlt(hdc
-			, 0 , 0
-			, texture->GetWidth() * toolTextureSize
-			, texture->GetHeight() * toolTextureSize
-			, texture->GetHdc()
-			, 0 , 0
-			, texture->GetWidth()
-			, texture->GetHeight()
-			, RGB(255 , 0 , 255));
+//		HDC hdc = BeginPaint(hWnd , &ps);
+//
+//		//Rectangle(hdc, 100, 100, 200, 200);
+//		MegiEngine::graphics::Texture* texture
+//			= MegiEngine::Resources::Find<MegiEngine::graphics::Texture>(L"SpringFloor");
+//
+//		TransparentBlt(hdc
+//			, 0 , 0
+//			, texture->GetWidth() * toolTextureSize
+//			, texture->GetHeight() * toolTextureSize
+//			, texture->GetHdc()
+//			, 0 , 0
+//			, texture->GetWidth()
+//			, texture->GetHeight()
+//			, RGB(255 , 0 , 255));
 
 		EndPaint(hWnd , &ps);
 	}

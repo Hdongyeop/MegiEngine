@@ -8,7 +8,7 @@ namespace MegiEngine
 	public:
 		static void Initialize();
 		static void Update();
-		static void Render(HDC hdc);
+		static void Render();
 		__forceinline static float DeltaTime() { return DeltaTimeValue; }
 	private:
 		// CPU가 1초에 몇 번 진동하는지 

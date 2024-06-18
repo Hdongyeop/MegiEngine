@@ -37,9 +37,9 @@ namespace MegiEngine
 		Script::LateUpdate();
 	}
 
-	void MoveToMousePos::Render(HDC hdc)
+	void MoveToMousePos::Render()
 	{
-		Script::Render(hdc);
+		Script::Render();
 	}
 
 	void MoveToMousePos::SetRotation(Math::Vector2 pos)
