@@ -39,7 +39,7 @@ namespace MegiEngine::graphics
 
 	void ConstantBuffer::SetData(void* data) const
 	{
-		GetDevice()->SetDataBuffer(buffer.Get() , data , mSize);
+		GetDevice()->SetDataGpuBuffer(buffer.Get() , data , mSize);
 	}
 
 	void ConstantBuffer::Bind(ShaderStage stage) const

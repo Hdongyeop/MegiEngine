@@ -39,7 +39,7 @@ namespace MegiEngine
 
 //		wchar_t str[ 50 ] = L"Title Scene";
 //		int len = wcsnlen_s(str, 50);
-//		TextOut(hdc , 0 , 0 , str , len);
+//		TextOut(GetHDC() , 0 , 0 , str , len);
 	}
 
 	void TitleScene::OnEnter()

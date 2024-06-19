@@ -8,9 +8,6 @@ namespace MegiEngine::Renderer
 {
 	extern Camera* MainCamera;
 
-	extern std::vector<graphics::Vertex> vertexes;
-	extern std::vector<UINT> indices;
-
 	extern Mesh* mesh;
 
 	extern graphics::ConstantBuffer constantBuffers[ ( UINT ) graphics::CBType::End ];

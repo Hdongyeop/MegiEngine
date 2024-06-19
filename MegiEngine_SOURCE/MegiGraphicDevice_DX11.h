@@ -24,6 +24,8 @@ namespace MegiEngine::graphics
 			ID3D11Resource* pResource ,
 			const D3D11_DEPTH_STENCIL_VIEW_DESC* pDesc ,
 			ID3D11DepthStencilView** ppDSView);
+		bool CreateSamplerState(const D3D11_SAMPLER_DESC* pSamplerDesc ,
+			ID3D11SamplerState** ppSamplerState);
 		bool CreateTexture2D(
 			const D3D11_TEXTURE2D_DESC* pDesc ,
 			const D3D11_SUBRESOURCE_DATA* pInitialData ,
@@ -46,8 +48,12 @@ namespace MegiEngine::graphics
 			const D3D11_BUFFER_DESC* pDesc ,
 			const D3D11_SUBRESOURCE_DATA* pInitialData ,
 			ID3D11Buffer** ppBuffer);
+		bool CreateShaderResourceView(ID3D11Resource* pResource ,
+			const D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc ,
+			ID3D11ShaderResourceView** ppSRView);
 
-		void SetDataBuffer(ID3D11Buffer* buffer , void* data , UINT size);
+		void SetDataGpuBuffer(ID3D11Buffer* buffer , void* data , UINT size);
+		void SetShaderResource(ShaderStage stage , UINT startSlot , ID3D11ShaderResourceView** ppSRV);
 
 		void BindPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology);
 		void BindVS(ID3D11VertexShader* pVertexShader);
@@ -57,8 +63,14 @@ namespace MegiEngine::graphics
 		void BindIndexBuffer(ID3D11Buffer* pIndexBuffer , DXGI_FORMAT format , UINT offset);
 		void BindConstantBuffer(ShaderStage stage , CBType type , ID3D11Buffer* buffer);
 
+		void BindSampler(ShaderStage stage , UINT startSlot , UINT numSamplers , ID3D11SamplerState* const* ppSamplers);
+		void BindSamplers(UINT startSlot , UINT numSamplers , ID3D11SamplerState* const* ppSamplers);
+
 		void Initialize();
 		void Draw();
+
+	public:
+		Microsoft::WRL::ComPtr<ID3D11Device> GetID3D11Device() { return mDevice; }
 
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Device> mDevice;

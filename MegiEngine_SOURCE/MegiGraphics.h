@@ -15,6 +15,7 @@ namespace MegiEngine::graphics
 	{
 		Math::Vector3 pos;
 		Math::Vector4 color;
+		Math::Vector2 uv;
 	};
 
 	enum class ShaderStage
@@ -33,6 +34,14 @@ namespace MegiEngine::graphics
 	{
 		Transform,
 		None,
+		End,
+	};
+
+	enum class SamplerType
+	{
+		Anisotropic,
+		Point,
+		PostProcess,
 		End,
 	};
 

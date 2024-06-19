@@ -1,4 +1,7 @@
 #pragma once
+#include <DirectXTex.h>
+
+#include "MegiGraphicDevice_DX11.h"
 #include "MegiResource.h"
 
 namespace MegiEngine::graphics
@@ -6,34 +9,22 @@ namespace MegiEngine::graphics
 	class Texture : public Resource
 	{
 	public:
-		enum class TextureType
-		{
-			Bmp,
-			Png,
-			None,
-		};
-
-		static Texture* Create(const std::wstring& name , UINT width , UINT height);
-
 		Texture();
 		~Texture();
 
 		HRESULT Save(const std::wstring& path) override;
 		HRESULT Load(const std::wstring& path) override;
-		UINT GetWidth() const { return mWidth; }
-		UINT GetHeight() const { return mHeight; }
-		TextureType GetTextureType() const { return mType; }
-		bool HaveAlphaChannel() const { return mAlpha; }
 
-		void SetWidth(UINT width) { mWidth = width; }
-		void SetHeight(UINT height) { mHeight = height; }
+		void Bind(ShaderStage stage , UINT startSlot);
 
 	private:
-		bool mAlpha;
-		TextureType mType;
+		ScratchImage mImage;
 
-		UINT mWidth;
-		UINT mHeight;
+		D3D11_TEXTURE2D_DESC mDesc;
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> mTexture;
+
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mSRV; // For read
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRTV; // For write
 	};
 
 

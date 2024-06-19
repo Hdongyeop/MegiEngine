@@ -82,8 +82,44 @@ namespace MegiEngine::graphics
 		return true;
 	}
 
+	bool GraphicDevice_DX11::CreateSamplerState(const D3D11_SAMPLER_DESC* pSamplerDesc,
+		ID3D11SamplerState** ppSamplerState)
+	{
+		if ( FAILED(mDevice->CreateSamplerState(pSamplerDesc , ppSamplerState)) )
+			return false;
+		return true;
+	}
+
+	void GraphicDevice_DX11::BindSampler(ShaderStage stage, UINT startSlot, UINT numSamplers,
+		ID3D11SamplerState* const* ppSamplers)
+	{
+		if ( ShaderStage::VS == stage )
+			mContext->VSSetSamplers(startSlot , numSamplers, ppSamplers);
+
+		if ( ShaderStage::HS == stage )
+			mContext->HSSetSamplers(startSlot , numSamplers, ppSamplers);
+
+		if ( ShaderStage::DS == stage )
+			mContext->DSSetSamplers(startSlot , numSamplers, ppSamplers);
+
+		if ( ShaderStage::GS == stage )
+			mContext->GSSetSamplers(startSlot , numSamplers, ppSamplers);
+
+		if ( ShaderStage::PS == stage )
+			mContext->PSSetSamplers(startSlot , numSamplers, ppSamplers);
+	}
+
+	void GraphicDevice_DX11::BindSamplers(UINT startSlot, UINT numSamplers, ID3D11SamplerState* const* ppSamplers)
+	{
+		BindSampler(ShaderStage::VS , startSlot , numSamplers , ppSamplers);
+		BindSampler(ShaderStage::HS , startSlot , numSamplers , ppSamplers);
+		BindSampler(ShaderStage::DS , startSlot , numSamplers , ppSamplers);
+		BindSampler(ShaderStage::GS , startSlot , numSamplers , ppSamplers);
+		BindSampler(ShaderStage::PS , startSlot , numSamplers , ppSamplers);
+	}
+
 	bool GraphicDevice_DX11::CreateTexture2D(const D3D11_TEXTURE2D_DESC* pDesc ,
-		const D3D11_SUBRESOURCE_DATA* pInitialData , ID3D11Texture2D** ppTexture2D)
+	                                         const D3D11_SUBRESOURCE_DATA* pInitialData , ID3D11Texture2D** ppTexture2D)
 	{
 		if ( FAILED(mDevice->CreateTexture2D(pDesc , pInitialData , ppTexture2D)) )
 			return false;
@@ -179,12 +215,41 @@ namespace MegiEngine::graphics
 		return true;
 	}
 
-	void GraphicDevice_DX11::SetDataBuffer(ID3D11Buffer* buffer , void* data , UINT size)
+	bool GraphicDevice_DX11::CreateShaderResourceView(ID3D11Resource* pResource,
+		const D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc, ID3D11ShaderResourceView** ppSRView)
+	{
+		if ( FAILED(mDevice->CreateShaderResourceView(pResource , pDesc , ppSRView)) )
+			return false;
+		return true;
+	}
+
+	void GraphicDevice_DX11::SetDataGpuBuffer(ID3D11Buffer* buffer, void* data, UINT size)
 	{
 		D3D11_MAPPED_SUBRESOURCE sub = {};
 		mContext->Map(buffer , 0 , D3D11_MAP_WRITE_DISCARD , 0 , &sub);
 		memcpy(sub.pData , data , size);
 		mContext->Unmap(buffer , 0);
+	}
+
+	void GraphicDevice_DX11::SetShaderResource(ShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV)
+	{
+		if ( ( UINT ) ShaderStage::VS & ( UINT ) stage )
+			mContext->VSSetShaderResources(startSlot , 1 , ppSRV);
+
+		if ( ( UINT ) ShaderStage::HS & ( UINT ) stage )
+			mContext->HSSetShaderResources(startSlot , 1 , ppSRV);
+
+		if ( ( UINT ) ShaderStage::DS & ( UINT ) stage )
+			mContext->DSSetShaderResources(startSlot , 1 , ppSRV);
+
+		if ( ( UINT ) ShaderStage::GS & ( UINT ) stage )
+			mContext->GSSetShaderResources(startSlot , 1 , ppSRV);
+
+		if ( ( UINT ) ShaderStage::PS & ( UINT ) stage )
+			mContext->PSSetShaderResources(startSlot , 1 , ppSRV);
+
+		if ( ( UINT ) ShaderStage::CS & ( UINT ) stage )
+			mContext->CSSetShaderResources(startSlot , 1 , ppSRV);
 	}
 
 	void GraphicDevice_DX11::BindPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology)
@@ -317,7 +382,7 @@ namespace MegiEngine::graphics
 
 #pragma region InputLayout DESC
 
-		D3D11_INPUT_ELEMENT_DESC inputLayoutDesces[ 2 ] = {};
+		D3D11_INPUT_ELEMENT_DESC inputLayoutDesces[ 3 ] = {};
 		inputLayoutDesces[ 0 ].AlignedByteOffset = 0;
 		inputLayoutDesces[ 0 ].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 		inputLayoutDesces[ 0 ].InputSlot = 0;
@@ -332,6 +397,13 @@ namespace MegiEngine::graphics
 		inputLayoutDesces[ 1 ].SemanticName = "COLOR";
 		inputLayoutDesces[ 1 ].SemanticIndex = 0;
 
+		inputLayoutDesces[ 2 ].AlignedByteOffset = 28; // 12 + 16
+		inputLayoutDesces[ 2 ].Format = DXGI_FORMAT_R32G32_FLOAT;
+		inputLayoutDesces[ 2 ].InputSlot = 0;
+		inputLayoutDesces[ 2 ].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		inputLayoutDesces[ 2 ].SemanticName = "TEXCOORD";
+		inputLayoutDesces[ 2 ].SemanticIndex = 0;
+
 #pragma endregion
 
 		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
@@ -340,6 +412,14 @@ namespace MegiEngine::graphics
 			, triangle->GetVSBlob()->GetBufferPointer()
 			, triangle->GetVSBlob()->GetBufferSize()
 			, &Renderer::inputLayouts) ) )
+			assert(NULL && "Create input layout failed!");
+
+		graphics::Shader* sprite = Resources::Find<graphics::Shader>(L"SpriteShader");
+
+		if ( !CreateInputLayout(inputLayoutDesces , 3
+			, sprite->GetVSBlob()->GetBufferPointer()
+			, sprite->GetVSBlob()->GetBufferSize()
+			, &Renderer::inputLayouts) )
 			assert(NULL && "Create input layout failed!");
 	}
 
@@ -368,16 +448,20 @@ namespace MegiEngine::graphics
 		Renderer::mesh->Bind();
 
 		// 상수 버퍼 데이터 변환
-		Vector4 newPos(0.5f , 0.0f , 0.0f , 1.0f);
+		Vector4 newPos(0.0f , 0.0f , 0.0f , 1.0f);
 		Renderer::constantBuffers[ CAST_UINT(CBType::Transform) ].SetData(&newPos);
 		Renderer::constantBuffers[ CAST_UINT(CBType::Transform) ].Bind(ShaderStage::VS);
 
 		// 쉐이더
-		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
-		triangle->Bind();
+		graphics::Shader* sprite = Resources::Find<graphics::Shader>(L"SpriteShader");
+		sprite->Bind();
+
+		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"Player");
+		if ( texture )
+			texture->Bind(ShaderStage::PS , 0);
 
 		// 렌더 타겟에 물체를 그려준다
-		mContext->Draw(3 , 0);
+		mContext->DrawIndexed(6 , 0 , 0);
 
 		// 렌더 타겟에 있는 이미지를 윈도우에 그려준다
 		mSwapChain->Present(1 , 0);

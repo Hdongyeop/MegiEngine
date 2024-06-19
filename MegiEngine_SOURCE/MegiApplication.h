@@ -12,6 +12,9 @@ namespace MegiEngine
 		~Application();
 
 		void Initialize(HWND hWnd, UINT width, UINT height);
+		void AdjustWindowRect(HWND hwnd , UINT width , UINT height);
+		void InitializeEtc();
+
 		void Run();
 
 		void Update();
@@ -25,14 +28,11 @@ namespace MegiEngine
 		UINT GetWidth() const { return mWidth; }
 		UINT GetHeight() const { return mHeight; }
 
-	private:
-		void clearRenderTarget();
-		void copyRenderTarget(HDC src , HDC dest);
-		void adjustWindowRect(HWND hwnd , UINT width , UINT height);
-		void createBuffer(UINT width , UINT height);
-		void initializeEtc();
+		bool IsLoaded() const { return mLoaded; }
+		void IsLoaded(bool load) { mLoaded = load; }
 
 	private:
+		bool mLoaded;
 		std::unique_ptr<graphics::GraphicDevice_DX11> mGraphicDevice;
 	
 		HWND mHwnd;

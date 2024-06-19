@@ -63,6 +63,8 @@ namespace MegiEngine
 	void PlayScene::Render()
 	{
 		Scene::Render();
+
+		graphics::GetDevice()->Draw();
 	}
 
 	void PlayScene::OnEnter()

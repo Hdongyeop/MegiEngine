@@ -29,7 +29,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance, const wchar_t* name, WNDPROC proc);
 BOOL                InitInstance(HINSTANCE, int);
-BOOL				InitToolScene(HINSTANCE);
+// BOOL				InitToolScene(HINSTANCE);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
@@ -60,6 +60,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
+	MegiEngine::LoadScene();
+
     while (true)
     {
         if(PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -79,7 +81,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
-	Gdiplus::GdiplusShutdown(gpToken);
 	application.Release();
 
     return (int) msg.wParam;
@@ -116,8 +117,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
-   application.Initialize(hWnd , width , height);
-
    if ( !hWnd )
    {
 	   return FALSE;
@@ -127,45 +126,39 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd , nCmdShow);
    UpdateWindow(hWnd);
 
-   //   ShowWindow(toolHwnd , nCmdShow);
-   //   UpdateWindow(toolHwnd);
+   HRESULT hr = CoInitializeEx(nullptr , COINIT_MULTITHREADED);
+   if ( FAILED(hr) )
+	   assert(false);
 
-	  // GdiPlus
-   Gdiplus::GdiplusStartup(&gpToken , &gpsi , NULL);
-
-   //load scenes
-   // MegiEngine::LoadResource(); -> LoadingScene에서 하는걸로 수정
-   MegiEngine::LoadScene();
-
-   InitToolScene(hInstance);
+   application.Initialize(hWnd , width , height);
 
    return TRUE;
 }
 
-BOOL InitToolScene(HINSTANCE hInstance)
-{
-	Scene* activeScene = SceneManager::GetActiveScene();
-	std::wstring name = activeScene->GetName();
-	if ( name == L"ToolScene" )
-	{
-		HWND toolHwnd = CreateWindowW(L"TILEWINDOW" , L"TileWindow" , WS_OVERLAPPEDWINDOW
-		, 0 , 0 , CW_USEDEFAULT , 0 , nullptr , nullptr , hInstance , nullptr);
-
-		// Tile 윈도우 크기 조정
-		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"SpringFloor");
-		RECT rect = { 0, 0, texture->GetWidth() * toolTextureSize, texture->GetHeight() * toolTextureSize };
-		AdjustWindowRect(&rect , WS_OVERLAPPEDWINDOW , false);
-
-		UINT toolWidth = rect.right - rect.left;
-		UINT toolHeight = rect.bottom - rect.top;
-
-		SetWindowPos(toolHwnd , nullptr , 672 , 100 , toolWidth , toolHeight , 0);
-		ShowWindow(toolHwnd , true);
-		UpdateWindow(toolHwnd);
-	}
-
-	return TRUE;
-}
+//BOOL InitToolScene(HINSTANCE hInstance)
+//{
+//	Scene* activeScene = SceneManager::GetActiveScene();
+//	std::wstring name = activeScene->GetName();
+//	if ( name == L"ToolScene" )
+//	{
+//		HWND toolHwnd = CreateWindowW(L"TILEWINDOW" , L"TileWindow" , WS_OVERLAPPEDWINDOW
+//		, 0 , 0 , CW_USEDEFAULT , 0 , nullptr , nullptr , hInstance , nullptr);
+//
+//		// Tile 윈도우 크기 조정
+//		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"SpringFloor");
+//		RECT rect = { 0, 0, texture->GetWidth() * toolTextureSize, texture->GetHeight() * toolTextureSize };
+//		AdjustWindowRect(&rect , WS_OVERLAPPEDWINDOW , false);
+//
+//		UINT toolWidth = rect.right - rect.left;
+//		UINT toolHeight = rect.bottom - rect.top;
+//
+//		SetWindowPos(toolHwnd , nullptr , 672 , 100 , toolWidth , toolHeight , 0);
+//		ShowWindow(toolHwnd , true);
+//		UpdateWindow(toolHwnd);
+//	}
+//
+//	return TRUE;
+//}
 
 
 LRESULT CALLBACK WndProc(HWND hWnd , UINT message , WPARAM wParam , LPARAM lParam)
